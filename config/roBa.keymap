@@ -34,8 +34,8 @@
     };
 
     behaviors {
-        // G（長押し Control+Command）と G の右隣（軽押し Mission Control・長押し Command+Shift）。
-        // G+T のように同じ左手のキーとも組めるよう、手の左右を問わない。0.25 秒押さえたときだけ長押し、打った直後 0.15 秒以内は必ず軽押し
+        // F（長押し Command+Shift）、G（長押し Control+Command）、G の右隣（軽押し Mission Control・長押し Command）。
+        // F+T・G+T のように同じ左手のキーとも組めるよう、手の左右を問わない。0.25 秒押さえたときだけ長押し、打った直後 0.15 秒以内は必ず軽押し
         ghm: g_hold_mod {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -58,7 +58,7 @@
             require-prior-idle-ms = <150>;
         };
 
-        // ホームの段の長押し: A Shift・D Control+Option（D を押さえて Space・Enter で Orca の会話の開始・送信など）・F Command（F+Space で Alfred）、右は ' Shift。
+        // ホームの段の長押し: A Shift・D Control+Option（D を押さえて Space・Enter で Orca の会話の開始・送信など）、右は ' Shift。F は Command+Shift（F+T で CleanShot の文字の写し取り）、G の右隣は Command（押さえて Space で Alfred）。
         // 反対の手のキーと親指にだけ効く。
         // 速打ちで誤って働かないように: 文字を打った直後 0.15 秒以内は必ず文字、0.25 秒押さえたうえで反対の手のキー（と親指）を押したときだけ修飾キー
         lhs: left_home_shift {
@@ -139,7 +139,7 @@
         default_layer {
             bindings = <
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
-&lhs LSHIFT A     &sct LG(S) S &lhs LC(LALT) D &lhs LGUI F                 &ghm LC(LGUI) G                   &ghm LG(LSHIFT) LC(UP_ARROW)    &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
+&lhs LSHIFT A     &sct LG(S) S &lhs LC(LALT) D &ghm LG(LSHIFT) F                &ghm LC(LGUI) G                   &ghm LGUI LC(UP_ARROW)    &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
 &kp Z             &sct LG(X) X &sct LG(C) C &sct LG(V) V            &kp B               &vbs LS(LG(Z)) LG(Z)  &vbs LG(PERIOD) B            &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH
 &mo 3             &mo 1       &kp LC(SPACE)  &cmt LCTRL TAB       &tmt LALT SPACE  &sk LGUI            &blt 1 BACKSPACE          &blt 2 ENTER                                        &lt 5 DELETE
             >;
