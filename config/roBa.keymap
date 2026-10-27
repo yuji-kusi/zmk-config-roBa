@@ -1,6 +1,9 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+// マウスキーは細かい位置合わせ用にゆっくり（初期値 600 の半分以下）
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 250
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 10
 #include <dt-bindings/zmk/pointing.h>
 
 // 面の番号: 0 ふだん / 1 数字と F キー / 2 記号と矢印 / 3 Mac 操作・メディア / 4 マウス / 5 スクロール
@@ -44,7 +47,7 @@
         };
 
         // ホームの段の長押しで修飾キーの束（単体の Control・Option・Command は親指にある）。反対の手のキーと親指にだけ効く。
-        // 左（右手の文字・親指と使う）: A Shift・D Command+Shift・F Control+Option・G Control+Option+Command（F+Space で Orca の会話開始）
+        // 左（右手の文字・親指と使う）: A Shift・D Command+Shift・F Control+Option・G Control+Option+Command・G の右隣 Control+Command（軽押しは Mission Control）（F+Space で Orca の会話開始）
         // 右（左手の文字・親指と使う）: J Command+Shift（J+T で CleanShot の文字の撮影）・K Command+Option・L Control+Command・' Shift
         // 速打ちで誤って働かないように: 文字を打った直後 0.15 秒以内は必ず文字、0.25 秒押さえたうえで反対の手のキー（と親指）を押したときだけ修飾キー
         lhs: left_home_shift {
@@ -124,7 +127,7 @@
         default_layer {
             bindings = <
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
-&lhs LSHIFT A     &sct LG(S) S &lhs LG(LSHIFT) D &lhs LC(LALT) F            &lhs LC(LA(LGUI)) G               &kp LC(UP_ARROW)      &kp MINUS                     &kp H      &rhs LG(LSHIFT) J  &rhs LG(LALT) K  &rhs LC(LGUI) L  &rhs LSHIFT SQT
+&lhs LSHIFT A     &sct LG(S) S &lhs LG(LSHIFT) D &lhs LC(LALT) F            &lhs LC(LA(LGUI)) G               &lhs LC(LGUI) LC(UP_ARROW)    &kp MINUS                     &kp H      &rhs LG(LSHIFT) J  &rhs LG(LALT) K  &rhs LC(LGUI) L  &rhs LSHIFT SQT
 &sct LG(Z) Z      &sct LG(X) X &sct LG(C) C &sct LG(V) V            &kp B               &vbs LS(LG(Z)) LG(Z)  &vbs SEMICOLON LG(PERIOD)    &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH
 &mo 3             &mo 1       &kp LC(SPACE)  &cmt LCTRL TAB       &tmt LALT SPACE  &cmt LGUI DELETE     &blt 1 BACKSPACE          &blt 2 ENTER                                        &lt 5 DELETE
             >;
@@ -153,12 +156,12 @@
         };
 
         // Mac 操作・メディアの面（Z の真下を押さえている間）。右手は画面の操作と撮影、左手は音楽・アプリを開くキー・Bluetooth。
-        // アプリを開くキー（S Notion・D Orca・F Finder・G LINE・内側 Chatwork）は Control+Option+Command+Shift+1〜5 を送る。開く設定は Mac 側で
+        // アプリを開くキー（A Notion・S Chatwork・D Orca・F Finder・G LINE）は Control+Option+Command+Shift+1〜5 を送る（Notion 1・Orca 2・Finder 3・LINE 4・Chatwork 5）。開く設定は Mac 側で
         // 撮影は CleanShot の設定に合わせる（全画面 Shift+Cmd+3、範囲 4、まとめ 0、画面の文字 T）
         MAC_MEDIA {
             bindings = <
 &none   &kp C_PREV    &kp C_PP      &kp C_NEXT    &kp LG(SLASH)                                     &kp C_BRI_DN       &kp C_BRI_UP        &kp C_VOL_DN      &kp C_VOL_UP         &kp C_MUTE
-&none   &kp LC(LA(LG(LS(N1))))  &kp LC(LA(LG(LS(N2))))  &kp LC(LA(LG(LS(N3))))  &kp LC(LA(LG(LS(N4))))  &kp LC(LA(LG(LS(N5))))  &kp LC(LS(TAB))    &kp LC(LEFT_ARROW) &kp LC(DOWN_ARROW)  &kp LC(UP_ARROW)  &kp LC(RIGHT_ARROW)  &kp LC(TAB)
+&kp LC(LA(LG(LS(N1))))  &kp LC(LA(LG(LS(N5))))  &kp LC(LA(LG(LS(N2))))  &kp LC(LA(LG(LS(N3))))  &kp LC(LA(LG(LS(N4))))  &none  &kp LC(LS(TAB))    &kp LC(LEFT_ARROW) &kp LC(DOWN_ARROW)  &kp LC(UP_ARROW)  &kp LC(RIGHT_ARROW)  &kp LC(TAB)
 &none   &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_CLR     &kp LA(LS(LG(V)))  &kp LS(LG(N3))     &kp LS(LG(N4))      &kp LS(LG(N0))    &kp LS(LG(T))        &bootloader
 &trans  &trans        &trans        &trans        &trans        &trans         &trans             &trans                                                                   &trans
             >;
@@ -173,12 +176,14 @@
             >;
         };
 
+        // スクロールの面（I か右下の角を押さえている間。ボールでスクロール）。左手にマウスキー（細かい位置合わせ用）:
+        // E S D F でカーソルを少しずつ上・左・下・右、R 左クリック、W 右クリック、T 上へスクロール、G 下へスクロール
         SCROLL {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+&trans  &mkp MB2       &mmv MOVE_UP     &mkp MB1         &msc SCRL_UP                            &trans  &trans  &trans  &trans  &trans
+&trans  &mmv MOVE_LEFT &mmv MOVE_DOWN   &mmv MOVE_RIGHT  &msc SCRL_DOWN  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans         &trans           &trans           &trans          &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans         &trans           &trans           &trans          &trans      &trans  &trans                          &trans
             >;
         };
 
