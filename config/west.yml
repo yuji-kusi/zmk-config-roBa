@@ -4,8 +4,6 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: kumamuk-git
       url-base: https://github.com/kumamuk-git
-    - name: dhruvinsh
-      url-base: https://github.com/dhruvinsh
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -14,9 +12,5 @@ manifest:
     - name: zmk-pmw3610-driver
       remote: kumamuk-git
       revision: main
-    # アプリ切り替え（Command+Tab を一押しで続ける仕組み）。2025-03-16 の版に固定
-    - name: zmk-tri-state
-      remote: dhruvinsh
-      revision: ebbc1f0ccdb51669650bb0ac3e34920d09e62400
   self:
     path: config

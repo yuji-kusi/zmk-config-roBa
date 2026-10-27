@@ -11,7 +11,7 @@
 // 親指は串田さんの呼び方に合わせる: 「外側」＝中央寄り（斜めに傾いたキー）。
 // 左親指 中央寄りから Command（軽く押すと次のキーに付く・押さえている間も Command）・Space・Tab、右親指 中央寄りから delete（Backspace）・Enter
 // スクロール: I の長押し、または右下の角（前方削除）の長押しをしながらボール
-// 入り方: 1 X の真下を押さえている間（軽押しは Mission Control）、または右親指の delete（Backspace）の長押し / 2 右親指の Enter の長押し / 3 Z の真下を押さえている間
+// 入り方: 1 X の真下を押さえている間、または右親指の delete（Backspace）の長押し / 2 右親指の Enter の長押し / 3 Z の真下を押さえている間
 
 &mt {
     flavor = "balanced";
@@ -48,8 +48,8 @@
     };
 
     behaviors {
-        // G（長押し Control+Command）。G+T のように同じ左手のキーとも組めるよう、手の左右を問わない。
-        // 0.25 秒押さえたときだけ長押し、打った直後 0.15 秒以内は必ず軽押し
+        // G（長押し Control+Command）と G の右隣（軽押し Mission Control・長押し Command+Shift。押さえて T で CleanShot の文字の写し取り）。
+        // G+T のように同じ左手のキーとも組めるよう、手の左右を問わない。0.25 秒押さえたときだけ長押し、打った直後 0.15 秒以内は必ず軽押し
         ghm: g_hold_mod {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -134,37 +134,6 @@
             require-prior-idle-ms = <150>;
         };
 
-        // アプリ切り替え: 1 回押すと Command+Tab、続けて押すと次のアプリへ。ほかのキーを押すか 0.8 秒たつと確定（Command を離す）
-        swapper: swapper {
-            compatible = "zmk,behavior-tri-state";
-            #binding-cells = <0>;
-            bindings = <&kt LGUI>, <&kp TAB>, <&kt LGUI>;
-            timeout-ms = <800>;
-        };
-
-        // G の右隣: 軽押し アプリ切り替え・長押し Command+Shift（押さえて T で CleanShot の文字の写し取り）。
-        // 続けて素早く押したときは必ず軽押し（アプリを次々に送れる）
-        swh: switch_hold_mod {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            bindings = <&kp>, <&swapper>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <250>;
-            quick-tap-ms = <175>;
-            require-prior-idle-ms = <150>;
-        };
-
-        // X の真下: 軽押し Mission Control・押さえている間 数字と F キーの面。
-        // 押さえて数字を打って離したら必ず数字の面（Mission Control は出ない）
-        nlt: num_layer_tap {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            bindings = <&mo>, <&kp>;
-            flavor = "balanced";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <150>;
-        };
-
         // 右親指の面の切り替え: delete（Backspace）の長押しで数字と F キーの面、Enter の長押しで記号と矢印の面。
         // 長押しして何も打たずに離しても delete・Enter は出さない（文字を消さない・誤って送信しない）
         blt: right_layer_tap {
@@ -184,15 +153,15 @@
         default_layer {
             bindings = <
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
-&lhs LSHIFT A     &sct LG(S) S &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &swh LG(LSHIFT) 0    &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
+&lhs LSHIFT A     &sct LG(S) S &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &ghm LG(LSHIFT) LC(UP_ARROW)    &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
 &kp Z             &sct LG(X) X &sct LG(C) C &sct LG(V) V            &kp B               &vbs LS(LG(Z)) LG(Z)  &vbs LG(PERIOD) B            &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH
-&mo 3             &nlt 1 LC(UP_ARROW) &kp LC(SPACE)  &cmt LCTRL TAB       &tmt LALT SPACE  &sk LGUI            &blt 1 BACKSPACE          &blt 2 ENTER                                        &lt 5 DELETE
+&mo 3             &mo 1       &kp LC(SPACE)  &cmt LCTRL TAB       &tmt LALT SPACE  &sk LGUI            &blt 1 BACKSPACE          &blt 2 ENTER                                        &lt 5 DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
         };
 
-        // 数字と F キーの面（X の真下を押さえている間（軽押しは Mission Control）か、右親指の delete の長押し）。左手に F キー、右手にテンキーの並び
+        // 数字と F キーの面（X の真下を押さえている間か、右親指の delete の長押し）。左手に F キー、右手にテンキーの並び
         NUM_F {
             bindings = <
 &kp F1   &kp F2   &kp F3   &kp F4   &none                                                 &kp MINUS        &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PLUS

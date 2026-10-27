@@ -36,7 +36,7 @@ table.cmp{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}table.
 </head>
 <body>
 <main>
-<div class="now">上の 5 つは第 30 版として配列に入れ済み。アプリ切り替えは第 31 版で G の右隣に入れました（Mission Control は X の真下の軽押しへ）</div>
+<div class="now">上の 5 つは第 30 版として配列に入れ済み。アプリ切り替えは第 31 版で試したが取りやめ（第 32 版で元に戻しました）</div>
 <h1>roBa マウスの修正案</h1>
 <p class="note">青い太枠＝今回変える・足すキー。塗りつぶし＝その面に入るために押さえるキー。</p>
 
@@ -70,11 +70,12 @@ table.cmp{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}table.
 ・クリックを押したままにするキー（ドラッグ固定）は、離し忘れると困るので入れていません。<br>
 <b>作れるか</b>：ボールを遅くする仕組みは、今使っているボールの部品（kumamuk-git/zmk-pmw3610-driver）に入っていることを確かめました。今まで使っていなかった機能なので、書き込んだら実機で確かめます。
 </div>
-<h2>アプリ切り替えの専用キー（第 31 版で G の右隣に入れました。下の一覧は検討したときのもの）</h2>
+<h2>アプリ切り替えの専用キー（取りやめ。下は検討したときの記録）</h2>
 <div class="box note">
 <b>動き</b>：1 回押すと Command+Tab（切り替えの一覧が出て、一つ前のアプリが選ばれる）。続けて押すと次のアプリへ進む。<b>ほかのキーを押すか、0.8 秒何も押さなければ確定</b>（Command を離したことになる）。Command を押さえ続ける必要はありません。<br>
 <b>作れるか</b>：ZMK 本体には無い仕組みなので、部品を 1 つ足します（<b>dhruvinsh/zmk-tri-state</b>。ZMK の swapper／tri-state をそのまま実装したもの。最終更新 2025 年 3 月）。中身を読んで、今の ZMK（v0.3）の作りと合うことは確かめました。最後はビルドが通るかで確かめます。待ち時間 0.8 秒は変えられます。
 </div>
+<p class="note"><b>取りやめた理由（第 31 版で試して分かったこと）</b>：切り替えのあいだ Command を押したままにするので、少し長いとチートシートが出る。さらに左親指の Command と重なると Command が押されたまま残り、A で全選択になるなど操作できなくなった。第 32 版で G の右隣を Mission Control に、X の真下を数字の面だけに戻し、部品も外しました。アプリの切り替えは、左親指の Command を軽く押してから Tab（一つ前のアプリへ）。</p>
 <p class="note">B の右隣（取り消し・やり直し）は使わない。</p>
 <h3 style="font-size:16px;margin:14px 0 4px">空いているキーの一覧</h3>
 <table class="cmp">
