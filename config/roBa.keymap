@@ -18,7 +18,7 @@
 
 / {
     behaviors {
-        // 親指の修飾キー: しっかり長く押したときだけ修飾キーにする
+        // 左親指の Space: しっかり長く押したときだけ Option にする
         tmt: thumb_mod_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -26,12 +26,12 @@
             flavor = "tap-preferred";
             tapping-term-ms = <220>;
             quick-tap-ms = <150>;
-            // 長く押しても他のキーを押さずに離したら軽押し（Space・Esc）として出す
+            // 長く押しても他のキーを押さずに離したら Space として出す
             retro-tap;
         };
 
-        // 左親指の Command: 軽押しで英数とかなの入れ替え（Control+Space）、長押しで Command。
-        // Command+C などを素早く打てるよう balanced にする
+        // 左親指のいちばん内側: 軽押しで英数とかなの入れ替え（Control+Space）、長押しで Control。
+        // Control+C などを素早く打てるよう balanced にする
         cmt: cmd_mod_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -41,7 +41,7 @@
             quick-tap-ms = <0>;
         };
 
-        // 右親指の Backspace: 長押しで音声入力（KoeType の Command+.）。軽押しのすぐ後の押し続けは Backspace の連続
+        // 右親指の内側の Enter: 長押しで音声入力（KoeType の Command+.）。軽押しのすぐ後の押し続けは Enter の連続
         vbs: voice_backspace {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -52,7 +52,7 @@
         };
 
         // 右手の面の切り替え: 長押しで面、軽押しでキー。
-        // 押さえたまま別のキーを押して離したら面に入る（Enter を短く押して数字を打っても Enter が出ない）
+        // 押さえたまま別のキーを押して離したら面に入る（Backspace を短く押して数字を打っても Backspace が出ない）
         tlt: thumb_layer_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -60,18 +60,6 @@
             flavor = "balanced";
             tapping-term-ms = <220>;
             quick-tap-ms = <150>;
-        };
-    };
-
-    combos {
-        compatible = "zmk,combos";
-
-        // 右親指の 2 つを同時に長押しで記号と矢印の面
-        sym_layer {
-            bindings = <&mo 2>;
-            key-positions = <40 41>;
-            timeout-ms = <40>;
-            require-prior-idle-ms = <80>;
         };
     };
 
@@ -83,18 +71,19 @@
 &kp Q             &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
 &kp A             &kp S     &kp D     &kp F              &kp G               &kp LEFT_BRACKET      &kp MINUS                     &kp H      &kp J  &kp K      &kp L    &kp SQT
 &mt LEFT_SHIFT Z  &kp X     &kp C     &kp V              &kp B               &kp COLON             &kp SEMICOLON                 &kp N      &kp M  &kp COMMA  &kp DOT  &mt LEFT_SHIFT SLASH
-&kp LCTRL         &kp LGUI  &kp TAB   &tmt LCTRL ESCAPE  &tmt LALT SPACE     &cmt LGUI LC(SPACE)   &vbs LG(PERIOD) BACKSPACE     &tlt 1 ENTER                             &tlt 3 F7
+&kp LCTRL         &kp ESC   &kp TAB   &kp LGUI           &tmt LALT SPACE     &cmt LCTRL LC(SPACE)  &vbs LG(PERIOD) ENTER         &tlt 1 BACKSPACE                            &tlt 3 F7
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
         };
 
+        // 右親指の外側（Backspace）を押さえたまま内側を押すと記号と矢印の面
         NUM_F {
             bindings = <
 &kp MINUS                   &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PLUS                                &none   &kp F1  &kp F2   &kp F3   &kp F4
 &kp SLASH                   &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp ASTERISK  &none          &none     &kp F5  &kp F6  &kp F7   &kp F8   &none
 &mt LEFT_SHIFT KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp PERIOD    &kp EQUAL      &none     &kp F9  &kp F10 &kp F11  &kp F12  &none
-&trans                      &trans           &trans           &trans           &trans        &trans         &trans    &trans                             &trans
+&trans                      &trans           &trans           &trans           &trans        &trans         &mo 2     &trans                             &trans
             >;
         };
 
