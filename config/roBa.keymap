@@ -205,12 +205,12 @@
 
         // スクロールの面（I か右下の角を押さえている間。ボールでスクロール）。
         // 押さえている間は J 左クリック（押さえている間ボールがゆっくり）・K 右クリックが時間切れなしで使える。
-        // マウスキー: 左手の E S D F でカーソルを ↑ ← ↓ →、R で上へ・V で下へスクロール。U 左クリック、O 右クリック
+        // マウスキー: 左手の E S D F でカーソルを ↑ ← ↓ →、R で上へ・V で下へスクロール（Mac のナチュラルなスクロールに合わせて SCRL_DOWN・SCRL_UP を逆に割り当て）。U 左クリック、O 右クリック
         SCROLL {
             bindings = <
-&trans  &trans          &mmv MOVE_UP    &msc SCRL_UP     &trans                      &trans  &mkp MB1  &trans    &mkp MB2  &trans
+&trans  &trans          &mmv MOVE_UP    &msc SCRL_DOWN   &trans                      &trans  &mkp MB1  &trans    &mkp MB2  &trans
 &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans      &trans  &trans  &slow_drag  &mkp MB2  &trans  &trans
-&trans  &trans          &trans          &msc SCRL_DOWN   &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &trans          &trans          &msc SCRL_UP     &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
 &trans  &trans          &trans          &trans           &trans  &trans      &trans  &trans                                &trans
             >;
         };
