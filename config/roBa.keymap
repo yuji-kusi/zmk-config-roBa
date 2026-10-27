@@ -1,6 +1,9 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+// マウスキーは細かい位置合わせ用にゆっくり（初期値 600 の半分以下）
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 250
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 10
 #include <dt-bindings/zmk/pointing.h>
 
 // 面の番号: 0 ふだん / 1 数字と F キー / 2 記号と矢印 / 3 Mac 操作・メディア / 4 マウス / 5 スクロール
@@ -174,13 +177,14 @@
             >;
         };
 
-        // スクロールの面（I か右下の角を押さえている間。ボールでスクロール）
+        // スクロールの面（I か右下の角を押さえている間。ボールでスクロール）。
+        // マウスキー（細かい位置合わせ用）: 右下の角を押さえたまま H J K L でカーソルを少しずつ ← ↓ ↑ →（矢印の面と同じ向き）、U 左クリック、O 右クリック
         SCROLL {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+&trans  &trans  &trans  &trans  &trans                      &trans          &mkp MB1        &trans        &mkp MB2         &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans          &trans          &trans        &trans           &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                                                         &trans
             >;
         };
 
