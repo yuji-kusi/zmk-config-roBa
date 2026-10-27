@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>roBa マウスの修正案</title>
+<style>
+:root{--bg:#1e1e1e;--panel:#2c2c2c;--line:#3d3d3d;--text:#e8e8e8;--sub:#a8a8a8;--blue:#1473e6;--blue2:#3b82f6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"Hiragino Sans",sans-serif;line-height:1.5}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:23px;margin:0 0 8px}
+h2{font-size:19px;margin:32px 0 6px;color:var(--blue2)}
+.now{background:#1d3b66;border:1px solid var(--blue2);border-radius:8px;padding:12px 16px;margin:0 0 16px;font-size:17px;font-weight:600;color:#fff}
+.note{color:var(--sub);font-size:15px;margin:6px 0}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--sub);margin:8px 0}
+.legend b{color:#fff}.legend i{font-style:normal;color:#8fb8ff}
+.wrap{overflow-x:auto;padding-bottom:4px}
+.kb{display:grid;grid-template-columns:repeat(6,1fr) 0.5fr repeat(6,1fr);grid-template-rows:repeat(4,64px);gap:5px;min-width:900px;margin:6px 0}
+.key{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:4px 6px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.key .t{font-size:15px;font-weight:600;color:#fff}
+.key .h{font-size:12px;color:#8fb8ff;margin-top:2px}
+.key.sh{border-color:#e6a23c}.key.sh .h{color:#f0c78a}
+.key.vo{border-color:#a78bfa}.key.vo .h{color:#c4b5fd}
+.key.in{border-color:#34d399}.key.in .h{color:#86efac}
+.key.ct{border-color:#f472b6}.key.ct .h{color:#f9a8d4}
+.key.th{border-color:var(--blue2);background:#22324a}
+.key.held{background:#1473e6;border-color:#1473e6}.key.held .h{color:#dbe8ff}
+.key.dim{background:transparent;border-style:dashed}
+.macwrap .kb{grid-template-rows:repeat(4,minmax(78px,auto))}.macwrap .key .t{font-size:12.5px;font-weight:500;line-height:1.35}
+.box{background:#252525;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:10px 0}
+.key.new{border-color:#3b82f6;border-width:2px;background:#22324a}.key.new .h{color:#8fb8ff}
+.key.off .t{color:#777}.key .k{font-size:11px;color:#8a8a8a}.key.dim .k{color:#5a5a5a}.key.held .k{color:#dbe8ff}
+table.cmp{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}table.cmp th,table.cmp td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}table.cmp th{background:#252525;color:var(--sub);font-weight:600}
+</style>
+</head>
+<body>
+<main>
+<div class="now">マウスまわりの修正案（まだ書き換えていません・書き込んでいません）</div>
+<h1>roBa マウスの修正案</h1>
+<p class="note">青い太枠＝今回変える・足すキー。塗りつぶし＝その面に入るために押さえるキー。</p>
+
+<h2>変えること（4 つまとめて）</h2>
+<table class="cmp">
+<tr><th>困りごと</th><th>今</th><th>修正案</th></tr>
+<tr><td>ボールでの選択の微調整が効かない</td><td>ドラッグ中もボールはいつもの速さ</td><td><b>J（左クリック）を押さえている間だけ、ボールが今の約 4 分の 1 の速さ</b>。選び始めまではいつもの速さで動かし、J を押したら自然にゆっくりになる。速さはあとで変えられます</td></tr>
+<tr><td>右下の角を手のひらで押さえるのが難しい・L と Enter が紛らわしい</td><td>ボールを動かした後 0.7 秒だけ J・K・L がクリック</td><td>クリックできる時間を <b>1.5 秒</b>に延ばす。クリックは <b>J 左・K 右</b>の 2 つにして、<b>L は文字に戻す</b></td></tr>
+<tr><td>マウスキーが細かすぎる</td><td>E S D F でカーソルを動かす速さ 250（初期値 600）</td><td><b>450</b> に上げる（今の約 1.8 倍。初期値より少しゆっくり）。細かく合わせるのは上の「J を押さえてボール」で</td></tr>
+<tr><td>キーボードでスクロールしたい</td><td>ボールでしかスクロールできない</td><td>スクロールの面（I か右下の角を押さえる）の <b>R で上へ・V で下へスクロール</b>。カーソルを動かす E S D F のすぐ隣で、人差し指の上下</td></tr>
+</table>
+
+<h2>ボールを動かした直後（1.5 秒）</h2>
+<div class="macwrap"><div class="wrap"><div class="kb"><div class="key dim" style="grid-column:1;grid-row:1"><span class="k">Q</span><span class="t"></span></div><div class="key dim" style="grid-column:2;grid-row:1"><span class="k">W</span><span class="t"></span></div><div class="key dim" style="grid-column:3;grid-row:1"><span class="k">E</span><span class="t"></span></div><div class="key dim" style="grid-column:4;grid-row:1"><span class="k">R</span><span class="t"></span></div><div class="key dim" style="grid-column:5;grid-row:1"><span class="k">T</span><span class="t"></span></div><div class="key dim" style="grid-column:1;grid-row:2"><span class="k">A</span><span class="t"></span></div><div class="key dim" style="grid-column:2;grid-row:2"><span class="k">S</span><span class="t"></span></div><div class="key dim" style="grid-column:3;grid-row:2"><span class="k">D</span><span class="t"></span></div><div class="key dim" style="grid-column:4;grid-row:2"><span class="k">F</span><span class="t"></span></div><div class="key dim" style="grid-column:5;grid-row:2"><span class="k">G</span><span class="t"></span></div><div class="key dim" style="grid-column:6;grid-row:2"><span class="k">G の右隣</span><span class="t"></span></div><div class="key dim" style="grid-column:1;grid-row:3"><span class="k">Z</span><span class="t"></span></div><div class="key dim" style="grid-column:2;grid-row:3"><span class="k">X</span><span class="t"></span></div><div class="key dim" style="grid-column:3;grid-row:3"><span class="k">C</span><span class="t"></span></div><div class="key dim" style="grid-column:4;grid-row:3"><span class="k">V</span><span class="t"></span></div><div class="key dim" style="grid-column:5;grid-row:3"><span class="k">B</span><span class="t"></span></div><div class="key dim" style="grid-column:6;grid-row:3"><span class="k">B の右隣</span><span class="t"></span></div><div class="key dim" style="grid-column:1;grid-row:4"><span class="k">Z の真下</span><span class="t"></span></div><div class="key dim" style="grid-column:2;grid-row:4"><span class="k">X の真下</span><span class="t"></span></div><div class="key dim" style="grid-column:3;grid-row:4"><span class="k">C の真下</span><span class="t"></span></div><div class="key dim" style="grid-column:4;grid-row:4"><span class="k">Tab</span><span class="t"></span></div><div class="key dim" style="grid-column:5;grid-row:4"><span class="k">Space</span><span class="t"></span></div><div class="key dim" style="grid-column:6;grid-row:4"><span class="k">Command</span><span class="t"></span></div><div class="key dim" style="grid-column:9;grid-row:1"><span class="k">Y</span><span class="t"></span></div><div class="key dim" style="grid-column:10;grid-row:1"><span class="k">U</span><span class="t"></span></div><div class="key dim" style="grid-column:11;grid-row:1"><span class="k">I</span><span class="t"></span></div><div class="key dim" style="grid-column:12;grid-row:1"><span class="k">O</span><span class="t"></span></div><div class="key dim" style="grid-column:13;grid-row:1"><span class="k">P</span><span class="t"></span></div><div class="key dim" style="grid-column:8;grid-row:2"><span class="k">-</span><span class="t"></span></div><div class="key dim" style="grid-column:9;grid-row:2"><span class="k">H</span><span class="t"></span></div><div class="key new" style="grid-column:10;grid-row:2"><span class="k">J</span><span class="t">左クリック</span><span class="h">押す間ゆっくり</span></div><div class="key new" style="grid-column:11;grid-row:2"><span class="k">K</span><span class="t">右クリック</span></div><div class="key off" style="grid-column:12;grid-row:2"><span class="k">L</span><span class="t">文字</span><span class="h">クリックをやめる</span></div><div class="key dim" style="grid-column:13;grid-row:2"><span class="k">&#x27;</span><span class="t"></span></div><div class="key dim" style="grid-column:8;grid-row:3"><span class="k">B</span><span class="t"></span></div><div class="key dim" style="grid-column:9;grid-row:3"><span class="k">N</span><span class="t"></span></div><div class="key dim" style="grid-column:10;grid-row:3"><span class="k">M</span><span class="t"></span></div><div class="key dim" style="grid-column:11;grid-row:3"><span class="k">,</span><span class="t"></span></div><div class="key dim" style="grid-column:12;grid-row:3"><span class="k">.</span><span class="t"></span></div><div class="key dim" style="grid-column:13;grid-row:3"><span class="k">/</span><span class="t"></span></div><div class="key dim" style="grid-column:8;grid-row:4"><span class="k">delete</span><span class="t"></span></div><div class="key dim" style="grid-column:9;grid-row:4"><span class="k">Enter</span><span class="t"></span></div><div class="key dim" style="grid-column:13;grid-row:4"><span class="k">右下の角</span><span class="t"></span></div></div></div></div>
+<p class="note">何も押さえなくても J・K がクリック。J を押したままボールを転がすとドラッグで、その間はゆっくり動きます。</p>
+
+<h2>スクロールの面（I か右下の角を押さえている間）</h2>
+<div class="macwrap"><div class="wrap"><div class="kb"><div class="key dim" style="grid-column:1;grid-row:1"><span class="k">Q</span><span class="t"></span></div><div class="key dim" style="grid-column:2;grid-row:1"><span class="k">W</span><span class="t"></span></div><div class="key new" style="grid-column:3;grid-row:1"><span class="k">E</span><span class="t">カーソル ↑</span></div><div class="key new" style="grid-column:4;grid-row:1"><span class="k">R</span><span class="t">上へ スクロール</span><span class="h">新しく足す</span></div><div class="key dim" style="grid-column:5;grid-row:1"><span class="k">T</span><span class="t"></span></div><div class="key dim" style="grid-column:1;grid-row:2"><span class="k">A</span><span class="t"></span></div><div class="key new" style="grid-column:2;grid-row:2"><span class="k">S</span><span class="t">カーソル ←</span></div><div class="key new" style="grid-column:3;grid-row:2"><span class="k">D</span><span class="t">カーソル ↓</span></div><div class="key new" style="grid-column:4;grid-row:2"><span class="k">F</span><span class="t">カーソル →</span></div><div class="key dim" style="grid-column:5;grid-row:2"><span class="k">G</span><span class="t"></span></div><div class="key dim" style="grid-column:6;grid-row:2"><span class="k">G の右隣</span><span class="t"></span></div><div class="key dim" style="grid-column:1;grid-row:3"><span class="k">Z</span><span class="t"></span></div><div class="key dim" style="grid-column:2;grid-row:3"><span class="k">X</span><span class="t"></span></div><div class="key dim" style="grid-column:3;grid-row:3"><span class="k">C</span><span class="t"></span></div><div class="key new" style="grid-column:4;grid-row:3"><span class="k">V</span><span class="t">下へ スクロール</span><span class="h">新しく足す</span></div><div class="key dim" style="grid-column:5;grid-row:3"><span class="k">B</span><span class="t"></span></div><div class="key dim" style="grid-column:6;grid-row:3"><span class="k">B の右隣</span><span class="t"></span></div><div class="key dim" style="grid-column:1;grid-row:4"><span class="k">Z の真下</span><span class="t"></span></div><div class="key dim" style="grid-column:2;grid-row:4"><span class="k">X の真下</span><span class="t"></span></div><div class="key dim" style="grid-column:3;grid-row:4"><span class="k">C の真下</span><span class="t"></span></div><div class="key dim" style="grid-column:4;grid-row:4"><span class="k">Tab</span><span class="t"></span></div><div class="key dim" style="grid-column:5;grid-row:4"><span class="k">Space</span><span class="t"></span></div><div class="key dim" style="grid-column:6;grid-row:4"><span class="k">Command</span><span class="t"></span></div><div class="key dim" style="grid-column:9;grid-row:1"><span class="k">Y</span><span class="t"></span></div><div class="key " style="grid-column:10;grid-row:1"><span class="k">U</span><span class="t">左クリック</span></div><div class="key held" style="grid-column:11;grid-row:1"><span class="k">I</span><span class="t">押さえる</span><span class="h">この面に入る</span></div><div class="key " style="grid-column:12;grid-row:1"><span class="k">O</span><span class="t">右クリック</span></div><div class="key dim" style="grid-column:13;grid-row:1"><span class="k">P</span><span class="t"></span></div><div class="key dim" style="grid-column:8;grid-row:2"><span class="k">-</span><span class="t"></span></div><div class="key dim" style="grid-column:9;grid-row:2"><span class="k">H</span><span class="t"></span></div><div class="key new" style="grid-column:10;grid-row:2"><span class="k">J</span><span class="t">左クリック</span><span class="h">押す間ゆっくり</span></div><div class="key new" style="grid-column:11;grid-row:2"><span class="k">K</span><span class="t">右クリック</span></div><div class="key off" style="grid-column:12;grid-row:2"><span class="k">L</span><span class="t">文字の L</span><span class="h">クリックをやめる</span></div><div class="key dim" style="grid-column:13;grid-row:2"><span class="k">&#x27;</span><span class="t"></span></div><div class="key dim" style="grid-column:8;grid-row:3"><span class="k">B</span><span class="t"></span></div><div class="key dim" style="grid-column:9;grid-row:3"><span class="k">N</span><span class="t"></span></div><div class="key dim" style="grid-column:10;grid-row:3"><span class="k">M</span><span class="t"></span></div><div class="key dim" style="grid-column:11;grid-row:3"><span class="k">,</span><span class="t"></span></div><div class="key dim" style="grid-column:12;grid-row:3"><span class="k">.</span><span class="t"></span></div><div class="key dim" style="grid-column:13;grid-row:3"><span class="k">/</span><span class="t"></span></div><div class="key dim" style="grid-column:8;grid-row:4"><span class="k">delete</span><span class="t"></span></div><div class="key dim" style="grid-column:9;grid-row:4"><span class="k">Enter</span><span class="t"></span></div><div class="key held" style="grid-column:13;grid-row:4"><span class="k">右下の角</span><span class="t">押さえる</span><span class="h">ここでも入れる</span></div></div></div></div>
+<p class="note">右手の中指で I を押さえれば、左手でカーソル（E S D F）とスクロール（R・V）が使えます。ボールはこの面ではスクロールです。</p>
+
+<div class="box note">
+<b>困る所</b><br>
+・ボールに触った直後の 1.5 秒は、J と K で文字が打てません（今は 0.7 秒）。<br>
+・J を押さえている間はゆっくりなので、長い文章を一気に選ぶときも遅くなります。そのときは、選び始めをクリックしてから A（長押しで Shift）を押さえて終わりをクリックすると一気に選べます（今の配列でもできます）。<br>
+・クリックを押したままにするキー（ドラッグ固定）は、離し忘れると困るので入れていません。<br>
+<b>作れるか</b>：ボールを遅くする仕組みは、今使っているボールの部品（kumamuk-git/zmk-pmw3610-driver）に入っていることを確かめました。まだ使っていない機能なので、実機で動くかは書き込んで試します。
+</div>
+</main>
+</body>
+</html>
