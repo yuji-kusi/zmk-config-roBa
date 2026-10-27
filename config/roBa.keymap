@@ -5,7 +5,7 @@
 
 // 面の番号: 0 ふだん / 1 数字と F キー / 2 矢印 / 3 Mac 操作・メディア / 4 マウス / 5 スクロール / 6 記号
 // 入り方（どれも 1 つのキーの長押し）: 1 左親指の Space / 2 左親指の英かな / 6 右親指の外側の Backspace
-//   3 Z の真下（Mac の fn キーと同じ場所。左の小指の列は使わない）
+//   3 N の左隣の ;（右人差し指。中身はおもに左手）
 // 4 と 5 は &trackball の automouse-layer・scroll-layers が指しているので番号を変えない
 
 &mt {
@@ -32,7 +32,7 @@
             retro-tap;
         };
 
-        // 左親指の面の切り替え（Space・英かな）: しっかり長く押したときだけ面にする。
+        // 面の切り替え（左親指の Space・英かな、N の左隣の ;）: しっかり長く押したときだけ面にする。
         // 文字を打った直後 0.15 秒以内は必ず軽押し（速く打っているときに面へ入らない）
         slt: thumb_layer_tap {
             compatible = "zmk,behavior-hold-tap";
@@ -86,8 +86,8 @@
             bindings = <
 &kp Q             &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
 &kp A             &kp S     &kp D     &kp F              &kp G               &kp LEFT_BRACKET      &kp MINUS                     &kp H      &kp J  &kp K      &kp L    &kp SQT
-&mt LEFT_SHIFT Z  &kp X     &kp C     &kp V              &kp B               &kp COLON             &kp SEMICOLON                 &kp N      &kp M  &kp COMMA  &kp DOT  &mt LEFT_SHIFT SLASH
-&mo 3             &cmt LCTRL TAB &tmt LALT ESC &cmt LGUI TAB &slt 1 SPACE   &slt 2 LC(SPACE)      &vbs LG(PERIOD) ENTER         &blt 6 BACKSPACE                              &kp DELETE
+&mt LEFT_SHIFT Z  &kp X     &kp C     &kp V              &kp B               &kp COLON             &slt 3 SEMICOLON                &kp N      &kp M  &kp COMMA  &kp DOT  &mt LEFT_SHIFT SLASH
+&kp ESC           &cmt LCTRL TAB &tmt LALT ESC &cmt LGUI TAB &slt 1 SPACE   &slt 2 LC(SPACE)      &vbs LG(PERIOD) ENTER         &blt 6 BACKSPACE                              &kp DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
@@ -113,13 +113,13 @@
             >;
         };
 
-        // Mac 操作・メディアの面（Z の真下を押さえている間）。押さえている左小指の列（Q・A・Z）は空ける
+        // Mac 操作・メディアの面（N の左隣の ; を押さえている間）。よく使うものは左手、めったに使わないものは右手の中指より外
         MAC_MEDIA {
             bindings = <
-&none   &kp C_BRI_DN       &kp C_BRI_UP   &kp C_VOL_DN    &kp C_VOL_UP                                      &none               &kp C_PREV          &kp C_PP          &kp C_NEXT           &kp LG(SLASH)
-&none   &kp C_MUTE         &kp LA(LS(LG(V))) &kp LS(LG(T)) &kp LC(LG(H))  &none         &kp LC(LS(TAB))  &kp LC(LEFT_ARROW)  &kp LC(DOWN_ARROW)  &kp LC(UP_ARROW)  &kp LC(RIGHT_ARROW)  &kp LC(TAB)
-&trans  &bt BT_SEL 0       &bt BT_SEL 1   &bt BT_SEL 2    &bt BT_SEL 3   &bt BT_CLR    &none            &kp LS(LG(N3))      &kp LS(LG(N4))      &kp LS(LG(N0))    &none                &bootloader
-&trans  &trans             &trans         &trans          &trans         &trans        &trans           &trans                                                                         &trans
+&kp C_BRI_DN        &kp C_BRI_UP        &kp C_VOL_DN        &kp C_VOL_UP         &kp C_MUTE                                    &none    &none           &kp C_PREV      &kp C_PP        &kp C_NEXT
+&kp LC(LEFT_ARROW)  &kp LC(DOWN_ARROW)  &kp LC(UP_ARROW)    &kp LC(RIGHT_ARROW)  &kp LA(LS(LG(V)))  &kp LS(LG(T))   &none     &none    &none           &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2
+&kp LS(LG(N3))      &kp LS(LG(N4))      &kp LS(LG(N0))      &kp LC(LS(TAB))      &kp LC(TAB)        &kp LG(SLASH)   &trans    &none    &none           &bt BT_SEL 3    &bt BT_CLR      &bootloader
+&trans              &trans              &trans              &trans               &trans             &trans          &trans    &trans                                                    &trans
             >;
         };
 
