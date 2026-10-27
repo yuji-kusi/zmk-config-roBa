@@ -22,8 +22,8 @@
 
 / {
     behaviors {
-        // ホームの段の長押し Shift（左は A、右は L の隣の '）。速打ちで誤って Shift にならないように:
-        // 文字を打った直後 0.15 秒以内は必ず文字、0.25 秒押さえたうえで反対の手のキー（と親指）を押したときだけ Shift
+        // ホームの段の長押しで修飾キー（左 A Shift・S Control・D Option・F Command、右はその鏡で J Command・K Option・L Control・' Shift）。
+        // 速打ちで誤って働かないように: 文字を打った直後 0.15 秒以内は必ず文字、0.25 秒押さえたうえで反対の手のキー（と親指）を押したときだけ修飾キー
         lhs: left_home_shift {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -60,7 +60,7 @@
             retro-tap;
         };
 
-        // 左親指の中央寄り（軽押し 前方削除・長押し Control）といちばん端（軽押し Tab・長押し Command）。
+        // 左親指の中央寄り（軽押し 前方削除・長押し Command）といちばん端（軽押し Tab・長押し Control）。
         // Command+C などを素早く打てるよう balanced にする。軽押しのすぐ後の押し続けは前方削除の連続
         cmt: quick_mod_tap {
             compatible = "zmk,behavior-hold-tap";
@@ -101,9 +101,9 @@
         default_layer {
             bindings = <
 &kp Q             &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
-&lhs LSHIFT A     &kp S     &kp D     &kp F              &kp G               &kp LC(UP_ARROW)      &kp MINUS                     &kp H      &kp J  &kp K      &kp L    &rhs LSHIFT SQT
+&lhs LSHIFT A     &lhs LCTRL S &lhs LALT D &lhs LGUI F            &kp G               &kp LC(UP_ARROW)      &kp MINUS                     &kp H      &rhs LGUI J  &rhs LALT K  &rhs LCTRL L  &rhs LSHIFT SQT
 &kp Z             &kp X     &kp C     &kp V              &kp B               &vbs LS(LG(Z)) LG(Z)  &vbs SEMICOLON LG(PERIOD)    &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH
-&mo 3             &kp ESC     &kp LC(SPACE)  &cmt LGUI TAB        &tmt LALT SPACE  &cmt LCTRL DELETE    &blt 1 BACKSPACE          &blt 2 ENTER                                        &lt 5 DELETE
+&mo 3             &kp ESC     &kp LC(SPACE)  &cmt LCTRL TAB       &tmt LALT SPACE  &cmt LGUI DELETE     &blt 1 BACKSPACE          &blt 2 ENTER                                        &lt 5 DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
