@@ -189,13 +189,14 @@
         };
 
         // スクロールの面（I か右下の角を押さえている間。ボールでスクロール）。
-        // マウスキー（細かい位置合わせ用）: 右下の角を押さえたまま H J K L でカーソルを少しずつ ← ↓ ↑ →（矢印の面と同じ向き）、U 左クリック、O 右クリック
+        // 押さえている間は J 左クリック・K ホイールクリック・L 右クリックが時間切れなしで使える（ボールで動かしてから、角を押さえて J）。
+        // マウスキー（細かい位置合わせ用）: 左手の E S D F でカーソルを少しずつ ↑ ← ↓ →。U 左クリック、O 右クリック
         SCROLL {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans          &mkp MB1        &trans        &mkp MB2         &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans          &trans          &trans        &trans           &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                                                         &trans
+&trans  &trans          &mmv MOVE_UP    &trans           &trans                      &trans  &mkp MB1  &trans    &mkp MB2  &trans
+&trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans      &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
+&trans  &trans          &trans          &trans           &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &trans          &trans          &trans           &trans  &trans      &trans  &trans                                &trans
             >;
         };
 
