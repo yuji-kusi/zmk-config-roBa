@@ -71,7 +71,7 @@
             quick-tap-ms = <150>;
         };
 
-        // 内側の列の 2 役キー（N の左隣: 軽押し 音声入力・長押し ;、G の右隣: 軽押し 取り消し・長押し やり直し）。
+        // 内側の列の 2 役キー（N の左隣: 軽押し 音声入力・長押し ;、B の右隣: 軽押し 取り消し・長押し やり直し）。
         // めったに使わない側を長押しにし、0.3 秒としっかり長めにする
         vbs: slow_hold_tap {
             compatible = "zmk,behavior-hold-tap";
@@ -101,8 +101,8 @@
         default_layer {
             bindings = <
 &kp Q             &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
-&lhs LSHIFT A     &kp S     &kp D     &kp F              &kp G               &vbs LS(LG(Z)) LG(Z)  &kp MINUS                     &kp H      &kp J  &kp K      &kp L    &rhs LSHIFT SQT
-&kp Z             &kp X     &kp C     &kp V              &kp B               &kp LC(UP_ARROW)      &vbs SEMICOLON LG(PERIOD)    &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH
+&lhs LSHIFT A     &kp S     &kp D     &kp F              &kp G               &kp LC(UP_ARROW)      &kp MINUS                     &kp H      &kp J  &kp K      &kp L    &rhs LSHIFT SQT
+&kp Z             &kp X     &kp C     &kp V              &kp B               &vbs LS(LG(Z)) LG(Z)  &vbs SEMICOLON LG(PERIOD)    &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH
 &mo 3             &kp ESC     &kp LC(SPACE)  &cmt LGUI TAB        &tmt LALT SPACE  &cmt LCTRL DELETE    &blt 1 BACKSPACE          &blt 2 ENTER                                        &lt 5 DELETE
             >;
 
