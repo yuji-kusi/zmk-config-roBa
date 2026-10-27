@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>roBa 保存から書き込みまで</title>
+<style>
+:root{--bg:#1e1e1e;--panel:#2c2c2c;--line:#3d3d3d;--text:#e8e8e8;--sub:#a8a8a8;--blue:#1473e6;--blue2:#3b82f6;--ok:#2d9d78;--warn:#e6a23c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"Hiragino Sans",sans-serif;line-height:1.7}
+main{max-width:860px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:24px;margin:0 0 4px}
+.lead{color:var(--sub);margin:0 0 24px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 18px 14px;margin:0 0 16px}
+.step h2{font-size:18px;margin:0 0 6px;display:flex;gap:10px;align-items:center}
+.num{background:var(--blue);color:#fff;border-radius:50%;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;flex:none}
+.step p{margin:4px 0}
+.btn{display:inline-block;border:1px solid var(--blue2);color:#fff;background:#1d3b66;border-radius:5px;padding:0 7px;font-size:14px}
+.note{color:var(--sub);font-size:14px}
+svg{display:block;width:100%;height:auto;margin:10px 0 4px;border-radius:6px}
+.part{color:var(--blue2);font-size:13px;letter-spacing:.08em;margin:28px 0 8px}
+</style>
+</head>
+<body>
+<main>
+<h1>roBa 保存から書き込みまで</h1>
+<p class="lead">1 回に 1 つだけ押します。絵は画面のおおまかな形で、青い枠が押す場所です。</p>
+
+<div class="part">A. Keymap Editor で保存</div>
+<section class="step">
+<h2><span class="num">1</span>右上の <span class="btn">Save</span> を押す</h2>
+<p>変えたキーが画面に出ているのを確かめてから押します。これで GitHub に変更が送られ、自動でビルドが始まります。</p>
+<svg viewBox="0 0 800 220"><rect width="800" height="220" fill="#f6f6f6"/>
+<text x="20" y="30" font-size="13" fill="#555">Source  GitHub   Repository  zmk-config-roBa   Branch  main</text>
+<rect x="690" y="12" width="90" height="30" rx="4" fill="#fff" stroke="#1473e6" stroke-width="4"/><text x="713" y="33" font-size="15" fill="#222">Save</text>
+<text x="20" y="70" font-size="13" fill="#555">layers   conditional layers   combos   macros   behaviors</text>
+<g fill="#fff" stroke="#bbb">
+<rect x="160" y="90" width="50" height="40"/><rect x="215" y="90" width="50" height="40"/><rect x="270" y="90" width="50" height="40"/><rect x="325" y="90" width="50" height="40"/><rect x="430" y="90" width="50" height="40"/><rect x="485" y="90" width="50" height="40"/><rect x="540" y="90" width="50" height="40"/><rect x="595" y="90" width="50" height="40"/>
+<rect x="160" y="140" width="50" height="40"/><rect x="215" y="140" width="50" height="40"/><rect x="270" y="140" width="50" height="40"/><rect x="325" y="140" width="50" height="40"/><rect x="430" y="140" width="50" height="40"/><rect x="485" y="140" width="50" height="40"/><rect x="540" y="140" width="50" height="40"/><rect x="595" y="140" width="50" height="40"/></g>
+<text x="20" y="120" font-size="13" fill="#888">0 default_layer</text><text x="20" y="140" font-size="13" fill="#888">1 FUNCTION ...</text>
+</svg>
+<p class="note">押したあと少し待つと、上の「Latest」の文字が新しくなります。</p>
+</section>
+
+<div class="part">B. GitHub でビルドを待つ</div>
+<section class="step">
+<h2><span class="num">2</span>GitHub の自分の roBa のページを開く</h2>
+<p>アドレス: <span class="btn">github.com/yuji-kusi/zmk-config-roBa</span></p>
+</section>
+<section class="step">
+<h2><span class="num">3</span>上のタブの <span class="btn">Actions</span> を押す</h2>
+<svg viewBox="0 0 800 110"><rect width="800" height="110" fill="#f6f6f6"/>
+<text x="20" y="30" font-size="15" fill="#222">yuji-kusi / zmk-config-roBa</text>
+<text x="20" y="75" font-size="14" fill="#444">Code     Pull requests</text>
+<rect x="180" y="55" width="80" height="30" rx="4" fill="#fff" stroke="#1473e6" stroke-width="4"/><text x="197" y="75" font-size="14" fill="#222">Actions</text>
+<text x="280" y="75" font-size="14" fill="#444">Projects     Settings</text>
+</svg>
+</section>
+<section class="step">
+<h2><span class="num">4</span>いちばん上の行が緑のチェックになるまで待って、その行を押す</h2>
+<p>黄色の丸は作業中、緑のチェックは完了、赤のバツは失敗です。数分かかります。</p>
+<svg viewBox="0 0 800 130"><rect width="800" height="130" fill="#f6f6f6"/>
+<rect x="15" y="15" width="770" height="44" rx="4" fill="#fff" stroke="#1473e6" stroke-width="4"/>
+<circle cx="40" cy="37" r="10" fill="#2d9d78"/><path d="M34 37l4 4 8-8" stroke="#fff" stroke-width="3" fill="none"/>
+<text x="62" y="42" font-size="14" fill="#222">いちばん新しい変更（Save したもの）</text>
+<rect x="15" y="70" width="770" height="44" rx="4" fill="#fff" stroke="#ddd"/>
+<circle cx="40" cy="92" r="10" fill="#2d9d78"/><text x="62" y="97" font-size="14" fill="#888">ひとつ前の変更</text>
+</svg>
+</section>
+
+<div class="part">C. ファイルを取る</div>
+<section class="step">
+<h2><span class="num">5</span>下の方の Artifacts にある <span class="btn">firmware</span> を押す</h2>
+<p>zip ファイルがダウンロードフォルダに入ります。</p>
+<svg viewBox="0 0 800 110"><rect width="800" height="110" fill="#f6f6f6"/>
+<text x="20" y="30" font-size="15" fill="#222">Artifacts</text>
+<rect x="15" y="45" width="200" height="40" rx="4" fill="#fff" stroke="#1473e6" stroke-width="4"/><text x="35" y="71" font-size="15" fill="#1473e6">firmware</text>
+<text x="240" y="71" font-size="13" fill="#888">数百 KB</text>
+</svg>
+</section>
+<section class="step">
+<h2><span class="num">6</span>ダウンロードフォルダの firmware.zip をダブルクリックして開く</h2>
+<p>中に 3 つのファイルが出てきます。使うのは <span class="btn">roBa_R-seeeduino_xiao_ble-zmk.uf2</span> だけです。</p>
+</section>
+
+<div class="part">D. 右側に書き込む</div>
+<section class="step">
+<h2><span class="num">7</span>roBa の右側（トラックボール側）を USB ケーブルで Mac につなぐ</h2>
+<p class="note">配列を変えただけなら、左側とリセット用のファイルは要りません。</p>
+</section>
+<section class="step">
+<h2><span class="num">8</span>右側のリセットボタンを素早く 2 回押す</h2>
+<p>または、左親指のかなキー（下の段の左から 4 つ目）を押しながら、右手の N の左隣のキーを押します（解説にある bootloader のキー）。</p>
+<p>デスクトップや Finder に <span class="btn">XIAO-SENSE</span> というドライブが出れば成功です。</p>
+<svg viewBox="0 0 800 200"><rect width="800" height="200" fill="#2a2a2a"/>
+<path d="M80 40 h300 v120 h-300 z" fill="#3a3a3a" stroke="#555"/><circle cx="320" cy="80" r="28" fill="#555"/><text x="300" y="130" font-size="12" fill="#aaa">ボール</text>
+<rect x="110" y="140" width="60" height="18" fill="#222"/><text x="96" y="185" font-size="13" fill="#aaa">裏の小さな基板（XIAO）</text>
+<circle cx="160" cy="149" r="5" fill="#fff" stroke="#3b82f6" stroke-width="4"/><text x="190" y="155" font-size="13" fill="#3b82f6">リセットボタン（2 回）</text>
+<rect x="500" y="60" width="220" height="80" rx="8" fill="#333" stroke="#3b82f6" stroke-width="3"/><text x="540" y="108" font-size="16" fill="#fff">XIAO-SENSE</text>
+<text x="420" y="105" font-size="20" fill="#aaa">→</text>
+</svg>
+</section>
+<section class="step">
+<h2><span class="num">9</span>roBa_R のファイルを XIAO-SENSE にドラッグする</h2>
+<p>ドライブが消えたら書き込み完了です。Mac がエラーを出しても、書き込みは済んでいるので閉じて大丈夫です。</p>
+</section>
+<section class="step">
+<h2><span class="num">10</span>ケーブルを抜いて試す</h2>
+<p>かなキーでかな、英数キーで英数になれば完成です。キーが効かないときは、右側のリセットボタンを 1 回だけ押します。</p>
+</section>
+</main>
+</body>
+</html>
