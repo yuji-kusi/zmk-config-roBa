@@ -4,7 +4,7 @@
 #include <dt-bindings/zmk/pointing.h>
 
 // 面の番号: 0 ふだん / 1 数字と F キー / 2 記号と矢印 / 3 Mac 操作・メディア / 4 マウス / 5 スクロール
-// 入り方（どれも 1 つのキーの長押し）: 1 右親指の外側 / 2 右下の角 / 3 C の真下
+// 入り方（どれも 1 つのキーの長押し）: 1 左親指の Space / 2 右下の角 / 3 C の真下
 // 4 と 5 は &trackball の automouse-layer・scroll-layers が指しているので番号を変えない
 
 &mt {
@@ -19,7 +19,7 @@
 
 / {
     behaviors {
-        // 左親指の Space: しっかり長く押したときだけ Option にする
+        // 右親指の外側の Backspace: しっかり長く押したときだけ Option にする
         tmt: thumb_mod_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -27,7 +27,20 @@
             flavor = "tap-preferred";
             tapping-term-ms = <220>;
             quick-tap-ms = <150>;
-            // 長く押しても他のキーを押さずに離したら Space として出す
+            // 長く押しても他のキーを押さずに離したら Backspace として出す
+            retro-tap;
+        };
+
+        // 左親指の Space: しっかり長く押したときだけ数字と F キーの面にする。
+        // 文字を打った直後 0.15 秒以内の Space は必ず Space（速く打っているときに面へ入らない）
+        slt: space_layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&mo>, <&kp>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            require-prior-idle-ms = <150>;
             retro-tap;
         };
 
@@ -52,8 +65,8 @@
             quick-tap-ms = <200>;
         };
 
-        // 右手の面の切り替え: 長押しで面、軽押しでキー。
-        // 押さえたまま別のキーを押して離したら面に入る（Backspace を短く押して数字を打っても Backspace が出ない）
+        // 右下の角: 軽押し F7、長押しで記号と矢印の面。
+        // 押さえたまま別のキーを押して離したら面に入る（角を短く押して矢印を打っても F7 が出ない）
         tlt: thumb_layer_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -72,19 +85,19 @@
 &kp Q             &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
 &kp A             &kp S     &kp D     &kp F              &kp G               &kp LEFT_BRACKET      &kp MINUS                     &kp H      &kp J  &kp K      &kp L    &kp SQT
 &mt LEFT_SHIFT Z  &kp X     &kp C     &kp V              &kp B               &kp COLON             &kp SEMICOLON                 &kp N      &kp M  &kp COMMA  &kp DOT  &mt LEFT_SHIFT SLASH
-&kp LCTRL         &kp LGUI  &lt 3 ESC &cmt LGUI TAB      &tmt LALT SPACE     &cmt LCTRL LC(SPACE)  &vbs LG(PERIOD) ENTER         &tlt 1 BACKSPACE                            &tlt 2 F7
+&kp LCTRL         &kp LGUI  &lt 3 ESC &cmt LGUI TAB      &slt 1 SPACE        &cmt LCTRL LC(SPACE)  &vbs LG(PERIOD) ENTER         &tmt LALT BACKSPACE                           &tlt 2 F7
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
         };
 
-        // 数字と F キーの面（右親指の外側の長押し）
+        // 数字と F キーの面（左親指の Space の長押し）。数字は右手、F キーは左手
         NUM_F {
             bindings = <
-&kp MINUS                   &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PLUS                                &none   &kp F1  &kp F2   &kp F3   &kp F4
-&kp SLASH                   &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp ASTERISK  &none          &none     &kp F5  &kp F6  &kp F7   &kp F8   &none
-&mt LEFT_SHIFT KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp PERIOD    &kp EQUAL      &none     &kp F9  &kp F10 &kp F11  &kp F12  &none
-&trans                      &trans           &trans           &trans           &trans        &trans         &trans    &trans                             &trans
+&kp F1   &kp F2   &kp F3   &kp F4   &none                                                &kp MINUS      &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PLUS
+&kp F5   &kp F6   &kp F7   &kp F8   &none    &none                       &none           &kp SLASH      &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp ASTERISK
+&kp F9   &kp F10  &kp F11  &kp F12  &none    &none                       &kp EQUAL       &kp KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp PERIOD
+&trans   &trans   &trans   &trans   &trans   &trans                      &trans          &trans                                                              &trans
             >;
         };
 
