@@ -12,6 +12,7 @@ main{max-width:720px;margin:0 auto;padding:24px 16px 64px}
 h1{font-size:23px;margin:0 0 8px}
 h2{font-size:18px;margin:28px 0 8px;color:var(--blue2)}
 .now{background:#1d3b66;border:1px solid var(--blue2);border-radius:8px;padding:12px 16px;margin:0 0 16px;font-size:17px;font-weight:600;color:#fff}
+.k{display:grid;grid-template-columns:repeat(13,1fr);gap:4px;min-width:640px}.k div{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:8px 4px;text-align:center;font-size:16px;font-weight:600}.k .e{visibility:hidden}.k .n{background:#1d3b66;border-color:var(--blue2);color:#fff}.wrap{overflow-x:auto}
 .note{color:var(--sub);font-size:15px}
 table{border-collapse:collapse;width:100%;background:var(--panel);font-size:18px}
 th,td{border:1px solid var(--line);padding:10px 12px;text-align:left}
@@ -20,17 +21,23 @@ th{background:#252a33;color:#cfd8e6;font-weight:600}
 </head>
 <body>
 <main>
-<div class="now">修正案 第 2 版（まだ書き込んでいません）</div>
+<div class="now">修正案 第 3 版（まだ書き込んでいません）</div>
 <h1>親指のキー（左から順に）</h1>
 <table>
 <tr><th>キー</th><th>軽く押す</th><th>長押し</th></tr>
 <tr><td>左親指 1（いちばん外）</td><td>Tab</td><td>Command</td></tr>
-<tr><td>左親指 2（真ん中）</td><td>Space</td><td>Option</td></tr>
+<tr><td>左親指 2（真ん中）</td><td>Space</td><td>数字と F キーの面</td></tr>
 <tr><td>左親指 3（いちばん内）</td><td>英数とかなの入れ替え</td><td>Control</td></tr>
 <tr><td>右親指 1（内側）</td><td>Enter</td><td>音声入力</td></tr>
-<tr><td>右親指 2（外側）</td><td>Backspace</td><td>数字と F キーの面</td></tr>
+<tr><td>右親指 2（外側）</td><td>Backspace</td><td>Option</td></tr>
 <tr><td>右下の角（小指）</td><td>F7</td><td>記号と矢印の面</td></tr>
 </table>
+
+<h2>数字と F キーの面（左親指の Space を長押し）</h2>
+<div class="wrap"><div class="k"><div class="">F1</div><div class="">F2</div><div class="">F3</div><div class="">F4</div><div class="e"></div><div class="e"></div><div class="e"></div><div class="e"></div><div class="">-</div><div class="n">7</div><div class="n">8</div><div class="n">9</div><div class="">+</div><div class="">F5</div><div class="">F6</div><div class="">F7</div><div class="">F8</div><div class="e"></div><div class="e"></div><div class="e"></div><div class="e"></div><div class="">/</div><div class="n">4</div><div class="n">5</div><div class="n">6</div><div class="">*</div><div class="">F9</div><div class="">F10</div><div class="">F11</div><div class="">F12</div><div class="e"></div><div class="e"></div><div class="e"></div><div class="">=</div><div class="n">0</div><div class="n">1</div><div class="n">2</div><div class="n">3</div><div class="">.</div></div></div>
+<p class="note">数字は右手（U・I・O の段が 7 8 9、J・K・L が 4 5 6、M・カンマ・ピリオドが 1 2 3、N が 0）。F キーは左手（Q から順に F1〜F4、A から F5〜F8、Z から F9〜F12）。</p>
+<p class="note">推奨の理由：数字を打つ右手と反対の、左親指で面に入るのがいちばん打ちやすいからです。Space は「しっかり長く押したとき」だけ面に入ります。文章を速く打っているときは Space のままです。</p>
+<p class="note">そのぶん Option は右親指の外側（Backspace）の長押しに移します。デスクトップの切り替え（Option＋数字）は、右親指で Option を押さえ、左親指で数字の面に入って、右手で数字です。</p>
 
 <h2>Esc の場所</h2>
 <table>
