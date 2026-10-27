@@ -5,54 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>roBa 親指の修正案</title>
 <style>
-:root{--bg:#1e1e1e;--panel:#2c2c2c;--line:#3d3d3d;--text:#e8e8e8;--sub:#a8a8a8;--blue:#1473e6;--blue2:#3b82f6}
+:root{--bg:#1e1e1e;--panel:#2c2c2c;--line:#3d3d3d;--text:#e8e8e8;--sub:#a8a8a8;--blue2:#3b82f6}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"Hiragino Sans",sans-serif;line-height:1.6}
-main{max-width:900px;margin:0 auto;padding:24px 16px 64px}
+main{max-width:720px;margin:0 auto;padding:24px 16px 64px}
 h1{font-size:23px;margin:0 0 8px}
 h2{font-size:18px;margin:28px 0 8px;color:var(--blue2)}
 .now{background:#1d3b66;border:1px solid var(--blue2);border-radius:8px;padding:12px 16px;margin:0 0 16px;font-size:17px;font-weight:600;color:#fff}
-.note{color:var(--sub);font-size:14px}
-table{border-collapse:collapse;width:100%;background:var(--panel);font-size:16px}
-th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+.note{color:var(--sub);font-size:15px}
+table{border-collapse:collapse;width:100%;background:var(--panel);font-size:18px}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left}
 th{background:#252a33;color:#cfd8e6;font-weight:600}
-.chg{color:#fff;font-weight:700;background:#1d3b66}
-.old{color:var(--sub);font-size:13px;display:block}
 </style>
 </head>
 <body>
 <main>
-<div class="now">修正案（まだ書き込んでいません）。青い所が変わる所です。OK が出たら書き込み用のファイルを作ります。</div>
-<h1>roBa 親指の修正案</h1>
-
-<h2>左親指（外から）</h2>
+<div class="now">修正案 第 2 版（まだ書き込んでいません）</div>
+<h1>親指のキー（左から順に）</h1>
 <table>
-<tr><th>場所</th><th>軽く押す</th><th>長押し</th></tr>
-<tr><td>1（いちばん外）</td><td class="chg">なし<span class="old">前は Esc</span></td><td class="chg">Command<span class="old">前は Control</span></td></tr>
-<tr><td>2（真ん中）</td><td>Space（そのまま）</td><td>Option（そのまま）</td></tr>
-<tr><td>3（いちばん内）</td><td>英数とかなの入れ替え（そのまま）</td><td class="chg">Control<span class="old">前は Command</span></td></tr>
+<tr><th>キー</th><th>軽く押す</th><th>長押し</th></tr>
+<tr><td>左親指 1（いちばん外）</td><td>Tab</td><td>Command</td></tr>
+<tr><td>左親指 2（真ん中）</td><td>Space</td><td>Option</td></tr>
+<tr><td>左親指 3（いちばん内）</td><td>英数とかなの入れ替え</td><td>Control</td></tr>
+<tr><td>右親指 1（内側）</td><td>Enter</td><td>音声入力</td></tr>
+<tr><td>右親指 2（外側）</td><td>Backspace</td><td>数字と F キーの面</td></tr>
+<tr><td>右下の角（小指）</td><td>F7</td><td>記号と矢印の面</td></tr>
 </table>
-<p class="note">いちばん外は Command だけにします。軽押しの役が無いので、押した瞬間から Command になり、Command+C などが遅れません。</p>
-<p class="note">Space は真ん中のまま（推奨）。親指をいちばん自然に置ける所で、いちばんよく使うキーだからです。</p>
 
-<h2>Esc の新しい場所</h2>
+<h2>Esc の場所</h2>
 <table>
-<tr><th>場所</th><th>今</th><th>修正案</th></tr>
-<tr><td>左手の下の段（Tab の外隣）</td><td>Command</td><td class="chg">Esc</td></tr>
+<tr><th>キー</th><th>軽く押す</th><th>長押し</th></tr>
+<tr><td>C の真下</td><td>Esc</td><td>Mac 操作の面</td></tr>
 </table>
-<p class="note">左手の下の段は外から Control・Esc・Tab になります。Command は親指にあるので、ここの Command は Esc に回します（推奨）。</p>
-
-<h2>右親指</h2>
-<table>
-<tr><th>場所</th><th>軽く押す</th><th>長押し</th></tr>
-<tr><td>内側</td><td class="chg">Enter<span class="old">前は Backspace</span></td><td>音声入力（KoeType。そのまま）</td></tr>
-<tr><td>外側</td><td class="chg">Backspace<span class="old">前は Enter</span></td><td>数字と F キーの面（そのまま）</td></tr>
-<tr><td>記号と矢印の面</td><td>―</td><td class="chg">外側を押さえたまま、内側を押す<span class="old">前は 2 つを同時に長押し</span></td></tr>
-<tr><td>右下の角</td><td>F7（そのまま）</td><td>Mac 操作の面（そのまま）</td></tr>
-</table>
-<p class="note">長押しは「内側＝音声入力、外側＝数字と F キーの面」で合っています（推奨。音声入力はこのまま内側）。</p>
-<p class="note">同時押しは、ほぼ同時（0.04 秒以内）に押さないと効かず、外れやすいのでやめます。代わりに「外側で数字の面に入って、そのまま内側を押すと記号の面」にします（推奨）。順番に押せばよいので失敗しにくく、Enter と Backspace を続けて打っても誤って働きません。</p>
-<p class="note">Backspace を押し続けて消したいときは、一度軽く押してすぐ押し直し、そのまま押し続けます。Enter も同じです。</p>
+<p class="note">X の真下は Command、Z の真下は Control のまま。前に C の真下にあった Tab は、左親指 1 に移りました。</p>
+<p class="note">同時押しや「押さえたまま別の親指」は全部やめました。どの面も、キー 1 つの長押しだけで入ります。</p>
 </main>
 </body>
 </html>
