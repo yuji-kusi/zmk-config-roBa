@@ -39,7 +39,7 @@ svg{display:block;width:100%;height:auto;margin:10px 0 4px;border-radius:6px}
 <rect x="160" y="140" width="50" height="40"/><rect x="215" y="140" width="50" height="40"/><rect x="270" y="140" width="50" height="40"/><rect x="325" y="140" width="50" height="40"/><rect x="430" y="140" width="50" height="40"/><rect x="485" y="140" width="50" height="40"/><rect x="540" y="140" width="50" height="40"/><rect x="595" y="140" width="50" height="40"/></g>
 <text x="20" y="120" font-size="13" fill="#888">0 default_layer</text><text x="20" y="140" font-size="13" fill="#888">1 FUNCTION ...</text>
 </svg>
-<p class="note">押したあと少し待つと、上の「Latest」の文字が新しくなります。</p>
+<p class="note">押したあと少し待つと、Save の左の「Latest（英数字）」の表示が新しくなります。</p>
 </section>
 
 <div class="part">B. GitHub でビルドを待つ</div>
@@ -59,6 +59,7 @@ svg{display:block;width:100%;height:auto;margin:10px 0 4px;border-radius:6px}
 <section class="step">
 <h2><span class="num">4</span>いちばん上の行が緑のチェックになるまで待って、その行を押す</h2>
 <p>黄色の丸は作業中、緑のチェックは完了、赤のバツは失敗です。数分かかります。</p>
+<p class="note">赤のバツなら先へ進まず、Keymap Editor で直前の変更を戻すか、相談してください。</p>
 <svg viewBox="0 0 800 130"><rect width="800" height="130" fill="#f6f6f6"/>
 <rect x="15" y="15" width="770" height="44" rx="4" fill="#fff" stroke="#1473e6" stroke-width="4"/>
 <circle cx="40" cy="37" r="10" fill="#2d9d78"/><path d="M34 37l4 4 8-8" stroke="#fff" stroke-width="3" fill="none"/>
@@ -79,7 +80,7 @@ svg{display:block;width:100%;height:auto;margin:10px 0 4px;border-radius:6px}
 </svg>
 </section>
 <section class="step">
-<h2><span class="num">6</span>ダウンロードフォルダの firmware.zip をダブルクリックして開く</h2>
+<h2><span class="num">6</span>ダウンロードフォルダの firmware.zip（または firmware フォルダ）を開く</h2>
 <p>中に 3 つのファイルが出てきます。使うのは <span class="btn">roBa_R-seeeduino_xiao_ble-zmk.uf2</span> だけです。</p>
 </section>
 
@@ -90,8 +91,8 @@ svg{display:block;width:100%;height:auto;margin:10px 0 4px;border-radius:6px}
 </section>
 <section class="step">
 <h2><span class="num">8</span>右側のリセットボタンを素早く 2 回押す</h2>
-<p>または、左親指のかなキー（下の段の左から 4 つ目）を押しながら、右手の N の左隣のキーを押します（解説にある bootloader のキー）。</p>
-<p>デスクトップや Finder に <span class="btn">XIAO-SENSE</span> というドライブが出れば成功です。</p>
+<p>デスクトップや Finder に <span class="btn">XIAO-SENSE</span> というドライブが出れば成功です（名前が少し違うこともあります。XIAO で始まるドライブです）。</p>
+<p class="note">慣れてきたら別のやり方も: 左親指の、下の段の左から 4 つ目のキーを押しながら、右手の N の左隣のキーを押す（解説にある bootloader のキー）。</p>
 <svg viewBox="0 0 800 200"><rect width="800" height="200" fill="#2a2a2a"/>
 <path d="M80 40 h300 v120 h-300 z" fill="#3a3a3a" stroke="#555"/><circle cx="320" cy="80" r="28" fill="#555"/><text x="300" y="130" font-size="12" fill="#aaa">ボール</text>
 <rect x="110" y="140" width="60" height="18" fill="#222"/><text x="96" y="185" font-size="13" fill="#aaa">裏の小さな基板（XIAO）</text>
@@ -107,6 +108,7 @@ svg{display:block;width:100%;height:auto;margin:10px 0 4px;border-radius:6px}
 <section class="step">
 <h2><span class="num">10</span>ケーブルを抜いて試す</h2>
 <p>かなキーでかな、英数キーで英数になれば完成です。キーが効かないときは、右側のリセットボタンを 1 回だけ押します。</p>
+<p class="note">書いたのに配列が変わらないときは、ZMK Studio で以前保存した設定が残っている可能性があります。相談してください（左側とリセット用のファイルが要らないのは、配列だけを変えて、ZMK Studio で保存したことがない場合です）。</p>
 </section>
 </main>
 </body>
