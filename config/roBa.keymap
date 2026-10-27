@@ -22,7 +22,9 @@
 
 / {
     behaviors {
-        // ホームの段の長押しで修飾キー（左 A Shift・S Control・D Option・F Command、右はその鏡で J Command・K Option・L Control・' Shift）。
+        // ホームの段の長押しで修飾キーの束（単体の Control・Option・Command は親指にある）。
+        // 左 A Shift・S Control+Option+Command・D Command+Shift・F Control+Option、右はその鏡（J Control+Option・K Command+Shift・L Control+Option+Command・' Shift）。
+        // F を押さえて Space で Orca の会話開始（Control+Option+Space）、K を押さえて T・4 で CleanShot の撮影など
         // 速打ちで誤って働かないように: 文字を打った直後 0.15 秒以内は必ず文字、0.25 秒押さえたうえで反対の手のキー（と親指）を押したときだけ修飾キー
         lhs: left_home_shift {
             compatible = "zmk,behavior-hold-tap";
@@ -101,7 +103,7 @@
         default_layer {
             bindings = <
 &kp Q             &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
-&lhs LSHIFT A     &lhs LCTRL S &lhs LALT D &lhs LGUI F            &kp G               &kp LC(UP_ARROW)      &kp MINUS                     &kp H      &rhs LGUI J  &rhs LALT K  &rhs LCTRL L  &rhs LSHIFT SQT
+&lhs LSHIFT A     &lhs LC(LA(LGUI)) S &lhs LG(LSHIFT) D &lhs LC(LALT) F            &kp G               &kp LC(UP_ARROW)      &kp MINUS                     &kp H      &rhs LC(LALT) J  &rhs LG(LSHIFT) K  &rhs LC(LA(LGUI)) L  &rhs LSHIFT SQT
 &kp Z             &kp X     &kp C     &kp V              &kp B               &vbs LS(LG(Z)) LG(Z)  &vbs SEMICOLON LG(PERIOD)    &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH
 &mo 3             &kp ESC     &kp LC(SPACE)  &cmt LCTRL TAB       &tmt LALT SPACE  &cmt LGUI DELETE     &blt 1 BACKSPACE          &blt 2 ENTER                                        &lt 5 DELETE
             >;
