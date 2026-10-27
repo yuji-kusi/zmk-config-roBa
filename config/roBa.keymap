@@ -4,7 +4,8 @@
 #include <dt-bindings/zmk/pointing.h>
 
 // 面の番号: 0 ふだん / 1 数字と F キー / 2 矢印 / 3 Mac 操作・メディア / 4 マウス / 5 スクロール / 6 記号
-// 入り方（どれも 1 つのキーの長押し）: 1 左親指の Space / 2 左親指の英かな / 6 右親指の外側の Backspace
+// 消す向きと手を合わせる: 左親指の Backspace（左を消す）、右親指の Delete（右を消す）
+// 入り方（どれも 1 つのキーの長押し）: 1 左親指の Space / 2 左親指の Backspace / 6 右親指の外側の Delete
 //   3 N の左隣の ;（右人差し指。中身はおもに左手）
 // 4 と 5 は &trackball の automouse-layer・scroll-layers が指しているので番号を変えない
 
@@ -32,7 +33,7 @@
             retro-tap;
         };
 
-        // 面の切り替え（左親指の Space・英かな、N の左隣の ;）: しっかり長く押したときだけ面にする。
+        // 面の切り替え（左親指の Space、N の左隣の ;）: しっかり長く押したときだけ面にする。
         // 文字を打った直後 0.15 秒以内は必ず軽押し（速く打っているときに面へ入らない）
         slt: thumb_layer_tap {
             compatible = "zmk,behavior-hold-tap";
@@ -45,7 +46,7 @@
             retro-tap;
         };
 
-        // 左親指の外側（軽押し Tab・長押し Command）と X の真下（軽押し Tab・長押し Control）。
+        // 左親指の外側（軽押しで英数とかなの入れ替え＝Control+Space・長押し Command）と X の真下（軽押し Tab・長押し Control）。
         // Command+C・Control+C などを素早く打てるよう balanced にする
         cmt: quick_mod_tap {
             compatible = "zmk,behavior-hold-tap";
@@ -66,8 +67,8 @@
             quick-tap-ms = <200>;
         };
 
-        // 右親指の外側の Backspace: 長押しで記号の面。
-        // 長押しして何も打たずに離しても Backspace は出さない（文字が消えないように retro-tap なし）
+        // 左親指の Backspace（長押しで矢印の面）と右親指の外側の Delete（長押しで記号の面）。
+        // 長押しして何も打たずに離しても文字を消さない（retro-tap なし）
         blt: backspace_layer_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -87,7 +88,7 @@
 &kp Q             &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
 &kp A             &kp S     &kp D     &kp F              &kp G               &kp LEFT_BRACKET      &kp MINUS                     &kp H      &kp J  &kp K      &kp L    &kp SQT
 &mt LEFT_SHIFT Z  &kp X     &kp C     &kp V              &kp B               &kp COLON             &slt 3 SEMICOLON                &kp N      &kp M  &kp COMMA  &kp DOT  &mt LEFT_SHIFT SLASH
-&kp ESC           &cmt LCTRL TAB &tmt LALT ESC &cmt LGUI TAB &slt 1 SPACE   &slt 2 LC(SPACE)      &vbs LG(PERIOD) ENTER         &blt 6 BACKSPACE                              &kp DELETE
+&kp ESC           &cmt LCTRL TAB &tmt LALT ESC &cmt LGUI LC(SPACE) &slt 1 SPACE &blt 2 BACKSPACE   &vbs LG(PERIOD) ENTER         &blt 6 DELETE                                 &kp DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
@@ -103,7 +104,7 @@
             >;
         };
 
-        // 矢印の面（左親指の英かなの長押し）。矢印は右手、左手のホームの段は修飾キー（A Control・S Option・D Command・F Shift）
+        // 矢印の面（左親指の Backspace の長押し）。矢印は右手、左手のホームの段は修飾キー（A Control・S Option・D Command・F Shift）
         ARROW {
             bindings = <
 &none      &none     &none     &none       &none                                     &none      &kp HOME       &kp PG_UP      &kp PG_DN      &kp END
@@ -141,7 +142,7 @@
             >;
         };
 
-        // 記号の面（右親指の外側の Backspace の長押し）。動画の配列図の Layer 2 の並び（^ と _ は人差し指の内側、Home・End は下の段の内側）
+        // 記号の面（右親指の外側の Delete の長押し）。動画の配列図の Layer 2 の並び（^ と _ は人差し指の内側、Home・End は下の段の内側）
         SYMBOL {
             bindings = <
 &kp QUESTION  &kp EXCLAMATION   &kp AMPERSAND      &kp PIPE          &kp BACKSLASH                                                  &kp SLASH              &kp EQUAL          &kp ASTERISK      &kp PLUS          &kp PERCENT
