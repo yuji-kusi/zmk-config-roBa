@@ -46,9 +46,10 @@
             require-prior-idle-ms = <150>;
         };
 
-        // ホームの段の長押しで修飾キーの束（単体の Control・Option・Command は親指にある）。反対の手のキーと親指にだけ効く。
-        // 左（右手の文字・親指と使う）: A Shift・D Command+Shift・F Control+Option・G Control+Option+Command・G の右隣 Control+Command（軽押しは Mission Control）（F+Space で Orca の会話開始）
-        // 右（左手の文字・親指と使う）: J Command+Shift（J+T で CleanShot の文字の撮影）・K Command+Option・L Control+Command・' Shift
+        // ホームの段の長押しで修飾キーの束。規則: 左は Control、右は Command が土台。中指で Shift、人差し指で Option、
+        // 人差し指の内側（G・H）で Control と Command の両方を足す。G の右隣は Control+Option+Command の 3 つ全部（軽押しは Mission Control）。
+        // 左: D Control+Shift・F Control+Option（F+Space で Orca）・G Control+Command。右: K Command+Shift（K+T で画面の文字の撮影）・J Command+Option・H Command+Control
+        // 小指は Shift（A と '）。反対の手のキーと親指にだけ効く。
         // 速打ちで誤って働かないように: 文字を打った直後 0.15 秒以内は必ず文字、0.25 秒押さえたうえで反対の手のキー（と親指）を押したときだけ修飾キー
         lhs: left_home_shift {
             compatible = "zmk,behavior-hold-tap";
@@ -127,7 +128,7 @@
         default_layer {
             bindings = <
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
-&lhs LSHIFT A     &sct LG(S) S &lhs LG(LSHIFT) D &lhs LC(LALT) F            &lhs LC(LA(LGUI)) G               &lhs LC(LGUI) LC(UP_ARROW)    &kp MINUS                     &kp H      &rhs LG(LSHIFT) J  &rhs LG(LALT) K  &rhs LC(LGUI) L  &rhs LSHIFT SQT
+&lhs LSHIFT A     &sct LG(S) S &lhs LC(LSHIFT) D &lhs LC(LALT) F            &lhs LC(LGUI) G                   &lhs LC(LA(LGUI)) LC(UP_ARROW)    &kp MINUS                     &rhs LG(LCTRL) H  &rhs LG(LALT) J  &rhs LG(LSHIFT) K  &kp L  &rhs LSHIFT SQT
 &sct LG(Z) Z      &sct LG(X) X &sct LG(C) C &sct LG(V) V            &kp B               &vbs LS(LG(Z)) LG(Z)  &vbs SEMICOLON LG(PERIOD)    &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH
 &mo 3             &mo 1       &kp LC(SPACE)  &cmt LCTRL TAB       &tmt LALT SPACE  &cmt LGUI DELETE     &blt 1 BACKSPACE          &blt 2 ENTER                                        &lt 5 DELETE
             >;
@@ -176,14 +177,14 @@
             >;
         };
 
-        // スクロールの面（I か右下の角を押さえている間。ボールでスクロール）。左手にマウスキー（細かい位置合わせ用）:
-        // E S D F でカーソルを少しずつ上・左・下・右、R 左クリック、W 右クリック、T 上へスクロール、G 下へスクロール
+        // スクロールの面（I か右下の角を押さえている間。ボールでスクロール）。
+        // マウスキー（細かい位置合わせ用）: 右下の角を押さえたまま H J K L でカーソルを少しずつ ← ↓ ↑ →（矢印の面と同じ向き）、U 左クリック、O 右クリック
         SCROLL {
             bindings = <
-&trans  &mkp MB2       &mmv MOVE_UP     &mkp MB1         &msc SCRL_UP                            &trans  &trans  &trans  &trans  &trans
-&trans  &mmv MOVE_LEFT &mmv MOVE_DOWN   &mmv MOVE_RIGHT  &msc SCRL_DOWN  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans         &trans           &trans           &trans          &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans         &trans           &trans           &trans          &trans      &trans  &trans                          &trans
+&trans  &trans  &trans  &trans  &trans                      &trans          &mkp MB1        &trans        &mkp MB2         &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans          &trans          &trans        &trans           &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                                                         &trans
             >;
         };
 
