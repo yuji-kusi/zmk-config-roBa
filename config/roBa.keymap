@@ -7,7 +7,7 @@
 // 4 と 5 は &trackball の automouse-layer・scroll-layers が指しているので番号を変えない
 // 親指は串田さんの呼び方に合わせる: 「外側」＝中央寄り（斜めに傾いたキー）。
 // 左親指 中央寄りから delete（Backspace）・Space・Tab、右親指 中央寄りから前方削除（Delete）・Enter
-// 入り方: 1 X の真下（Esc）の長押し / 2 右親指の中央寄り（前方削除）の長押し / 3 Z の真下を押さえている間
+// 入り方: 1 右親指の前方削除の長押し / 2 右親指の Enter の長押し / 3 Z の真下を押さえている間
 
 &mt {
     flavor = "balanced";
@@ -59,20 +59,6 @@
             retro-tap;
         };
 
-        // X の真下の Esc: しっかり長く押したときだけ数字と F キーの面にする。
-        // 文字を打った直後 0.15 秒以内は必ず Esc（速く打っているときに面へ入らない）
-        slt: esc_layer_tap {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            bindings = <&mo>, <&kp>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <150>;
-            require-prior-idle-ms = <150>;
-            // 長めに押しても他のキーを押さずに離したら Esc として出す
-            retro-tap;
-        };
-
         // 左親指の中央寄り（軽押し Backspace・長押し Control）といちばん端（軽押し Tab・長押し Command）。
         // Command+C などを素早く打てるよう balanced にする。軽押しのすぐ後の押し続けは Backspace の連続
         cmt: quick_mod_tap {
@@ -84,20 +70,8 @@
             quick-tap-ms = <150>;
         };
 
-        // 右親指の端の Enter: 長押しで Shift+Command（Shift+Command+Z でやり直し など）。
-        // 文字を打った直後 0.15 秒以内は必ず Enter。長押しして何も打たずに離しても Enter は出さない（誤って送信しない）
-        smt: enter_shift_cmd {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            bindings = <&kp>, <&kp>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <220>;
-            quick-tap-ms = <150>;
-            require-prior-idle-ms = <150>;
-        };
-
-        // N の左隣の ;（右親指の前方削除のすぐ上）: 長押しで音声入力（KoeType の Command+.）。誤って始まらないよう長めに 0.3 秒
-        vbs: voice_semicolon {
+        // / の長押しで音声入力（KoeType の Command+.）。誤って始まらないよう長めに 0.3 秒
+        vbs: voice_slash {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             bindings = <&kp>, <&kp>;
@@ -106,9 +80,9 @@
             quick-tap-ms = <200>;
         };
 
-        // 右親指の中央寄りの Delete（前方削除）: 長押しで記号と矢印の面。
-        // 長押しして何も打たずに離しても Delete は出さない（文字が消えないように retro-tap なし）
-        blt: delete_layer_tap {
+        // 右親指の面の切り替え: 前方削除の長押しで数字と F キーの面、Enter の長押しで記号と矢印の面。
+        // 長押しして何も打たずに離しても前方削除・Enter は出さない（文字を消さない・誤って送信しない）
+        blt: right_layer_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             bindings = <&mo>, <&kp>;
@@ -126,24 +100,24 @@
             bindings = <
 &kp Q             &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
 &lhs LSHIFT A     &kp S     &kp D     &kp F              &kp G               &kp LEFT_BRACKET      &kp MINUS                     &kp H      &kp J  &kp K      &kp L    &rhs LSHIFT SQT
-&kp Z             &kp X     &kp C     &kp V              &kp B               &kp COLON             &vbs LG(PERIOD) SEMICOLON                &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH
-&mo 3             &slt 1 ESC  &kp LC(SPACE)  &cmt LGUI TAB        &tmt LALT SPACE  &cmt LCTRL BACKSPACE &blt 2 DELETE             &smt LS(LGUI) ENTER                                 &kp DELETE
+&kp Z             &kp X     &kp C     &kp V              &kp B               &kp COLON             &kp SEMICOLON                &kp N      &kp M  &kp COMMA  &kp DOT  &vbs LG(PERIOD) SLASH
+&mo 3             &kp ESC     &kp LC(SPACE)  &cmt LGUI TAB        &tmt LALT SPACE  &cmt LCTRL BACKSPACE &blt 1 DELETE             &blt 2 ENTER                                        &kp DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
         };
 
-        // 数字と F キーの面（X の真下の Esc の長押し）。数字は右手、F キーは左手
+        // 数字と F キーの面（右親指の前方削除の長押し）。押さえる親指と反対の左手に数字（元の roBa の並び）、F キーは右手
         NUM_F {
             bindings = <
-&kp F1   &kp F2   &kp F3   &kp F4   &none                                                &kp MINUS      &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PLUS
-&kp F5   &kp F6   &kp F7   &kp F8   &none    &none                       &none           &kp SLASH      &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp ASTERISK
-&kp F9   &kp F10  &kp F11  &kp F12  &none    &none                       &kp EQUAL       &kp KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp PERIOD
-&trans   &trans   &trans   &trans   &trans   &trans                      &trans          &trans                                                              &trans
+&kp MINUS        &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PLUS                                &none   &kp F1  &kp F2   &kp F3   &kp F4
+&kp SLASH        &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp ASTERISK  &none          &none     &kp F5  &kp F6  &kp F7   &kp F8   &none
+&kp KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp PERIOD    &kp EQUAL      &none     &kp F9  &kp F10 &kp F11  &kp F12  &none
+&trans           &trans           &trans           &trans           &trans        &trans         &trans    &trans                             &trans
             >;
         };
 
-        // 記号の面（右親指の外側の Delete の長押し）。動画の配列図の Layer 2 の並び（^ と _ は人差し指の内側、Home・End は下の段の内側）
+        // 記号と矢印の面（右親指の Enter の長押し）。動画の配列図の Layer 2 の並び（^ と _ は人差し指の内側、Home・End は下の段の内側）
         SYMBOL {
             bindings = <
 &kp QUESTION  &kp EXCLAMATION   &kp AMPERSAND      &kp PIPE          &kp BACKSLASH                                                  &kp SLASH              &kp EQUAL          &kp ASTERISK      &kp PLUS          &kp PERCENT
