@@ -60,7 +60,7 @@
             require-prior-idle-ms = <150>;
         };
 
-        // 文字キーの長押しでよく使う操作（Q Esc、F Alfred＝Command+Space、X ⌘X、C ⌘C、V ⌘V）。
+        // 文字キーの長押しでよく使う操作（Q Esc、S ⌘S、F Alfred＝Command+Space、X ⌘X、C ⌘C、V ⌘V）。
         // 速打ちで誤って出ないよう、文字を打った直後 0.15 秒以内は必ず文字、長押しは 0.3 秒
         sct: shortcut_tap {
             compatible = "zmk,behavior-hold-tap";
@@ -72,7 +72,7 @@
             require-prior-idle-ms = <150>;
         };
 
-        // ホームの段の長押し: A Shift・S Command+Option（S を押さえて Orca のタブの移動など）・D Control+Option（D を押さえて Space・Enter で Orca の会話の開始・送信など）、右は ' Shift。
+        // ホームの段の長押し: A Shift・D Control+Option（D を押さえて Space・Enter で Orca の会話の開始・送信など）、右は ' Shift。
         // 反対の手のキーと親指にだけ効く。
         // 速打ちで誤って働かないように: 文字を打った直後 0.15 秒以内は必ず文字、0.25 秒押さえたうえで反対の手のキー（と親指）を押したときだけ修飾キー
         lhs: left_home_shift {
@@ -153,7 +153,7 @@
         default_layer {
             bindings = <
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
-&lhs LSHIFT A     &lhs LG(LALT) S &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &ghm LG(LSHIFT) LC(UP_ARROW)    &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
+&lhs LSHIFT A     &sct LG(S) S &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &ghm LG(LSHIFT) LC(UP_ARROW)    &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
 &kp Z             &sct LG(X) X &sct LG(C) C &sct LG(V) V            &kp B               &vbs LS(LG(Z)) LG(Z)  &vbs LG(PERIOD) B            &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH
 &mo 3             &mo 1       &kp LC(SPACE)  &cmt LCTRL TAB       &tmt LALT SPACE  &sk LGUI            &blt 1 BACKSPACE          &blt 2 ENTER                                        &lt 5 DELETE
             >;
