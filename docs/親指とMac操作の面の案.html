@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>roBa 親指と Mac 操作の面</title>
+<title>roBa 今の設定</title>
 <style>
 :root{--bg:#1e1e1e;--panel:#2c2c2c;--line:#3d3d3d;--text:#e8e8e8;--sub:#a8a8a8;--blue:#1473e6;--blue2:#3b82f6;--warn:#e6a23c}
 *{box-sizing:border-box}
@@ -24,18 +24,20 @@ th{background:#252a33;color:#cfd8e6;font-weight:600}
 .k.on{border-color:var(--blue2);background:#1d3b66}
 .k.hold{border-color:var(--warn)}
 .gap{visibility:hidden}
+.now{background:#1d3b66;border:1px solid var(--blue2);border-radius:8px;padding:12px 16px;margin:0 0 16px;font-size:17px;font-weight:600;color:#fff}
 </style>
 </head>
 <body>
 <main>
-<h1>roBa 親指と Mac 操作の面（第 5 版・書き込み用に確定）</h1>
-<p class="lead">串田さんの希望のまとめと、動画の配列図 3 枚を土台にしました。まだ書き込んでいません。OK が出たらこの形で書き換えます。</p>
+<div class="now">これが今の設定（書き込み前）。設定のファイルにはこの通り入っていて、キーボードにはまだ書き込んでいません。</div>
+<h1>roBa 親指と Mac 操作の面（第 6 版・今ファイルに入っている設定）</h1>
+<p class="lead">串田さんの希望のまとめと、動画の配列図 3 枚が土台です。点検で直した所（長めに押しても Space・Esc を出す、Enter を短く押して数字を打っても Enter を出さない、危ないキーの位置）まで反映済みです。</p>
 
-<div class="fix"><b>決まったこと</b>：英数とかなは、左親指のいちばん内側のキーを<b>軽く押すたびに入れ替わる</b>（Mac の「前の入力ソースを選択」＝ Control+Space を送る。串田さんの MacBook で入れ替わるのを確認済み。Control+Space はふだん使わないので、この役に回します）。⌘英かなは MacBook 本体のキーボード用にそのまま残します。</div>
+<div class="fix"><b>英数とかな</b>：左親指のいちばん内側（長押しは Command）のキーを<b>軽く押すたびに入れ替わる</b>（Mac の「前の入力ソースを選択」＝ Control+Space を送る。串田さんの MacBook で入れ替わるのを確認済み。Control+Space はふだん使わないので、この役に回しました）。Command+C のように素早く続けて押したときは Command として働きます。⌘英かなは MacBook 本体のキーボード用にそのまま残します。</div>
 
-<h2>1. よく聞かれる 4 つ（推奨）</h2>
+<h2>1. 各面への入り方など</h2>
 <table>
-<tr><th>項目</th><th>推奨</th></tr>
+<tr><th>項目</th><th>今の設定</th></tr>
 <tr><td>各面への入り方（すべて右手）</td><td>
 数字と F キーの面：右親指 2（Enter）を長押し<br>
 記号と矢印の面：右親指の 2 つを同時に長押し<br>
@@ -58,9 +60,11 @@ Mac 操作・メディアの面：右下の角を小指で長押し<br>
 <tr><td>右親指の 2 つを同時に</td><td>―</td><td>記号と矢印の面</td></tr>
 <tr><td>右下の角（小指）</td><td>F7（カタカナ変換）</td><td>Mac 操作・メディアの面</td></tr>
 </table>
-<p class="note">親指は「しっかり長く押したときだけ」長押し扱いにします。右親指の 2 つを同時に押す判定は、ごく短い時間（0.04 秒）に両方押したときだけにして、Backspace と Enter を続けて打っても誤って働かないようにします。</p>
-<p class="note">左手の下の段（Z の下の 3 つ）は、外から Control・Command・Tab にします（今は Control・Command・Option）。Shift+Tab は Z を長押ししながら Tab です。</p>
-<p class="note"><b>代わりにできなくなること</b>：Backspace を押しっぱなしで続けて消すこと（一度軽く押してすぐ押し直し、押し続ければ続けて消せます）と、スペースの押しっぱなしでの連打。</p>
+<p class="note">左親指の Esc・スペースは「しっかり長く押したときだけ」長押し扱いです。長めに押しても、他のキーを押さずに離せば Esc・スペースが出ます。</p>
+<p class="note">Enter と右下の角は、押さえたまま別のキーを押して離すと面に入ります（Enter を短く押して数字を打っても Enter は出ません）。</p>
+<p class="note">右親指の 2 つを同時に押す判定は、ごく短い時間（0.04 秒）に両方押したときだけ、しかも直前に他のキーを打っていないときだけです。Backspace と Enter を続けて打っても誤って働きません。</p>
+<p class="note">左手の下の段（Z の下の 3 つ）は、外から Control・Command・Tab です（前は Control・Command・Option）。Shift+Tab は Z を長押ししながら Tab です。</p>
+<p class="note"><b>代わりにできなくなること</b>：Backspace を押しっぱなしで続けて消すこと（一度軽く押してすぐ押し直し、押し続ければ続けて消せます）と、スペースの押しっぱなしでの連打（こちらも、軽く押してすぐ押し直して押し続ければ連打になります）。</p>
 
 <h2>3. 記号と矢印の面（動画の 2 枚目をほぼそのまま）</h2>
 <div class="wrap"><div class="grid">
@@ -76,7 +80,7 @@ Mac 操作・メディアの面：右下の角を小指で長押し<br>
 <div class="gap"></div>
 <div class="k"><b>End</b></div><div class="k"><b>)</b></div><div class="k"><b>]</b></div><div class="k"><b>}</b></div><div class="k"><b>&gt;</b></div><div class="k"><b>$</b></div>
 </div></div>
-<p class="note">下の段の人差し指の内側の空きに、左は Home、右は End を入れます（今の矢印の面にあったもの）。開くカッコは左手、閉じるカッコは右手の同じ並び。動画の左親指の Delete は、この面の左親指 2（スペースの位置）に置きます。動画のいちばん外側の列は roBa にないので、^ と _ は人差し指の内側に移しました。</p>
+<p class="note">下の段の人差し指の内側の空きに、左は Home、右は End を入れました（前の矢印の面にあったもの）。開くカッコは左手、閉じるカッコは右手の同じ並び。動画の左親指の Delete は、この面の左親指 2（スペースの位置）に置きました。動画のいちばん外側の列は roBa にないので、^ と _ は人差し指の内側に移しました。</p>
 
 <h2>4. 数字と F キーの面（右親指 2 を長押し）</h2>
 <div class="wrap"><div class="grid">
@@ -88,11 +92,11 @@ Mac 操作・メディアの面：右下の角を小指で長押し<br>
 <div class="gap"></div>
 <div class="k"><small>空き</small></div><div class="k"><b>F5</b></div><div class="k"><b>F6</b></div><div class="k on"><b>F7</b><small>カタカナ</small></div><div class="k"><b>F8</b></div><div class="k"><small>空き</small></div>
 
-<div class="k"><b>0</b></div><div class="k"><b>1</b></div><div class="k"><b>2</b></div><div class="k"><b>3</b></div><div class="k"><b>.</b></div><div class="k"><b>=</b></div>
+<div class="k"><b>0</b><small>長押し Shift</small></div><div class="k"><b>1</b></div><div class="k"><b>2</b></div><div class="k"><b>3</b></div><div class="k"><b>.</b></div><div class="k"><b>=</b></div>
 <div class="gap"></div>
 <div class="k"><small>空き</small></div><div class="k"><b>F9</b></div><div class="k"><b>F10</b></div><div class="k"><b>F11</b></div><div class="k"><b>F12</b></div><div class="k"><small>空き</small></div>
 </div></div>
-<p class="note">左手は今の roBa の数字の並びのまま。右手にあった記号は記号の面と重なるので、F1〜F12 に置き換えます。</p>
+<p class="note">左手は元の roBa の数字の並びのまま。右手にあった記号は記号の面と重なるので、F1〜F12 に置き換えました。</p>
 
 <h2>5. Mac 操作・メディアの面（右下の角を小指で長押し／動画の 3 枚目が土台）</h2>
 <div class="wrap"><div class="grid">
@@ -110,19 +114,26 @@ Mac 操作・メディアの面：右下の角を小指で長押し<br>
 </div></div>
 <p class="note">動画のマウス移動（右手の H J K L）は、トラックボールがあるので、トラックパッドのスワイプの代わり（デスクトップの切り替え・Mission Control）に置き換えました。H J K L の向きは記号の面の矢印と同じです。動画の電源キーは誤操作が怖いので外し、マクロのキーは Bluetooth の接続先に置き換えました。撮影キーは CleanShot の設定（Shift+Cmd+3／4／0）に合わせています。</p>
 
-<h2>6. 外すもの・残すもの</h2>
+<h2>6. 外したもの・残したもの</h2>
 <table>
-<tr><th>今あるもの</th><th>どうするか</th></tr>
-<tr><td>左親指の かな・英数（今日入れたもの）、A と S の同時押しの英数</td><td>外します（英かなは左親指のいちばん内側の軽押しで入れ替えるため）</td></tr>
-<tr><td>S+D で Tab、D+F で Shift+Tab、L と ' で "、C+V で =</td><td>外します</td></tr>
-<tr><td>F1〜F13 の面、今の矢印の面</td><td>外します（F1〜F12 は数字の面へ、矢印は記号の面へ）</td></tr>
-<tr><td>G の右隣の Shift+Cmd+S（Windows の画面切り取り）</td><td>外して <code>[</code> にします。H の左隣の <code>-</code>（長音の「ー」）はそのまま残します。<code>]</code> は記号の面にあります</td></tr>
-<tr><td>今の矢印の面の Home・End、タブの切り替え（Control+Tab／Control+Shift+Tab）</td><td>Home・End は記号の面、タブの切り替えは Mac 操作・メディアの面に移します</td></tr>
-<tr><td>今の矢印の面の Command+Shift+←／→（行の頭・終わりまで選ぶ）、F13</td><td>外します（使っていたら言ってください。置き場所を作ります）</td></tr>
-<tr><td>右下の角の Delete</td><td>記号の面の左親指 2（スペースの位置）に移します</td></tr>
-<tr><td>トラックボールを動かした直後の J・K・L クリック、I の長押しでスクロール</td><td>残します</td></tr>
-<tr><td>BetterTouchTool の Notion・Chrome・Finder・デスクトップ1</td><td>ほぼ使っていないとのことなので置きません</td></tr>
-<tr><td>全部の Bluetooth 接続を消すキー</td><td>外します（誤操作で全部のつなぎ先が消えるため）</td></tr>
+<tr><th>前にあったもの</th><th>どうしたか</th></tr>
+<tr><td>左親指の かな・英数（前に入れたもの）、A と S の同時押しの英数</td><td>外しました（英かなは左親指のいちばん内側の軽押しで入れ替えるため）</td></tr>
+<tr><td>S+D で Tab、D+F で Shift+Tab、L と ' で "、C+V で =</td><td>外しました</td></tr>
+<tr><td>F1〜F13 の面、前の矢印の面</td><td>外しました（F1〜F12 は数字の面へ、矢印は記号の面へ）</td></tr>
+<tr><td>G の右隣の Shift+Cmd+S（Windows の画面切り取り）</td><td>外して <code>[</code> にしました。H の左隣の <code>-</code>（長音の「ー」）はそのまま残しました。<code>]</code> は記号の面にあります</td></tr>
+<tr><td>前の矢印の面の Home・End、タブの切り替え（Control+Tab／Control+Shift+Tab）</td><td>Home・End は記号の面、タブの切り替えは Mac 操作・メディアの面に移しました</td></tr>
+<tr><td>前の矢印の面の Command+Shift+←／→（行の頭・終わりまで選ぶ）、F13</td><td>外しました（使っていたら言ってください。置き場所を作ります）</td></tr>
+<tr><td>右下の角の Delete</td><td>記号の面の左親指 2（スペースの位置）に移しました</td></tr>
+<tr><td>トラックボールを動かした直後の J・K・L クリック、I の長押しでスクロール</td><td>残しました</td></tr>
+<tr><td>BetterTouchTool の Notion・Chrome・Finder・デスクトップ1</td><td>ほぼ使っていないとのことなので置いていません</td></tr>
+<tr><td>全部の Bluetooth 接続を消すキー</td><td>外しました（誤操作で全部のつなぎ先が消えるため）</td></tr>
+</table>
+
+<h2>7. 決めずに残していること</h2>
+<table>
+<tr><th>こと</th><th>今の扱い</th></tr>
+<tr><td>ホームの段の文字（F など）を長押しして Command などにする</td><td>入れていません。ローマ字を速く打つと打ち間違いが増えやすいため。使ってみて欲しくなったら足します</td></tr>
+<tr><td>トラックボールを動かす部品の版</td><td>いつも最新を使う形のまま。困ったら固定します</td></tr>
 </table>
 </main>
 </body>
