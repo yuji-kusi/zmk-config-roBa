@@ -181,7 +181,7 @@
             bindings = <
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &lt 3 P
 &lhs LSHIFT A     &kp S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &ghn LG(LSHIFT) 0               &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
-&kp Z             &kp X        &kp C        &kp V                   &blt 3 B            &urd LS(LG(Z)) LG(Z)  &vbs LG(PERIOD) B            &lt 5 N    &kp M  &kp COMMA  &kp DOT  &lt 5 SLASH
+&kp Z             &kp X        &kp C        &kp V                   &blt 3 B            &urd LS(LG(Z)) LG(Z)  &vbs LG(PERIOD) B            &lt 3 N    &kp M  &kp COMMA  &kp DOT  &lt 5 SLASH
 &mo 3             &none       &mo 1          &cmt LCTRL TAB       &tmt LGUI SPACE  &cmt LALT LC(SPACE) &blt 2 ENTER              &blt 1 BACKSPACE                                      &lt 5 DELETE
             >;
 
