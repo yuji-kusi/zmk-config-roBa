@@ -61,6 +61,17 @@
             require-prior-idle-ms = <150>;
         };
 
+        // G の右隣用: 軽押しは何も出さない（&none）、長押しだけ働く。押し方の決め方は上の ghm と同じ
+        ghn: g_hold_only {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&none>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <250>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+        };
+
         // 文字キーの長押しでよく使う操作（Q Esc、S ⌘S、F Alfred＝Command+Space、X ⌘X、C ⌘C、V ⌘V）。
         // 速打ちで誤って出ないよう、文字を打った直後 0.15 秒以内は必ず文字、長押しは 0.3 秒
         sct: shortcut_tap {
@@ -156,7 +167,7 @@
         default_layer {
             bindings = <
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
-&lhs LSHIFT A     &sct LG(S) S &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &ghm LG(LSHIFT) NONE            &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
+&lhs LSHIFT A     &sct LG(S) S &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &ghn LG(LSHIFT) 0               &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
 &kp Z             &sct LG(X) X &sct LG(C) C &sct LG(V) V            &blt 3 B            &vbs LS(LG(Z)) LG(Z)  &vbs LG(PERIOD) B            &lt 5 N    &kp M  &kp COMMA  &kp DOT  &lt 3 SLASH
 &mo 3             &none       &mo 1          &cmt LCTRL TAB       &tmt LGUI SPACE  &cmt LALT LC(SPACE) &blt 2 ENTER              &blt 1 BACKSPACE                                      &lt 5 DELETE
             >;
