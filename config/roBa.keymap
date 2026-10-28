@@ -208,24 +208,24 @@
             >;
         };
 
-        // マウスの面（ボールを動かした後 1.5 秒）。J 左クリック（押さえている間ボールがゆっくり）・K 右クリック。L は文字のまま
+        // マウスの面（ボールを動かした後 1.5 秒）。J 左クリック（押さえている間ボールがゆっくり）・L 右クリック（第 39 版で K から L へ。K は文字のまま）
         MOUSE {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans    &trans    &trans    &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &slow_drag  &mkp MB2  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &slow_drag  &trans    &mkp MB2  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                                &trans
             >;
         };
 
         // スクロールの面（I・N か右下の角を押さえている間。ボールでスクロール）。
-        // 押さえている間は J 左クリック（押さえている間ボールがゆっくり）・K 右クリックが時間切れなしで使える。
+        // 押さえている間は J 左クリック（押さえている間ボールがゆっくり）・L 右クリックが時間切れなしで使える。
         // マウスキー: 左手の E S D F でカーソルを ↑ ← ↓ →、R で上へ・V で下へスクロール（Mac のナチュラルなスクロールに合わせて SCRL_DOWN・SCRL_UP を逆に割り当て）。U 左クリック、O 右クリック
         // 拡大・縮小（タッチパッドのピンチの代わり）: T 拡大 Command+=、G 縮小 Command+-、B 元の大きさ Command+0
         SCROLL {
             bindings = <
 &trans  &trans          &mmv MOVE_UP    &msc SCRL_DOWN   &kp LG(EQUAL)               &trans  &mkp MB1  &trans    &mkp MB2  &trans
-&trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &kp LG(MINUS)  &trans      &trans  &trans  &slow_drag  &mkp MB2  &trans  &trans
+&trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &kp LG(MINUS)  &trans      &trans  &trans  &slow_drag  &trans    &mkp MB2  &trans
 &trans  &trans          &trans          &msc SCRL_UP     &kp LG(N0)     &trans      &trans  &trans  &trans    &trans    &trans    &trans
 &trans  &trans          &trans          &trans           &trans  &trans      &trans  &trans                                &trans
             >;
