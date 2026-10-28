@@ -49,7 +49,7 @@
 
     behaviors {
         // G（長押し Control+Command）と G の右隣（軽押しは何も出さない・長押し Command+Shift。押さえて T で CleanShot の文字の写し取り）。
-        // G の右隣の軽押しは Mission Control だったが、誤って押しやすいので第 39 版で外した（Mission Control は Mac 操作の面の K の位置にある）
+        // G の右隣の軽押しは Mission Control だったが、誤って押しやすいので第 39 版で外した（Mission Control は Mac 操作の面の J の位置にある）
         // G+T のように同じ左手のキーとも組めるよう、手の左右を問わない。0.25 秒押さえたときだけ長押し、打った直後 0.15 秒以内は必ず軽押し
         ghm: g_hold_mod {
             compatible = "zmk,behavior-hold-tap";

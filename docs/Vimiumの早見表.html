@@ -22,7 +22,6 @@ kbd.my{border-color:var(--blue2);background:#22324a}
 .w{color:var(--warn);font-size:14px}
 .box{background:#252525;border:1px solid var(--line);border-radius:10px;padding:10px 16px;margin:10px 0}
 .box li{margin:4px 0}
-.tag{display:inline-block;font-size:12px;padding:1px 8px;border-radius:10px;background:#1473e6;color:#fff;margin-left:6px;vertical-align:1px}
 </style>
 </head>
 <body>
@@ -34,10 +33,10 @@ kbd.my{border-color:var(--blue2);background:#22324a}
 <h2>タブ</h2>
 <table>
 <tr><th>やりたいこと</th><th>押すキー</th><th>roBa での注意</th></tr>
-<tr><td>タブを閉じる</td><td class="k"><kbd>x</kbd></td><td class="w">X は長押しで ⌘X（切り取り）になる。軽く押す</td></tr>
+<tr><td>タブを閉じる</td><td class="k"><kbd>x</kbd></td><td class="w">X は長押しで ⌘X（切り取り）になる。軽く押す。YouTube では x がサイトに渡る</td></tr>
 <tr><td>閉じたタブを戻す</td><td class="k"><kbd>X</kbd></td><td class="w">Shift は右の ' の長押しで（X と同じ左手の A では Shift にならない）</td></tr>
-<tr><td>左のタブへ</td><td class="k"><kbd>J</kbd> または <kbd>g</kbd><kbd>T</kbd></td><td>J は A の長押し（Shift）と一緒に</td></tr>
-<tr><td>右のタブへ</td><td class="k"><kbd>K</kbd> または <kbd>g</kbd><kbd>t</kbd></td><td>K は A の長押し（Shift）と一緒に。Mac 操作の面の - の位置（左のタブ）・L の位置（右のタブ）でも移れる</td></tr>
+<tr><td>左のタブへ</td><td class="k"><kbd>J</kbd> または <kbd>g</kbd><kbd>T</kbd></td><td>J は A の長押し（Shift）と一緒に。gT の T の Shift は右の ' の長押しで</td></tr>
+<tr><td>右のタブへ</td><td class="k"><kbd>K</kbd> または <kbd>g</kbd><kbd>t</kbd></td><td>K は A の長押し（Shift）と一緒に。Mac 操作の面（Z の真下を押さえる、または B・P の長押し）の - の位置（左のタブ）・L の位置（右のタブ）でも移れる</td></tr>
 <tr><td>直前に見ていたタブへ</td><td class="k"><kbd>^</kbd></td><td>^ は Enter を押さえて G の右隣</td></tr>
 <tr><td>いちばん左・いちばん右のタブへ</td><td class="k"><kbd>g</kbd><kbd>0</kbd> ／ <kbd>g</kbd><kbd>$</kbd></td><td>0 は delete を押さえて N の位置、$ は Enter を押さえて / の位置</td></tr>
 <tr><td>新しいタブ</td><td class="k"><kbd>t</kbd></td><td></td></tr>
@@ -59,8 +58,8 @@ kbd.my{border-color:var(--blue2);background:#22324a}
 <h2>戻る・進む・読み込み</h2>
 <table>
 <tr><th>やりたいこと</th><th>押すキー</th><th>roBa での注意</th></tr>
-<tr><td>前のページへ戻る</td><td class="k"><kbd class="my">h</kbd> または <kbd>H</kbd></td><td></td></tr>
-<tr><td>次のページへ進む</td><td class="k"><kbd class="my">l</kbd> または <kbd>L</kbd></td><td></td></tr>
+<tr><td>前のページへ戻る</td><td class="k"><kbd class="my">h</kbd> または <kbd>H</kbd></td><td>H は A の長押し（Shift）と一緒に</td></tr>
+<tr><td>次のページへ進む</td><td class="k"><kbd class="my">l</kbd> または <kbd>L</kbd></td><td>L は A の長押し（Shift）と一緒に</td></tr>
 <tr><td>読み込み直す</td><td class="k"><kbd>r</kbd></td><td></td></tr>
 <tr><td>今の URL を写す</td><td class="k"><kbd>y</kbd><kbd>y</kbd></td><td></td></tr>
 <tr><td>URL を一つ上の階層へ</td><td class="k"><kbd>g</kbd><kbd>u</kbd></td><td></td></tr>
@@ -70,9 +69,9 @@ kbd.my{border-color:var(--blue2);background:#22324a}
 <table>
 <tr><th>やりたいこと</th><th>押すキー</th><th>roBa での注意</th></tr>
 <tr><td>少し下・少し上へ</td><td class="k"><kbd>j</kbd> ／ <kbd>k</kbd></td><td>Gmail では j・k がサイトに渡る（Gmail の次・前のメール）</td></tr>
-<tr><td>半ページ下・上へ</td><td class="k"><kbd>d</kbd> ／ <kbd>u</kbd></td><td class="w">D は長押しで Control+Option になる。軽く押す</td></tr>
+<tr><td>半ページ下・上へ</td><td class="k"><kbd>d</kbd> ／ <kbd>u</kbd></td><td class="w">D は長押しで Control+Option になる。軽く押す。YouTube・Udemy では d がサイトに渡る</td></tr>
 <tr><td>いちばん上・いちばん下へ</td><td class="k"><kbd>g</kbd><kbd>g</kbd> ／ <kbd>G</kbd></td><td class="w">G の Shift は右の ' の長押しで</td></tr>
-<tr><td>左右へ</td><td class="k">（なし）</td><td>初期設定の h・l を戻る・進むに替えているので、左右のスクロールはボール（I・N・/ を押さえる）で</td></tr>
+<tr><td>いちばん左・いちばん右へ</td><td class="k"><kbd>z</kbd><kbd>H</kbd> ／ <kbd>z</kbd><kbd>L</kbd></td><td>少しずつの左右は、h・l を戻る・進むに替えているので無し。ボール（I・N・/ を押さえる）で</td></tr>
 </table>
 <p class="note">roBa ならボールでもスクロールできます（I・N・/ か右下の角を押さえて転がす）。</p>
 
@@ -82,7 +81,7 @@ kbd.my{border-color:var(--blue2);background:#22324a}
 <tr><td>ページ内を検索</td><td class="k"><kbd>/</kbd></td><td class="w">/ は長押しでスクロールの面に入る。軽く押す</td></tr>
 <tr><td>次・前の検索結果</td><td class="k"><kbd>n</kbd> ／ <kbd>N</kbd></td><td>N は長押しでスクロールの面。N（大文字）は A の長押し（Shift）と一緒に</td></tr>
 <tr><td>URL・ブックマーク・履歴を開く</td><td class="k"><kbd>o</kbd> ／ <kbd>O</kbd>（新しいタブ）</td><td></td></tr>
-<tr><td>ブックマークを開く</td><td class="k"><kbd>b</kbd> ／ <kbd>B</kbd>（新しいタブ）</td><td class="w">B は長押しで Mac 操作の面。軽く押す。B の Shift は右の ' の長押しで</td></tr>
+<tr><td>ブックマークを開く</td><td class="k"><kbd>b</kbd> ／ <kbd>B</kbd>（新しいタブ）</td><td class="w">B は長押しで Mac 操作の面。軽く押す。大文字の B は、N の左隣の B を A の長押し（Shift）と一緒に押すと楽（左の B なら Shift は右の ' で）</td></tr>
 <tr><td>文字を選ぶ（ビジュアルモード）</td><td class="k"><kbd>v</kbd></td><td class="w">V は長押しで ⌘V（貼り付け）。軽く押す</td></tr>
 <tr><td>Vimium のキー一覧を出す</td><td class="k"><kbd>?</kbd></td><td>? は Enter を押さえて Q の位置</td></tr>
 <tr><td>Vimium の操作をやめる</td><td class="k"><kbd>Esc</kbd></td><td>Q の長押し</td></tr>
@@ -92,6 +91,7 @@ kbd.my{border-color:var(--blue2);background:#22324a}
 <div class="box"><ul>
 <li><b>右手の文字（J K L I N H など）の大文字</b>：左の A を長押し（Shift）したまま押す。</li>
 <li><b>左手の文字（X T F G B など）の大文字</b>：右の ' を長押し（Shift）したまま押す。A の Shift は反対の手のキーにしか効かないためです。</li>
+<li><b>一呼吸おく</b>：文字を打った直後 0.15 秒以内は、Enter・delete・' などを押さえても長押しにならず、Enter などがそのまま出ます。g$・gT・G のように続けて押すときは、g の後に一呼吸おいてから押さえてください（すぐだとリンクが開いたりします）。</li>
 </ul></div>
 
 <h2>Vimium の今の設定（読み取った内容）</h2>
@@ -99,7 +99,7 @@ kbd.my{border-color:var(--blue2);background:#22324a}
 <li><b>自分で割り当てたキー</b>：<kbd class="my">h</kbd> 戻る、<kbd class="my">l</kbd> 進む、<kbd class="my">i</kbd> リンクに文字を出す、<kbd class="my">I</kbd> リンクを新しいタブで開く。</li>
 <li><b>注意</b>：i をリンク用にしているので、Vimium の「入力モード（i）」は使えません。文字の入力欄へは <kbd>g</kbd><kbd>i</kbd> で移れます。</li>
 <li><b>Vimium が止まるサイト</b>：寿司打（sushida.net のプレイ画面）と edclub のタイピング画面は Vimium が全部止まる。</li>
-<li><b>キーをサイトに渡すサイト</b>：Gmail は j・k、Udemy は a・s・d・f、YouTube は a・s・d・f・x・z（YouTube では f・x が Vimium として働かない）。</li>
+<li><b>キーをサイトに渡すサイト</b>：Gmail は j・k、Udemy は a・s・d・f、YouTube は a・s・d・f・x・z（YouTube では f・d・x、Udemy では f・d が Vimium として働かない）。</li>
 <li><b>そのほか</b>：リンクの文字の色はダーク系の自作の見た目。新しいタブは Chrome の新しいタブのページ。ほかは初期設定のまま。</li>
 </ul></div>
 </main>
