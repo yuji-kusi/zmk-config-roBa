@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vimium の早見表</title>
+<style>
+:root{--bg:#1e1e1e;--panel:#2c2c2c;--line:#3d3d3d;--text:#e8e8e8;--sub:#a8a8a8;--blue:#1473e6;--blue2:#3b82f6;--warn:#f0c78a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"Hiragino Sans",sans-serif;line-height:1.55}
+main{max-width:1000px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:23px;margin:0 0 8px}
+h2{font-size:19px;margin:30px 0 8px;color:var(--blue2)}
+.now{background:#1d3b66;border:1px solid var(--blue2);border-radius:8px;padding:12px 16px;margin:0 0 16px;font-size:16px;color:#fff}
+.note{color:var(--sub);font-size:15px;margin:6px 0}
+table{width:100%;border-collapse:collapse;font-size:16px;margin:6px 0}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{color:var(--sub);font-weight:500;font-size:14px;background:var(--panel)}
+td.k{white-space:nowrap;width:1%}
+kbd{display:inline-block;min-width:26px;padding:2px 8px;margin:1px 2px;background:var(--panel);border:1px solid #555;border-bottom-width:2px;border-radius:6px;font-family:ui-monospace,Menlo,monospace;font-size:15px;color:#fff;text-align:center}
+kbd.my{border-color:var(--blue2);background:#22324a}
+.w{color:var(--warn);font-size:14px}
+.box{background:#252525;border:1px solid var(--line);border-radius:10px;padding:10px 16px;margin:10px 0}
+.box li{margin:4px 0}
+.tag{display:inline-block;font-size:12px;padding:1px 8px;border-radius:10px;background:#1473e6;color:#fff;margin-left:6px;vertical-align:1px}
+</style>
+</head>
+<body>
+<main>
+<div class="now">Vimium 2.4.2 の今の設定（2026-10-28 に Chrome の Default プロファイルから読み取り。設定は変えていません）と、roBa 第 40 版で押すときの注意をまとめた早見表です。</div>
+<h1>Vimium の早見表</h1>
+<p class="note">青い枠のキー <kbd class="my">h</kbd> は串田さんが自分で割り当てたキー、ふつうの枠は Vimium の初期設定のままのキーです。大文字は Shift と一緒に押します（下の「大文字の打ち方」を参照）。</p>
+
+<h2>タブ</h2>
+<table>
+<tr><th>やりたいこと</th><th>押すキー</th><th>roBa での注意</th></tr>
+<tr><td>タブを閉じる</td><td class="k"><kbd>x</kbd></td><td class="w">X は長押しで ⌘X（切り取り）になる。軽く押す</td></tr>
+<tr><td>閉じたタブを戻す</td><td class="k"><kbd>X</kbd></td><td class="w">Shift は右の ' の長押しで（X と同じ左手の A では Shift にならない）</td></tr>
+<tr><td>左のタブへ</td><td class="k"><kbd>J</kbd> または <kbd>g</kbd><kbd>T</kbd></td><td>J は A の長押し（Shift）と一緒に</td></tr>
+<tr><td>右のタブへ</td><td class="k"><kbd>K</kbd> または <kbd>g</kbd><kbd>t</kbd></td><td>K は A の長押し（Shift）と一緒に。Mac 操作の面の - の位置（左のタブ）・L の位置（右のタブ）でも移れる</td></tr>
+<tr><td>直前に見ていたタブへ</td><td class="k"><kbd>^</kbd></td><td>^ は Enter を押さえて G の右隣</td></tr>
+<tr><td>いちばん左・いちばん右のタブへ</td><td class="k"><kbd>g</kbd><kbd>0</kbd> ／ <kbd>g</kbd><kbd>$</kbd></td><td>0 は delete を押さえて N の位置、$ は Enter を押さえて / の位置</td></tr>
+<tr><td>新しいタブ</td><td class="k"><kbd>t</kbd></td><td></td></tr>
+<tr><td>開いているタブを検索して移る</td><td class="k"><kbd>T</kbd></td><td class="w">Shift は右の ' の長押しで</td></tr>
+<tr><td>タブを複製</td><td class="k"><kbd>y</kbd><kbd>t</kbd></td><td></td></tr>
+<tr><td>タブを左・右へ動かす</td><td class="k"><kbd>&lt;</kbd><kbd>&lt;</kbd> ／ <kbd>&gt;</kbd><kbd>&gt;</kbd></td><td>&lt; は Enter を押さえて X の位置、&gt; は Enter を押さえて . の位置</td></tr>
+</table>
+
+<h2>リンクを開く</h2>
+<table>
+<tr><th>やりたいこと</th><th>押すキー</th><th>roBa での注意</th></tr>
+<tr><td>リンクに文字を出して、今のタブで開く</td><td class="k"><kbd class="my">i</kbd> または <kbd>f</kbd></td><td class="w">F は長押しで Alfred が出る。I は長押しでスクロールの面に入る。どちらも軽く押す。YouTube と Udemy では f がサイトに渡るので i を使う</td></tr>
+<tr><td>リンクを新しいタブで開く</td><td class="k"><kbd class="my">I</kbd> または <kbd>F</kbd></td><td>I は A の長押し（Shift）と一緒に。F の Shift は右の ' の長押しで</td></tr>
+<tr><td>リンクの URL を写す</td><td class="k"><kbd>y</kbd><kbd>f</kbd></td><td></td></tr>
+<tr><td>文字の入力欄へ移る</td><td class="k"><kbd>g</kbd><kbd>i</kbd></td><td></td></tr>
+</table>
+<p class="note">リンクに出る文字は初期設定（s a d f j k l e w c m p g h）のまま。文字が出ている間は、その文字を軽く打つだけで開きます（長押しにならないように）。</p>
+
+<h2>戻る・進む・読み込み</h2>
+<table>
+<tr><th>やりたいこと</th><th>押すキー</th><th>roBa での注意</th></tr>
+<tr><td>前のページへ戻る</td><td class="k"><kbd class="my">h</kbd> または <kbd>H</kbd></td><td></td></tr>
+<tr><td>次のページへ進む</td><td class="k"><kbd class="my">l</kbd> または <kbd>L</kbd></td><td></td></tr>
+<tr><td>読み込み直す</td><td class="k"><kbd>r</kbd></td><td></td></tr>
+<tr><td>今の URL を写す</td><td class="k"><kbd>y</kbd><kbd>y</kbd></td><td></td></tr>
+<tr><td>URL を一つ上の階層へ</td><td class="k"><kbd>g</kbd><kbd>u</kbd></td><td></td></tr>
+</table>
+
+<h2>スクロール</h2>
+<table>
+<tr><th>やりたいこと</th><th>押すキー</th><th>roBa での注意</th></tr>
+<tr><td>少し下・少し上へ</td><td class="k"><kbd>j</kbd> ／ <kbd>k</kbd></td><td>Gmail では j・k がサイトに渡る（Gmail の次・前のメール）</td></tr>
+<tr><td>半ページ下・上へ</td><td class="k"><kbd>d</kbd> ／ <kbd>u</kbd></td><td class="w">D は長押しで Control+Option になる。軽く押す</td></tr>
+<tr><td>いちばん上・いちばん下へ</td><td class="k"><kbd>g</kbd><kbd>g</kbd> ／ <kbd>G</kbd></td><td class="w">G の Shift は右の ' の長押しで</td></tr>
+<tr><td>左右へ</td><td class="k">（なし）</td><td>初期設定の h・l を戻る・進むに替えているので、左右のスクロールはボール（I・N・/ を押さえる）で</td></tr>
+</table>
+<p class="note">roBa ならボールでもスクロールできます（I・N・/ か右下の角を押さえて転がす）。</p>
+
+<h2>検索・その他</h2>
+<table>
+<tr><th>やりたいこと</th><th>押すキー</th><th>roBa での注意</th></tr>
+<tr><td>ページ内を検索</td><td class="k"><kbd>/</kbd></td><td class="w">/ は長押しでスクロールの面に入る。軽く押す</td></tr>
+<tr><td>次・前の検索結果</td><td class="k"><kbd>n</kbd> ／ <kbd>N</kbd></td><td>N は長押しでスクロールの面。N（大文字）は A の長押し（Shift）と一緒に</td></tr>
+<tr><td>URL・ブックマーク・履歴を開く</td><td class="k"><kbd>o</kbd> ／ <kbd>O</kbd>（新しいタブ）</td><td></td></tr>
+<tr><td>ブックマークを開く</td><td class="k"><kbd>b</kbd> ／ <kbd>B</kbd>（新しいタブ）</td><td class="w">B は長押しで Mac 操作の面。軽く押す。B の Shift は右の ' の長押しで</td></tr>
+<tr><td>文字を選ぶ（ビジュアルモード）</td><td class="k"><kbd>v</kbd></td><td class="w">V は長押しで ⌘V（貼り付け）。軽く押す</td></tr>
+<tr><td>Vimium のキー一覧を出す</td><td class="k"><kbd>?</kbd></td><td>? は Enter を押さえて Q の位置</td></tr>
+<tr><td>Vimium の操作をやめる</td><td class="k"><kbd>Esc</kbd></td><td>Q の長押し</td></tr>
+</table>
+
+<h2>大文字の打ち方（roBa の Shift）</h2>
+<div class="box"><ul>
+<li><b>右手の文字（J K L I N H など）の大文字</b>：左の A を長押し（Shift）したまま押す。</li>
+<li><b>左手の文字（X T F G B など）の大文字</b>：右の ' を長押し（Shift）したまま押す。A の Shift は反対の手のキーにしか効かないためです。</li>
+</ul></div>
+
+<h2>Vimium の今の設定（読み取った内容）</h2>
+<div class="box"><ul>
+<li><b>自分で割り当てたキー</b>：<kbd class="my">h</kbd> 戻る、<kbd class="my">l</kbd> 進む、<kbd class="my">i</kbd> リンクに文字を出す、<kbd class="my">I</kbd> リンクを新しいタブで開く。</li>
+<li><b>注意</b>：i をリンク用にしているので、Vimium の「入力モード（i）」は使えません。文字の入力欄へは <kbd>g</kbd><kbd>i</kbd> で移れます。</li>
+<li><b>Vimium が止まるサイト</b>：寿司打（sushida.net のプレイ画面）と edclub のタイピング画面は Vimium が全部止まる。</li>
+<li><b>キーをサイトに渡すサイト</b>：Gmail は j・k、Udemy は a・s・d・f、YouTube は a・s・d・f・x・z（YouTube では f・x が Vimium として働かない）。</li>
+<li><b>そのほか</b>：リンクの文字の色はダーク系の自作の見た目。新しいタブは Chrome の新しいタブのページ。ほかは初期設定のまま。</li>
+</ul></div>
+</main>
+</body>
+</html>
