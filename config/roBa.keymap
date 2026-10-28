@@ -48,7 +48,8 @@
     };
 
     behaviors {
-        // G（長押し Control+Command）と G の右隣（軽押し Mission Control・長押し Command+Shift。押さえて T で CleanShot の文字の写し取り）。
+        // G（長押し Control+Command）と G の右隣（軽押しは何も出さない・長押し Command+Shift。押さえて T で CleanShot の文字の写し取り）。
+        // G の右隣の軽押しは Mission Control だったが、誤って押しやすいので第 39 版で外した（Mission Control は Mac 操作の面の K の位置にある）
         // G+T のように同じ左手のキーとも組めるよう、手の左右を問わない。0.25 秒押さえたときだけ長押し、打った直後 0.15 秒以内は必ず軽押し
         ghm: g_hold_mod {
             compatible = "zmk,behavior-hold-tap";
@@ -155,7 +156,7 @@
         default_layer {
             bindings = <
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
-&lhs LSHIFT A     &sct LG(S) S &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &ghm LG(LSHIFT) LC(UP_ARROW)    &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
+&lhs LSHIFT A     &sct LG(S) S &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &ghm LG(LSHIFT) NONE            &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
 &kp Z             &sct LG(X) X &sct LG(C) C &sct LG(V) V            &blt 3 B            &vbs LS(LG(Z)) LG(Z)  &vbs LG(PERIOD) B            &lt 5 N    &kp M  &kp COMMA  &kp DOT  &lt 3 SLASH
 &mo 3             &none       &mo 1          &cmt LCTRL TAB       &tmt LGUI SPACE  &cmt LALT LC(SPACE) &blt 2 ENTER              &blt 1 BACKSPACE                                      &lt 5 DELETE
             >;
