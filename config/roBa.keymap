@@ -9,8 +9,8 @@
 // 面の番号: 0 ふだん / 1 数字と F キー / 2 記号と矢印 / 3 Mac 操作・メディア / 4 マウス / 5 スクロール / 6 ドラッグ中（ボールをゆっくり）
 // 4・5・6 は &trackball の automouse-layer・scroll-layers・snipe-layers が指しているので番号を変えない
 // 親指は串田さんの呼び方に合わせる: 「外側」＝中央寄り（斜めに傾いたキー）。
-// 左親指 中央寄りから 英かな（軽押しで Control+Space）／長押し Command・Space・Tab、右親指 中央寄りから delete（Backspace）・Enter
-// スクロール: N の長押し、または右下の角（前方削除）の長押しをしながらボール
+// 左親指 中央寄りから 英かな（軽押しで Control+Space）／長押し Option・Space（長押し Command）・Tab、右親指 中央寄りから delete（Backspace）・Enter
+// スクロール: I・N・/ の長押し（使いやすいのを試す）、または右下の角（前方削除）の長押しをしながらボール
 // 入り方: 1 C の真下を押さえている間（X の真下は空き）、または右親指の delete（Backspace）の長押し / 2 右親指の Enter の長押し / 3 Z の真下を押さえている間、または左の B の長押し
 
 &mt {
@@ -99,20 +99,22 @@
             hold-trigger-on-release;
         };
 
-        // 左親指の真ん中の Space: しっかり長く押したときだけ Option にする
+        // 左親指の真ん中の Space: 長押しで Command。Command+C などを素早く打てるよう balanced にし、
+        // 文字を打った直後 0.15 秒以内は必ず Space（速打ちで Command+文字 に化けないように）
         tmt: thumb_mod_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             bindings = <&kp>, <&kp>;
-            flavor = "tap-preferred";
+            flavor = "balanced";
             tapping-term-ms = <220>;
             quick-tap-ms = <150>;
+            require-prior-idle-ms = <150>;
             // 長く押しても他のキーを押さずに離したら Space として出す
             retro-tap;
         };
 
-        // 左親指のいちばん端（軽押し Tab・長押し Control）と中央寄り（軽押し 英かな・長押し Command）。
-        // Command+C などを素早く打てるよう balanced にする。軽押しのすぐ後の押し続けは前方削除の連続
+        // 左親指のいちばん端（軽押し Tab・長押し Control）と中央寄り（軽押し 英かな・長押し Option）。
+        // 修飾キーを素早く使えるよう balanced にする。軽押しのすぐ後の押し続けは前方削除の連続
         cmt: quick_mod_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -152,10 +154,10 @@
 
         default_layer {
             bindings = <
-&sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &kp I      &kp O    &kp P
+&sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
 &lhs LSHIFT A     &sct LG(S) S &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &ghm LG(LSHIFT) LC(UP_ARROW)    &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
-&kp Z             &sct LG(X) X &sct LG(C) C &sct LG(V) V            &blt 3 B            &vbs LS(LG(Z)) LG(Z)  &vbs LG(PERIOD) B            &lt 5 N    &kp M  &kp COMMA  &kp DOT  &kp SLASH
-&mo 3             &none       &mo 1          &cmt LCTRL TAB       &tmt LALT SPACE  &cmt LGUI LC(SPACE) &blt 1 BACKSPACE          &blt 2 ENTER                                        &lt 5 DELETE
+&kp Z             &sct LG(X) X &sct LG(C) C &sct LG(V) V            &blt 3 B            &vbs LS(LG(Z)) LG(Z)  &vbs LG(PERIOD) B            &lt 5 N    &kp M  &kp COMMA  &kp DOT  &lt 5 SLASH
+&mo 3             &none       &mo 1          &cmt LCTRL TAB       &tmt LGUI SPACE  &cmt LALT LC(SPACE) &blt 1 BACKSPACE          &blt 2 ENTER                                        &lt 5 DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
@@ -204,14 +206,15 @@
             >;
         };
 
-        // スクロールの面（N か右下の角を押さえている間。ボールでスクロール）。
+        // スクロールの面（I・N・/ か右下の角を押さえている間。ボールでスクロール）。
         // 押さえている間は J 左クリック（押さえている間ボールがゆっくり）・K 右クリックが時間切れなしで使える。
         // マウスキー: 左手の E S D F でカーソルを ↑ ← ↓ →、R で上へ・V で下へスクロール（Mac のナチュラルなスクロールに合わせて SCRL_DOWN・SCRL_UP を逆に割り当て）。U 左クリック、O 右クリック
+        // 拡大・縮小（タッチパッドのピンチの代わり）: T 拡大 Command+=、G 縮小 Command+-、B 元の大きさ Command+0
         SCROLL {
             bindings = <
-&trans  &trans          &mmv MOVE_UP    &msc SCRL_DOWN   &trans                      &trans  &mkp MB1  &trans    &mkp MB2  &trans
-&trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans      &trans  &trans  &slow_drag  &mkp MB2  &trans  &trans
-&trans  &trans          &trans          &msc SCRL_UP     &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &trans          &mmv MOVE_UP    &msc SCRL_DOWN   &kp LG(EQUAL)               &trans  &mkp MB1  &trans    &mkp MB2  &trans
+&trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &kp LG(MINUS)  &trans      &trans  &trans  &slow_drag  &mkp MB2  &trans  &trans
+&trans  &trans          &trans          &msc SCRL_UP     &kp LG(N0)     &trans      &trans  &trans  &trans    &trans    &trans    &trans
 &trans  &trans          &trans          &trans           &trans  &trans      &trans  &trans                                &trans
             >;
         };

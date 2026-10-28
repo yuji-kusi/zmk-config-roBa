@@ -1,4 +1,5 @@
 #include "roBa.dtsi"
+#include <input/processors.dtsi>
 
 &default_transform {
     col-offset = <6>;
@@ -19,6 +20,8 @@
         status = "okay";
         compatible = "zmk,input-listener";
         device = <&trackball>;
+        // ボールのスクロールを 1 回で 3 倍に（細かすぎるので大きく動かす。大きすぎたら 2、まだ細かければ 4 に）
+        input-processors = <&zip_scroll_scaler 3 1>;
     };
 };
 
