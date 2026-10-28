@@ -10,8 +10,8 @@
 // 4・5・6 は &trackball の automouse-layer・scroll-layers・snipe-layers が指しているので番号を変えない
 // 親指は串田さんの呼び方に合わせる: 「外側」＝中央寄り（斜めに傾いたキー）。
 // 左親指 中央寄りから 英かな（軽押しで Control+Space）／長押し Option・Space（長押し Command）・Tab、右親指 中央寄りから Enter・delete（Backspace）（第 38 版で入れ替え。長押しはキーと一緒に動かした）
-// スクロール: I・N の長押し（使いやすいのを試す）、または右下の角（前方削除）の長押しをしながらボール
-// 入り方: 1 C の真下を押さえている間（X の真下は空き）、または右親指の delete（Backspace）の長押し / 2 右親指の Enter の長押し / 3 Z の真下を押さえている間、または左の B・右の / の長押し
+// スクロール: I・N・/ の長押し（使いやすいのを試す）、または右下の角（前方削除）の長押しをしながらボール
+// 入り方: 1 C の真下を押さえている間（X の真下は空き）、または右親指の delete（Backspace）の長押し / 2 右親指の Enter の長押し / 3 Z の真下を押さえている間、または左の B・右の P の長押し
 
 &mt {
     flavor = "balanced";
@@ -166,9 +166,9 @@
 
         default_layer {
             bindings = <
-&sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &kp P
+&sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &lt 3 P
 &lhs LSHIFT A     &sct LG(S) S &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &ghn LG(LSHIFT) 0               &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
-&kp Z             &sct LG(X) X &sct LG(C) C &sct LG(V) V            &blt 3 B            &vbs LS(LG(Z)) LG(Z)  &vbs LG(PERIOD) B            &lt 5 N    &kp M  &kp COMMA  &kp DOT  &lt 3 SLASH
+&kp Z             &sct LG(X) X &sct LG(C) C &sct LG(V) V            &blt 3 B            &vbs LS(LG(Z)) LG(Z)  &vbs LG(PERIOD) B            &lt 5 N    &kp M  &kp COMMA  &kp DOT  &lt 5 SLASH
 &mo 3             &none       &mo 1          &cmt LCTRL TAB       &tmt LGUI SPACE  &cmt LALT LC(SPACE) &blt 2 ENTER              &blt 1 BACKSPACE                                      &lt 5 DELETE
             >;
 
@@ -195,7 +195,7 @@
             >;
         };
 
-        // Mac 操作・メディアの面（Z の真下を押さえている間か、左の B・右の / の長押し）。右手は画面の操作と撮影、左手は音楽・アプリを開くキー・Bluetooth。
+        // Mac 操作・メディアの面（Z の真下を押さえている間か、左の B・右の P の長押し）。右手は画面の操作と撮影、左手は音楽・アプリを開くキー・Bluetooth。
         // アプリを開くキー（A Notion・S Orca・D Finder・F Google Chrome・G Chatwork・G の右隣 LINE）は Control+Option+Command+Shift+1〜6 を送る（Notion 1・Orca 2・Finder 3・LINE 4・Chatwork 5・Chrome 6）。開く設定は Mac 側（BetterTouchTool）で
         // 右手の中の段は外から 左のタブ・左のデスクトップ・Mission Control・右のデスクトップ・右のタブ（' の位置は空き）
         // 撮影は CleanShot の設定に合わせる（N 範囲 Shift+Cmd+4、M 全画面 3、, 画面の文字 T、/ 撮影メニュー 0）。. の CleanShot の履歴は Control+Option+Command+Shift+7 を BetterTouchTool で cleanshot://open-history に
@@ -218,7 +218,7 @@
             >;
         };
 
-        // スクロールの面（I・N か右下の角を押さえている間。ボールでスクロール）。
+        // スクロールの面（I・N・/ か右下の角を押さえている間。ボールでスクロール）。
         // 押さえている間は J 左クリック（押さえている間ボールがゆっくり）・L 右クリックが時間切れなしで使える。
         // マウスキー: 左手の E S D F でカーソルを ↑ ← ↓ →、R で上へ・V で下へスクロール（Mac のナチュラルなスクロールに合わせて SCRL_DOWN・SCRL_UP を逆に割り当て）。U 左クリック、O 右クリック
         // 拡大・縮小（タッチパッドのピンチの代わり）: T 拡大 Command+=、G 縮小 Command+-、B 元の大きさ Command+0
