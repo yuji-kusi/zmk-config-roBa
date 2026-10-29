@@ -136,7 +136,7 @@
             quick-tap-ms = <150>;
         };
 
-        // 内側の列の 2 役キー（N の左隣: 軽押し B・長押し 音声入力）。
+        // 内側の列の 2 役キー（N の左隣: 軽押し 音声入力のモード切り替え ⌘/・長押し 音声入力 ⌘.）。第 46 版で軽押しを B から ⌘/ に（B は左手で打つ）。
         // 長押しは 0.3 秒としっかり長めに。文字を打った直後 0.15 秒以内は必ず軽押し
         vbs: slow_hold_tap {
             compatible = "zmk,behavior-hold-tap";
@@ -181,7 +181,7 @@
             bindings = <
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &lt 3 P
 &lhs LSHIFT A     &kp S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &ghn LG(LSHIFT) 0               &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
-&kp Z             &kp X        &kp C        &kp V                   &blt 3 B            &urd LS(LG(Z)) LG(Z)  &vbs LG(PERIOD) B            &lt 3 N    &kp M  &kp COMMA  &kp DOT  &lt 5 SLASH
+&kp Z             &kp X        &kp C        &kp V                   &blt 3 B            &urd LS(LG(Z)) LG(Z)  &vbs LG(PERIOD) LG(SLASH)           &lt 3 N    &kp M  &kp COMMA  &kp DOT  &lt 5 SLASH
 &mo 3             &none       &mo 1          &cmt LCTRL TAB       &tmt LGUI SPACE  &cmt LALT LC(SPACE) &blt 2 ENTER              &blt 1 BACKSPACE                                      &lt 5 DELETE
             >;
 
