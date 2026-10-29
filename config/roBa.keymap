@@ -212,13 +212,13 @@
         // Bluetooth は X の接続先 1 だけ（第 42 版で接続先 2〜4 と接続を消すキーを外した。撮影のときに誤って押して接続先が切り替わったため）
         // アプリを開くキー（A Notion・S Finder・D Orca（第 43 版で S と D を入れ替え）・F Google Chrome・G Chatwork・G の右隣 LINE）は Control+Option+Command+Shift+1〜6 を送る（Notion 1・Orca 2・Finder 3・LINE 4・Chatwork 5・Chrome 6）。開く設定は Mac 側（BetterTouchTool）で
         // 右手の中の段は外から 左のタブ・左のデスクトップ・Mission Control・右のデスクトップ・右のタブ（' の位置は空き）
-        // 左の下の段はウィンドウ操作（第 45 版）: Z 最小化 Cmd+M、C 左半分・V 最大化・B 右半分は Rectangle の既定 Control+Option+←・Return・→
+        // 左の下の段はウィンドウ操作（第 45 版）: Z 最小化 Cmd+M、C 左半分・V 最大化・B 右半分は Control+Option+Command+Shift+8・9・0 を BetterTouchTool で（第 46 版で Rectangle から移した。C の Control+Option+← が届かなかったため）
         // 撮影は CleanShot の設定に合わせる（N 範囲 Shift+Cmd+4、M 全画面 3、, 画面の文字 T、/ 撮影メニュー 0）。. の CleanShot の履歴は Control+Option+Command+Shift+7 を BetterTouchTool で cleanshot://open-history に
         MAC_MEDIA {
             bindings = <
 &none   &kp C_PREV    &kp C_PP      &kp C_NEXT    &kp LG(SLASH)                                     &kp C_BRI_DN       &kp C_BRI_UP        &kp C_VOL_DN      &kp C_VOL_UP         &kp C_MUTE
 &kp LC(LA(LG(LS(N1))))  &kp LC(LA(LG(LS(N3))))  &kp LC(LA(LG(LS(N2))))  &kp LC(LA(LG(LS(N6))))  &kp LC(LA(LG(LS(N5))))  &kp LC(LA(LG(LS(N4))))  &kp LC(LS(TAB))    &kp LC(LEFT_ARROW) &kp LC(UP_ARROW)  &kp LC(RIGHT_ARROW)  &kp LC(TAB)  &none
-&kp LG(M)  &bt BT_SEL 0  &kp LC(LA(LEFT_ARROW))  &kp LC(LA(RET))  &kp LC(LA(RIGHT_ARROW))  &none          &kp LA(LS(LG(V)))  &kp LS(LG(N4))     &kp LS(LG(N3))      &kp LS(LG(T))     &kp LC(LA(LG(LS(N7))))  &kp LS(LG(N0))
+&kp LG(M)  &bt BT_SEL 0  &kp LC(LA(LG(LS(N8))))  &kp LC(LA(LG(LS(N9))))  &kp LC(LA(LG(LS(N0))))  &none          &kp LA(LS(LG(V)))  &kp LS(LG(N4))     &kp LS(LG(N3))      &kp LS(LG(T))     &kp LC(LA(LG(LS(N7))))  &kp LS(LG(N0))
 &trans  &trans        &trans        &trans        &trans        &trans         &trans             &trans                                                                   &trans
             >;
         };
