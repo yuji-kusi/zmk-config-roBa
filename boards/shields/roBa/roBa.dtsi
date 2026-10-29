@@ -86,6 +86,9 @@
         compatible = "zmk,kscan-gpio-matrix";
         label = "KSCAN";
         diode-direction = "col2row";
+        // 第 47 版: 1 回押しで 2 回入る（小さい「っ」が出る）のを抑えるため、離したと判定するまでの時間を既定の 5ms から 15ms に。続けて打つ間隔は 0.1 秒以上あるので普通の入力には影響しない
+        debounce-press-ms = <5>;
+        debounce-release-ms = <15>;
             row-gpios
                 = <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
                 , <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
