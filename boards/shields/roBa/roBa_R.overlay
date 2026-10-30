@@ -20,8 +20,8 @@
         status = "okay";
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        // ボールのスクロールを 1 回で 3 倍に（細かすぎるので大きく動かす。大きすぎたら 2、まだ細かければ 4 に）
-        input-processors = <&zip_scroll_scaler 3 1>;
+        // ボールのスクロールの倍率。第 37 版で 3 倍にしたが、速すぎると言われたので第 48 版で 2 倍に（まだ速ければ 3/2 倍＝<&zip_scroll_scaler 3 2>）
+        input-processors = <&zip_scroll_scaler 2 1>;
     };
 };
 
