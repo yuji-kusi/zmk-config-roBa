@@ -48,7 +48,7 @@
     };
 
     behaviors {
-        // G（長押し Control+Command）と G の右隣（軽押しは何も出さない・長押し Command+Shift。押さえて T で CleanShot の文字の写し取り）。
+        // G（長押し Control+Command）。G の右隣の長押し Command+Shift は第 48 版で外した（G の右隣は取り消し・やり直しに。CleanShot の文字の写し取りは Mac 操作の面の , ）。
         // G の右隣の軽押しは Mission Control だったが、誤って押しやすいので第 39 版で外した（Mission Control は Mac 操作の面の J の位置にある）
         // G+T のように同じ左手のキーとも組めるよう、手の左右を問わない。0.25 秒押さえたときだけ長押し、打った直後 0.15 秒以内は必ず軽押し
         ghm: g_hold_mod {
@@ -61,7 +61,7 @@
             require-prior-idle-ms = <150>;
         };
 
-        // G の右隣用: 軽押しは何も出さない（&none）、長押しだけ働く。押し方の決め方は上の ghm と同じ
+        // 軽押しは何も出さない（&none）、長押しだけ働く 2 役キー。第 48 版から使っている所は無い
         ghn: g_hold_only {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -163,7 +163,7 @@
             require-prior-idle-ms = <150>;
         };
 
-        // B の右隣: 軽押し 取り消し（⌘Z）・長押し やり直し（⇧⌘Z）。第 43 版で専用に分けた。
+        // G の右隣（第 48 版で B の右隣から 1 つ上へ。空いた B の右隣は押さえている間ボールでスクロール）: 軽押し 取り消し（⌘Z）・長押し やり直し（⇧⌘Z）。第 43 版で専用に分けた。
         // 長押しが効かなかったので、長押しまでの時間を 0.3 秒から 0.2 秒に縮め、取り消しを続けて打った直後でもすぐ長押しと判定する（quick-tap を 0）。
         // 長押しのやり直しは 1 回だけ出す（押し続けても繰り返さない）
         urd: undo_redo {
@@ -195,8 +195,8 @@
         default_layer {
             bindings = <
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &lt 5 I    &kp O    &lt 3 P
-&lhs LSHIFT A     &kp S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &ghn LG(LSHIFT) 0               &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
-&kp Z             &kp X        &kp C        &kp V                   &blt 3 B            &urd LS(LG(Z)) LG(Z)  &vbs LG(PERIOD) LG(SLASH)           &nlt 3 N   &kp M  &kp COMMA  &kp DOT  &lt 5 SLASH
+&lhs LSHIFT A     &kp S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &urd LS(LG(Z)) LG(Z)               &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
+&kp Z             &kp X        &kp C        &kp V                   &blt 3 B            &mo 5                 &vbs LG(PERIOD) LG(SLASH)           &nlt 3 N   &kp M  &kp COMMA  &kp DOT  &lt 5 SLASH
 &mo 3             &none       &mo 1          &cmt LCTRL TAB       &tmt LGUI SPACE  &cmt LALT LC(SPACE) &blt 2 ENTER              &blt 1 BACKSPACE                                      &lt 5 DELETE
             >;
 
