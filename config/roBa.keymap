@@ -213,7 +213,7 @@
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &nlt 5 I   &kp O    &kp P  
 &kp A             &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &none                              &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &lt 3 SQT      
 &kp Z             &kp X        &kp C        &kp V                   &blt 3 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH  
-&mo 3             &kp LALT        &kp LCTRL          &tmt LGUI SPACE           &cmt LSHIFT TAB          &lt 5 LC(SPACE)       &blt 2 ENTER                  &blt 1 BACKSPACE                                          &lt 5 DELETE
+&mo 3             &kp LALT        &kp LCTRL          &tmt LGUI SPACE           &cmt LSHIFT TAB          &lt 5 LC(SPACE)       &blt 2 BACKSPACE              &blt 1 ENTER                                              &lt 5 DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
