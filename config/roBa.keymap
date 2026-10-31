@@ -18,7 +18,8 @@
 // 第 60 版: G の右隣にアプリ切替（押している間 Command を押さえて Tab を 1 回。押したまま左親指の Tab で次へ・ボールで合わせて選ぶ、離すと切り替わる。軽押しは直前のアプリへ）
 // 第 61 版: 面の組み替え。1 Enter の長押し＝数字（左手に電卓の並び、F が 5、0 は Space の位置）＋よく使う記号＋矢印 / 2 B の長押し＝余った記号と F1〜F12 / 3 delete の長押し＝Mac 操作の面（Z の真下・' の長押しからも）。Home・End は外した。
 // 第 61 版: 英かなは押すたびに かな（LANG1）と 英数（LANG2）を交互に送る（前は Control+Space＝前の入力ソース。続けて押すと全角英字などへ飛んだ）。どちらを送ったかはキーボードが覚える（面 1 の入・切）。ずれたら 1 回余分に押せば合う
-// 入り方: 1 右親指の Enter の長押し / 2 左の B の長押し / 3 右親指の delete の長押し、Z の真下を押さえている間、右の ' の長押し / 7 かなを送った後（英かなの次の 1 回を英数にするだけ）
+// 第 63 版: P の長押しで Mac 操作の面（' の長押しから移した）、' の長押しは Shift に戻した（rhs＝左手か親指のキーと一緒のときだけ）。Enter の面の / は BetterTouchTool で文字を入れる（かなのままでも半角の / が出る）
+// 入り方: 1 右親指の Enter の長押し / 2 左の B の長押し / 3 右親指の delete の長押し、Z の真下を押さえている間、右の P の長押し / 7 かなを送った後（英かなの次の 1 回を英数にするだけ）
 
 &mt {
     flavor = "balanced";
@@ -262,8 +263,8 @@
 
         default_layer {
             bindings = <
-&sct ESC Q        &sct LG(W) W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &nlt 6 I   &kp O    &kp P  
-&kp A             &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &app_switch                        &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &lt 4 SQT      
+&sct ESC Q        &sct LG(W) W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &nlt 6 I   &kp O    &blt 4 P  
+&kp A             &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &app_switch                        &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &rhs LSHIFT SQT      
 &kp Z             &sct LG(X) X        &sct LG(C) C        &sct LG(V) V                   &blt 3 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH  
 &mo 4             &kp LALT        &kp LCTRL          &tmt LGUI SPACE           &cmt LSHIFT TAB          &ekk 6 0       &blt 4 BACKSPACE              &blt 2 ENTER                                              &lt 6 DELETE
             >;
@@ -285,11 +286,12 @@
         // 左: Q *・W +・S -・Z ,・X .・G の右隣 =・B の右隣 %、A は押さえている間 Shift（矢印で範囲を選ぶ）。
         // 左の下の段（Enter を押さえている間）: X の真下 ×・C の真下 ÷。Control+Option+Command+Shift+- と = を送り、BetterTouchTool が × ÷ の文字を入れる（第 61 版で登録）
         // 右: 上の段 ? ! & | :、H の左隣 #・H @、J ← K ↓ L ↑ ' →、下の段 N の左隣 "（# の下）・N _・M (（← の下）・, )（↓ の下）・. \・/ /
+// / は第 63 版から Control+Option+Command+Shift+/ を送り、BetterTouchTool が半角の / を入れる（かなのままだと / が「・」になっていたため）
         NUM_SYM {
             bindings = <
 &kp ASTERISK &kp PLUS   &kp N7   &kp N8   &kp N9                                                    &kp QUESTION   &kp EXCLAMATION  &kp AMPERSAND   &kp PIPE      &kp COLON
 &kp LSHIFT   &kp MINUS  &kp N4   &kp N5   &kp N6   &kp EQUAL                    &kp HASH            &kp AT_SIGN    &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW
-&kp COMMA    &kp DOT    &kp N1   &kp N2   &kp N3   &kp PERCENT                  &kp DOUBLE_QUOTES    &kp UNDERSCORE  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp BACKSLASH  &kp SLASH
+&kp COMMA    &kp DOT    &kp N1   &kp N2   &kp N3   &kp PERCENT                  &kp DOUBLE_QUOTES    &kp UNDERSCORE  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp BACKSLASH  &kp LC(LA(LG(LS(SLASH))))
 &trans       &kp LC(LA(LG(LS(MINUS))))     &kp LC(LA(LG(LS(EQUAL))))   &kp N0   &trans   &trans                       &trans              &trans                                                                &trans
             >;
         };
