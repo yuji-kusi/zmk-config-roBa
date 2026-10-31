@@ -6,7 +6,7 @@
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 10
 #include <dt-bindings/zmk/pointing.h>
 
-// 面の番号: 0 ふだん / 1 数字と F キー / 2 記号と矢印 / 3 Mac 操作・メディア / 4 マウス / 5 スクロール / 6 ドラッグ中（ボールをゆっくり）
+// 面の番号: 0 ふだん / 1 数字＋よく使う記号＋矢印 / 2 余った記号と F キー / 3 Mac 操作・メディア / 4 マウス / 5 スクロール / 6 ドラッグ中（ボールをゆっくり） / 7 英かなの切り替え用（かなを送った後）
 // 4・5・6 は &trackball の automouse-layer・scroll-layers・snipe-layers が指しているので番号を変えない
 // 親指は串田さんの呼び方に合わせる: 「外側」＝中央寄り（斜めに傾いたキー）。
 // 左親指 中央寄りから 英かな（Control+Space。第 49 版で長押しの Option を外した）・Space（長押し Command）・Tab（長押し Control）。左の下の段 B の右隣 Shift（第 50 版）・X の真下 Option・C の真下 Command（押さえている間。第 49 版）。右親指 中央寄りから delete（Backspace）・Enter（第 49 版で入れ替え。長押しはキーと一緒に動かした）
@@ -16,7 +16,9 @@
 // 第 57 版: 左親指の Tab の長押しを Shift、B の右隣を押さえている間 Mac 操作の面（前は Shift）、右親指の Enter と delete を長押しごと元に戻す（中央寄り Enter＝記号と矢印、隣 delete＝数字と F）
 // 第 58 版: B の長押しで Mac 操作の面、取り消し・やり直しを G の右隣から B の右隣へ（G の右隣は空き）
 // 第 60 版: G の右隣にアプリ切替（押している間 Command を押さえて Tab を 1 回。押したまま左親指の Tab で次へ・ボールで合わせて選ぶ、離すと切り替わる。軽押しは直前のアプリへ）
-// 入り方: 1 右親指の delete（Backspace）の長押し / 2 右親指の Enter の長押し / 3 Z の真下を押さえている間、または左親指の Tab・右の ' の長押し（第 50 版で P から ' へ）（音声入力のモード切り替え ⌘/ は右手の B の軽押し）
+// 第 61 版: 面の組み替え。1 Enter の長押し＝数字（左手に電卓の並び、F が 5、0 は Space の位置）＋よく使う記号＋矢印 / 2 B の長押し＝余った記号と F1〜F12 / 3 delete の長押し＝Mac 操作の面（Z の真下・' の長押しからも）。Home・End は外した。
+// 第 61 版: 英かなは押すたびに かな（LANG1）と 英数（LANG2）を交互に送る（前は Control+Space＝前の入力ソース。続けて押すと全角英字などへ飛んだ）。どちらを送ったかはキーボードが覚える（面 7 の入・切）。ずれたら 1 回余分に押せば合う
+// 入り方: 1 右親指の Enter の長押し / 2 左の B の長押し / 3 右親指の delete の長押し、Z の真下を押さえている間、右の ' の長押し / 7 かなを送った後（英かなの次の 1 回を英数にするだけ）
 
 &mt {
     flavor = "balanced";
@@ -51,6 +53,19 @@
                 ;
         };
 
+        // 英かな（第 61 版）: かな（LANG1）を送って面 7 を入れる → 次の 1 回は英数（LANG2）を送って面 7 を切る。受け取る数は使わない
+        to_kana: to_kana {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&macro_tap &kp LANG1 &tog 7>;
+        };
+
+        to_eisu: to_eisu {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&macro_tap &kp LANG2 &tog 7>;
+        };
+
         // アプリ切替（第 60 版、G の右隣）: 押した瞬間に Command を押さえて Tab を 1 回 → アプリのアイコンが並ぶ。
         // 押している間は Command を押さえたまま（左親指の Tab で次のアプリ、Tab の長押し Shift と一緒に Tab で前へ、ボールでアイコンに合わせても選べる）。
         // 離すと Command も離れて、選んだアプリに切り替わる。軽く押すだけなら直前のアプリへ。
@@ -70,6 +85,25 @@
     };
 
     behaviors {
+        // 英かな（第 61 版、左親指の中央寄り）: 軽押しは かな と 英数 を交互に、長押しはボールでスクロール（前の &lt 5 と同じ）
+        ekk: eikana_kana {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&mo>, <&to_kana>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+        };
+
+        eke: eikana_eisu {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&mo>, <&to_eisu>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+        };
+
         // G（長押し Control+Command）。G の右隣の長押し Command+Shift は第 48 版で外した（G の右隣は取り消し・やり直しに。CleanShot の文字の写し取りは Mac 操作の面の , ）。
         // G の右隣の軽押しは Mission Control だったが、誤って押しやすいので第 39 版で外した（Mission Control は Mac 操作の面の J の位置にある）
         // G+T のように同じ左手のキーとも組めるよう、手の左右を問わない。0.25 秒押さえたときだけ長押し、打った直後 0.15 秒以内は必ず軽押し
@@ -210,7 +244,7 @@
             require-prior-idle-ms = <150>;
         };
 
-        // 長押しで面に入るキー: 右親指の delete（Backspace）で数字と F キーの面、Enter で記号と矢印の面、左の B で Mac 操作の面。
+        // 長押しで面に入るキー（第 61 版）: 右親指の Enter で数字＋よく使う記号＋矢印、左の B で余った記号と F キー、右親指の delete（Backspace）で Mac 操作の面。
         // 長押しして何も打たずに離しても delete・Enter・B は出さない（文字を消さない・誤って送信しない）。文字を打った直後 0.15 秒以内は必ず軽押し
         blt: right_layer_tap {
             compatible = "zmk,behavior-hold-tap";
@@ -230,30 +264,32 @@
             bindings = <
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &nlt 5 I   &kp O    &kp P  
 &kp A             &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &app_switch                        &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &lt 3 SQT      
-&kp Z             &kp X        &kp C        &kp V                   &blt 3 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH  
-&mo 3             &kp LALT        &kp LCTRL          &tmt LGUI SPACE           &cmt LSHIFT TAB          &lt 5 LC(SPACE)       &blt 2 BACKSPACE              &blt 1 ENTER                                              &lt 5 DELETE
+&kp Z             &kp X        &kp C        &kp V                   &blt 2 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH  
+&mo 3             &kp LALT        &kp LCTRL          &tmt LGUI SPACE           &cmt LSHIFT TAB          &ekk 5 0       &blt 3 BACKSPACE              &blt 1 ENTER                                              &lt 5 DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
         };
 
-        // 数字と F キーの面（右親指の delete の長押し。C の真下は第 49 版で Command に）。左手に F キー、右手にテンキーの並び（第 41 版から、送るのはテンキーではなく上の段の普通の数字。⌘1 などのショートカットが確実に効くように）
-        NUM_F {
+        // 数字＋よく使う記号＋矢印の面（第 61 版。右親指の Enter の長押し）。左手は電卓の並び（F が 5、0 は左親指の Space の位置。送るのは上の段の普通の数字＝⌘1 などが確実に効く）。
+        // 左: W +・S -・Z ,・X .・G の右隣 =・B の右隣 %、A は押さえている間 Shift（矢印で範囲を選ぶ）。右: 上の段 ? ! & | *、H の左隣 #・H @、J ← K ↓ L ↑ ' →、N ( M )、, . / はふだんと同じ
+        NUM_SYM {
             bindings = <
-&kp F1   &kp F2   &kp F3   &kp F4   &none                                                 &kp MINUS        &kp N7           &kp N8           &kp N9           &kp PLUS
-&kp F5   &kp F6   &kp F7   &kp F8   &none    &none                       &none            &kp SLASH        &kp N4           &kp N5           &kp N6           &kp ASTERISK
-&kp F9   &kp F10  &kp F11  &kp F12  &none    &none                       &kp EQUAL        &kp N0           &kp N1           &kp N2           &kp N3           &kp PERIOD
-&trans   &trans   &trans   &trans   &trans   &trans                      &trans           &trans                                                              &trans
+&none        &kp PLUS   &kp N7   &kp N8   &kp N9                                                    &kp QUESTION   &kp EXCLAMATION  &kp AMPERSAND   &kp PIPE      &kp ASTERISK
+&kp LSHIFT   &kp MINUS  &kp N4   &kp N5   &kp N6   &kp EQUAL                    &kp HASH            &kp AT_SIGN    &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW
+&kp COMMA    &kp DOT    &kp N1   &kp N2   &kp N3   &kp PERCENT                  &none               &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp COMMA  &kp DOT  &kp SLASH
+&trans       &trans     &trans   &kp N0   &trans   &trans                       &trans              &trans                                                                &trans
             >;
         };
 
-        // 記号と矢印の面（右親指の Enter の長押し）。A の位置は軽押し #・長押し Shift（Enter を押さえた後から Shift を足して J K L ' で選ぶ）。第 49 版で矢印を 1 つ右へ（J ← K ↓ L ↑ ' →、: は H）。Y の位置は ;（動画の図では /。/ はふだんの面にある）。動画の配列図の Layer 2 の並び（^ と _ は人差し指の内側、Home・End は下の段の内側）
-        SYMBOL {
+        // 余った記号と F キーの面（第 61 版。左の B の長押し）。B を人差し指で押さえるので人差し指の列は空き。
+        // 左: F1〜F9 を小指〜中指の 3×3、F10・F11 は左親指の Space・Tab の位置、F12 は右の ' の位置（英かなの位置は面 7 が上に来るので使わない）。右: 記号
+        SYM_F {
             bindings = <
-&kp QUESTION  &kp EXCLAMATION   &kp AMPERSAND      &kp PIPE          &kp BACKSLASH                                                  &kp SEMICOLON          &kp EQUAL          &kp ASTERISK      &kp PLUS          &kp PERCENT
-&lhs LSHIFT HASH &kp GRAVE        &kp DOUBLE_QUOTES  &kp SINGLE_QUOTE  &kp TILDE             &kp CARET      &kp UNDERSCORE           &kp COLON              &kp LEFT_ARROW     &kp DOWN_ARROW      &kp UP_ARROW      &kp RIGHT_ARROW
-&kp AT_SIGN   &kp LESS_THAN     &kp LEFT_BRACE     &kp LEFT_BRACKET  &kp LEFT_PARENTHESIS  &kp HOME       &kp END                  &kp RIGHT_PARENTHESIS  &kp RIGHT_BRACKET  &kp RIGHT_BRACE   &kp GREATER_THAN  &kp DOLLAR
-&trans        &trans            &trans             &trans            &kp DELETE            &trans         &trans                   &trans                                                                           &trans
+&kp F1   &kp F2   &kp F3   &none    &none                                                 &kp SEMICOLON  &kp GRAVE         &kp DOUBLE_QUOTES  &kp SINGLE_QUOTE  &kp TILDE
+&kp F4   &kp F5   &kp F6   &none    &none    &none                   &kp UNDERSCORE       &kp COLON      &kp BACKSLASH     &kp CARET          &kp DOLLAR        &kp F12
+&kp F7   &kp F8   &kp F9   &none    &trans   &none                   &kp LESS_THAN        &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp GREATER_THAN
+&trans   &trans   &trans   &kp F10  &kp F11  &trans                  &trans               &trans                                                                       &trans
             >;
         };
 
@@ -305,5 +341,15 @@
             >;
         };
 
+
+        // 英かなの切り替え用（第 61 版）: かなを送った後だけ入る。英かなの位置だけ「次は英数」、ほかはすべて下の面のまま
+        EIKANA {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &eke 5 0    &trans  &trans                          &trans
+            >;
+        };
     };
 };
