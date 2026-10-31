@@ -11,6 +11,7 @@
 // 親指は串田さんの呼び方に合わせる: 「外側」＝中央寄り（斜めに傾いたキー）。
 // 左親指 中央寄りから 英かな（Control+Space。第 49 版で長押しの Option を外した）・Space（長押し Command）・Tab（長押し Control）。左の下の段 B の右隣 Shift（第 50 版）・X の真下 Option・C の真下 Command（押さえている間。第 49 版）。右親指 中央寄りから delete（Backspace）・Enter（第 49 版で入れ替え。長押しはキーと一緒に動かした）
 // スクロール: / の長押し・左親指の英かなの長押し（第 50 版で B の右隣から移した。B の右隣は Shift に。A と ' の長押しの Shift は外した）（I は Mac 操作の面へ、N は第 49 版で長押し無し）（使いやすいのを試す）、または右下の角（前方削除）の長押しをしながらボール
+// 第 51 版: X の真下 Control・C の真下 Option・Tab の長押し Command・Space の長押し Mac 操作の面。B と / の長押しは外した
 // 入り方: 1 右親指の delete（Backspace）の長押し / 2 右親指の Enter の長押し / 3 Z の真下を押さえている間、または左の B・右の I・' の長押し（第 50 版で P から ' へ）（音声入力のモード切り替え ⌘/ は右手の B の軽押し）
 
 &mt {
@@ -140,6 +141,18 @@
             retro-tap;
         };
 
+        // 左親指の真ん中の Space: 長押しで Mac 操作の面（第 51 版。前は Command）。押し方の決め方は上の tmt と同じ
+        tlt: thumb_layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&mo>, <&kp>;
+            flavor = "balanced";
+            tapping-term-ms = <220>;
+            quick-tap-ms = <150>;
+            require-prior-idle-ms = <150>;
+            retro-tap;
+        };
+
         // 左親指のいちばん端（軽押し Tab・長押し Control）と中央寄り（軽押し 英かな・長押し Option）。
         // 修飾キーを素早く使えるよう balanced にする。軽押しのすぐ後の押し続けは前方削除の連続
         cmt: quick_mod_tap {
@@ -196,8 +209,8 @@
             bindings = <
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &nlt 3 I   &kp O    &kp P  
 &kp A             &kp S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &urd LS(LG(Z)) LG(Z)               &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &lt 3 SQT      
-&kp Z             &kp X        &kp C        &kp V                   &blt 3 B            &kp LSHIFT                 &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &lt 5 SLASH
-&mo 3             &kp LALT       &kp LGUI          &cmt LCTRL TAB       &tmt LGUI SPACE  &lt 5 LC(SPACE)       &blt 1 BACKSPACE              &blt 2 ENTER                                          &lt 5 DELETE
+&kp Z             &kp X        &kp C        &kp V                   &kp B               &kp LSHIFT                 &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH  
+&mo 3             &kp LCTRL       &kp LALT          &cmt LGUI TAB        &tlt 3 SPACE     &lt 5 LC(SPACE)       &blt 1 BACKSPACE              &blt 2 ENTER                                          &lt 5 DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
