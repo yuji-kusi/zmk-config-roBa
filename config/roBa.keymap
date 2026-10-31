@@ -285,11 +285,11 @@
         };
 
         // 余った記号と F キーの面（第 61 版。左の B の長押し）。Enter の面にある記号（: _ \ " など）は置かない。
-        // 左: F キーは Enter の面の数字と同じ場所（F が F5、E R T が F7 F8 F9、D G が F4 F6、C V が F1 F2）。B は押さえるので F3 は B の右隣。F10 は Space、F11 は Tab の位置、F12 は右の ' の位置。右: 記号
+        // 左: F キーは Enter の面の数字と同じ場所（F が F5、E R T が F7 F8 F9、D G が F4 F6、C V が F1 F2）。B は押さえるので F3 は B の右隣。F10 は Space、F11 は Tab の位置、F12 は G の右隣（F6 の右）。右: 記号は間を空けずに詰める（上の段 ; ` ' ~ ^、H $、下の段 < [ ] { } >）
         SYM_F {
             bindings = <
-&none    &none    &kp F7   &kp F8   &kp F9                                                &kp SEMICOLON  &kp GRAVE         &none              &kp SINGLE_QUOTE  &kp TILDE
-&none    &none    &kp F4   &kp F5   &kp F6   &none                   &none                &none          &none             &kp CARET          &kp DOLLAR        &kp F12
+&none    &none    &kp F7   &kp F8   &kp F9                                                &kp SEMICOLON  &kp GRAVE         &kp SINGLE_QUOTE   &kp TILDE         &kp CARET
+&none    &none    &kp F4   &kp F5   &kp F6   &kp F12                 &none                &kp DOLLAR     &none             &none              &none             &none
 &none    &none    &kp F1   &kp F2   &trans   &kp F3                  &kp LESS_THAN        &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp GREATER_THAN
 &trans   &trans   &trans   &kp F10  &kp F11  &trans                  &trans               &trans                                                                       &trans
             >;
