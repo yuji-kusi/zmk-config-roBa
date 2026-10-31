@@ -9,9 +9,9 @@
 // 面の番号: 0 ふだん / 1 数字と F キー / 2 記号と矢印 / 3 Mac 操作・メディア / 4 マウス / 5 スクロール / 6 ドラッグ中（ボールをゆっくり）
 // 4・5・6 は &trackball の automouse-layer・scroll-layers・snipe-layers が指しているので番号を変えない
 // 親指は串田さんの呼び方に合わせる: 「外側」＝中央寄り（斜めに傾いたキー）。
-// 左親指 中央寄りから 英かな（軽押しで Control+Space）／長押し Option・Space（長押し Command）・Tab、右親指 中央寄りから Enter・delete（Backspace）（第 38 版で入れ替え。長押しはキーと一緒に動かした）
+// 左親指 中央寄りから 英かな（Control+Space。第 49 版で長押しの Option を外した）・Space（長押し Command）・Tab（長押し Control）。左の下の段 X の真下 Option・C の真下 Command（押さえている間。第 49 版）。右親指 中央寄りから delete（Backspace）・Enter（第 49 版で入れ替え。長押しはキーと一緒に動かした）
 // スクロール: / の長押し・B の右隣を押さえる（I は Mac 操作の面へ、N は第 49 版で長押し無し）（使いやすいのを試す）、または右下の角（前方削除）の長押しをしながらボール
-// 入り方: 1 C の真下を押さえている間（X の真下は空き）、または右親指の delete（Backspace）の長押し / 2 右親指の Enter の長押し / 3 Z の真下を押さえている間、または左の B・右の I・P の長押し（音声入力のモード切り替え ⌘/ は右手の B の軽押し）
+// 入り方: 1 右親指の delete（Backspace）の長押し / 2 右親指の Enter の長押し / 3 Z の真下を押さえている間、または左の B・右の I・P の長押し（音声入力のモード切り替え ⌘/ は右手の B の軽押し）
 
 &mt {
     flavor = "balanced";
@@ -197,13 +197,13 @@
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &nlt 3 I   &kp O    &lt 3 P
 &lhs LSHIFT A     &kp S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &urd LS(LG(Z)) LG(Z)               &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
 &kp Z             &kp X        &kp C        &kp V                   &blt 3 B            &mo 5                 &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &lt 5 SLASH
-&mo 3             &none       &mo 1          &cmt LCTRL TAB       &tmt LGUI SPACE  &cmt LALT LC(SPACE) &blt 2 ENTER              &blt 1 BACKSPACE                                      &lt 5 DELETE
+&mo 3             &kp LALT       &kp LGUI          &cmt LCTRL TAB       &tmt LGUI SPACE  &kp LC(SPACE)       &blt 1 BACKSPACE              &blt 2 ENTER                                          &lt 5 DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
         };
 
-        // 数字と F キーの面（C の真下を押さえている間か、右親指の delete の長押し）。左手に F キー、右手にテンキーの並び（第 41 版から、送るのはテンキーではなく上の段の普通の数字。⌘1 などのショートカットが確実に効くように）
+        // 数字と F キーの面（右親指の delete の長押し。C の真下は第 49 版で Command に）。左手に F キー、右手にテンキーの並び（第 41 版から、送るのはテンキーではなく上の段の普通の数字。⌘1 などのショートカットが確実に効くように）
         NUM_F {
             bindings = <
 &kp F1   &kp F2   &kp F3   &kp F4   &none                                                 &kp MINUS        &kp N7           &kp N8           &kp N9           &kp PLUS
@@ -213,11 +213,11 @@
             >;
         };
 
-        // 記号と矢印の面（右親指の Enter の長押し）。A の位置は軽押し #・長押し Shift（Enter を押さえた後から Shift を足して H J K L で選ぶ）。Y の位置は ;（動画の図では /。/ はふだんの面にある）。動画の配列図の Layer 2 の並び（^ と _ は人差し指の内側、Home・End は下の段の内側）
+        // 記号と矢印の面（右親指の Enter の長押し）。A の位置は軽押し #・長押し Shift（Enter を押さえた後から Shift を足して J K L ' で選ぶ）。第 49 版で矢印を 1 つ右へ（J ← K ↓ L ↑ ' →、: は H）。Y の位置は ;（動画の図では /。/ はふだんの面にある）。動画の配列図の Layer 2 の並び（^ と _ は人差し指の内側、Home・End は下の段の内側）
         SYMBOL {
             bindings = <
 &kp QUESTION  &kp EXCLAMATION   &kp AMPERSAND      &kp PIPE          &kp BACKSLASH                                                  &kp SEMICOLON          &kp EQUAL          &kp ASTERISK      &kp PLUS          &kp PERCENT
-&lhs LSHIFT HASH &kp GRAVE        &kp DOUBLE_QUOTES  &kp SINGLE_QUOTE  &kp TILDE             &kp CARET      &kp UNDERSCORE           &kp LEFT_ARROW         &kp DOWN_ARROW     &kp UP_ARROW      &kp RIGHT_ARROW   &kp COLON
+&lhs LSHIFT HASH &kp GRAVE        &kp DOUBLE_QUOTES  &kp SINGLE_QUOTE  &kp TILDE             &kp CARET      &kp UNDERSCORE           &kp COLON              &kp LEFT_ARROW     &kp DOWN_ARROW      &kp UP_ARROW      &kp RIGHT_ARROW
 &kp AT_SIGN   &kp LESS_THAN     &kp LEFT_BRACE     &kp LEFT_BRACKET  &kp LEFT_PARENTHESIS  &kp HOME       &kp END                  &kp RIGHT_PARENTHESIS  &kp RIGHT_BRACKET  &kp RIGHT_BRACE   &kp GREATER_THAN  &kp DOLLAR
 &trans        &trans            &trans             &trans            &kp DELETE            &trans         &trans                   &trans                                                                           &trans
             >;
@@ -231,7 +231,7 @@
         // 撮影は CleanShot の設定に合わせる（N 範囲 Shift+Cmd+4、M 全画面 3、, 画面の文字 T、/ 撮影メニュー 0）。. の CleanShot の履歴は Control+Option+Command+Shift+7 を BetterTouchTool で cleanshot://open-history に
         MAC_MEDIA {
             bindings = <
-&none   &kp C_PREV    &kp C_PP      &kp C_NEXT    &kp LG(SLASH)                                     &kp C_BRI_DN       &kp C_BRI_UP        &kp C_VOL_DN      &kp C_VOL_UP         &kp C_MUTE
+&none   &none         &none         &none         &none                                             &kp C_BRI_DN       &kp C_BRI_UP        &kp C_VOL_DN      &kp C_VOL_UP         &kp C_MUTE
 &kp LC(LA(LG(LS(N1))))  &kp LC(LA(LG(LS(N3))))  &kp LC(LA(LG(LS(N2))))  &kp LC(LA(LG(LS(N6))))  &kp LC(LA(LG(LS(N5))))  &kp LC(LA(LG(LS(N4))))  &kp LC(LS(TAB))    &kp LC(LEFT_ARROW) &kp LC(UP_ARROW)  &kp LC(RIGHT_ARROW)  &kp LC(TAB)  &none
 &kp LG(M)  &bt BT_SEL 0  &kp LC(LA(LG(LS(N8))))  &kp LC(LA(LG(LS(N9))))  &kp LC(LA(LG(LS(N0))))  &none          &kp LA(LS(LG(V)))  &kp LS(LG(N4))     &kp LS(LG(N3))      &kp LS(LG(T))     &kp LC(LA(LG(LS(N7))))  &kp LS(LG(N0))
 &trans  &trans        &trans        &trans        &trans        &trans         &trans             &trans                                                                   &trans
