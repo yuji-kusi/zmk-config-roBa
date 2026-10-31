@@ -272,12 +272,13 @@
         };
 
         // 数字＋よく使う記号＋矢印の面（第 61 版。右親指の Enter の長押し）。左手は電卓の並び（F が 5、0 は左親指の Space の位置。送るのは上の段の普通の数字＝⌘1 などが確実に効く）。
-        // 左: W +・S -・Z ,・X .・G の右隣 =・B の右隣 %、A は押さえている間 Shift（矢印で範囲を選ぶ）。右: 上の段 ? ! & | *、H の左隣 #・H @、J ← K ↓ L ↑ ' →、N ( M )、, . / はふだんと同じ
+        // 左: Q *・W +・S -・Z ,・X .・G の右隣 =・B の右隣 %、A は押さえている間 Shift（矢印で範囲を選ぶ）。
+        // 右: 上の段 ? ! & | '（アポストロフィ）、H の左隣 #・H @、J ← K ↓ L ↑ ' →、下の段 N の左隣 :（# の下）・N _・M (（← の下）・, )（↓ の下）・. \・/ /
         NUM_SYM {
             bindings = <
-&none        &kp PLUS   &kp N7   &kp N8   &kp N9                                                    &kp QUESTION   &kp EXCLAMATION  &kp AMPERSAND   &kp PIPE      &kp ASTERISK
+&kp ASTERISK &kp PLUS   &kp N7   &kp N8   &kp N9                                                    &kp QUESTION   &kp EXCLAMATION  &kp AMPERSAND   &kp PIPE      &kp SINGLE_QUOTE
 &kp LSHIFT   &kp MINUS  &kp N4   &kp N5   &kp N6   &kp EQUAL                    &kp HASH            &kp AT_SIGN    &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW
-&kp COMMA    &kp DOT    &kp N1   &kp N2   &kp N3   &kp PERCENT                  &none               &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp COMMA  &kp DOT  &kp SLASH
+&kp COMMA    &kp DOT    &kp N1   &kp N2   &kp N3   &kp PERCENT                  &kp COLON           &kp UNDERSCORE  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp BACKSLASH  &kp SLASH
 &trans       &trans     &trans   &kp N0   &trans   &trans                       &trans              &trans                                                                &trans
             >;
         };
