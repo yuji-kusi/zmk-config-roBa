@@ -10,8 +10,8 @@
 // 4・5・6 は &trackball の automouse-layer・scroll-layers・snipe-layers が指しているので番号を変えない
 // 親指は串田さんの呼び方に合わせる: 「外側」＝中央寄り（斜めに傾いたキー）。
 // 左親指 中央寄りから 英かな（軽押しで Control+Space）／長押し Option・Space（長押し Command）・Tab、右親指 中央寄りから Enter・delete（Backspace）（第 38 版で入れ替え。長押しはキーと一緒に動かした）
-// スクロール: / の長押し・B の右隣を押さえる（I と N は Mac 操作の面へ）（使いやすいのを試す）、または右下の角（前方削除）の長押しをしながらボール
-// 入り方: 1 C の真下を押さえている間（X の真下は空き）、または右親指の delete（Backspace）の長押し / 2 右親指の Enter の長押し / 3 Z の真下を押さえている間、または左の B・右の I・N・P の長押し（音声入力のモード切り替え ⌘/ は N 長押し＋T が押しやすい）
+// スクロール: / の長押し・B の右隣を押さえる（I は Mac 操作の面へ、N は第 49 版で長押し無し）（使いやすいのを試す）、または右下の角（前方削除）の長押しをしながらボール
+// 入り方: 1 C の真下を押さえている間（X の真下は空き）、または右親指の delete（Backspace）の長押し / 2 右親指の Enter の長押し / 3 Z の真下を押さえている間、または左の B・右の I・P の長押し（音声入力のモード切り替え ⌘/ は右手の B の軽押し）
 
 &mt {
     flavor = "balanced";
@@ -111,7 +111,7 @@
             hold-trigger-on-release;
         };
 
-        // N と I の長押しで Mac 操作の面（第 48 版。I はボールのスクロールから変えた）。「に」「の」のように N の直後に右手のキーを続けて打ったとき、
+        // I の長押しで Mac 操作の面（第 48 版。I はボールのスクロールから変えた。N の長押しは第 49 版で外した）。「に」「の」のように N の直後に右手のキーを続けて打ったとき、
         // N が長押しと判定されて I・O が音量になっていたので、右手のキーが続いたら必ず文字の N にする。
         // 文字を打った直後 0.15 秒以内も必ず N。Mac 操作の面は N を押さえて左手のキーで使う
         nlt: n_layer_tap {
@@ -196,7 +196,7 @@
             bindings = <
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &nlt 3 I   &kp O    &lt 3 P
 &lhs LSHIFT A     &kp S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &urd LS(LG(Z)) LG(Z)               &kp MINUS                     &kp H  &kp J  &kp K  &kp L  &rhs LSHIFT SQT
-&kp Z             &kp X        &kp C        &kp V                   &blt 3 B            &mo 5                 &vbs LG(PERIOD) LG(SLASH)           &nlt 3 N   &kp M  &kp COMMA  &kp DOT  &lt 5 SLASH
+&kp Z             &kp X        &kp C        &kp V                   &blt 3 B            &mo 5                 &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &lt 5 SLASH
 &mo 3             &none       &mo 1          &cmt LCTRL TAB       &tmt LGUI SPACE  &cmt LALT LC(SPACE) &blt 2 ENTER              &blt 1 BACKSPACE                                      &lt 5 DELETE
             >;
 
@@ -223,7 +223,7 @@
             >;
         };
 
-        // Mac 操作・メディアの面（Z の真下を押さえている間か、左の B・右の N・P の長押し）。右手は画面の操作と撮影、左手は音楽・アプリを開くキー・Bluetooth。
+        // Mac 操作・メディアの面（Z の真下を押さえている間か、左の B・右の I・P の長押し）。右手は画面の操作と撮影、左手は音楽・アプリを開くキー・Bluetooth。
         // Bluetooth は X の接続先 1 だけ（第 42 版で接続先 2〜4 と接続を消すキーを外した。撮影のときに誤って押して接続先が切り替わったため）
         // アプリを開くキー（A Notion・S Finder・D Orca（第 43 版で S と D を入れ替え）・F Google Chrome・G Chatwork・G の右隣 LINE）は Control+Option+Command+Shift+1〜6 を送る（Notion 1・Orca 2・Finder 3・LINE 4・Chatwork 5・Chrome 6）。開く設定は Mac 側（BetterTouchTool）で
         // 右手の中の段は外から 左のタブ・左のデスクトップ・Mission Control・右のデスクトップ・右のタブ（' の位置は空き）
