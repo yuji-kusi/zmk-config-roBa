@@ -128,7 +128,7 @@
             require-prior-idle-ms = <150>;
         };
 
-        // 文字キーの長押しでよく使う操作（Q Esc、F Alfred＝Command+Space）。S・X・C・V の長押し（⌘S・⌘X・⌘C・⌘V）は分かりにくいので第 43 版で外した。
+        // 文字キーの長押しでよく使う操作（Q Esc、F Alfred＝Command+Space、第 61 版で W ⌘W・X ⌘X・C ⌘C・V ⌘V を戻した）。S・X・C・V の長押し（⌘S・⌘X・⌘C・⌘V）は分かりにくいので第 43 版で外した。
         // 速打ちで誤って出ないよう、文字を打った直後 0.15 秒以内は必ず文字、長押しは 0.3 秒
         sct: shortcut_tap {
             compatible = "zmk,behavior-hold-tap";
@@ -262,9 +262,9 @@
 
         default_layer {
             bindings = <
-&sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &nlt 5 I   &kp O    &kp P  
+&sct ESC Q        &sct LG(W) W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &nlt 5 I   &kp O    &kp P  
 &kp A             &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &app_switch                        &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &lt 3 SQT      
-&kp Z             &kp X        &kp C        &kp V                   &blt 2 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH  
+&kp Z             &sct LG(X) X        &sct LG(C) C        &sct LG(V) V                   &blt 2 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH  
 &mo 3             &kp LALT        &kp LCTRL          &tmt LGUI SPACE           &cmt LSHIFT TAB          &ekk 5 0       &blt 3 BACKSPACE              &blt 1 ENTER                                              &lt 5 DELETE
             >;
 
@@ -273,13 +273,14 @@
 
         // 数字＋よく使う記号＋矢印の面（第 61 版。右親指の Enter の長押し）。左手は電卓の並び（F が 5、0 は左親指の Space の位置。送るのは上の段の普通の数字＝⌘1 などが確実に効く）。
         // 左: Q *・W +・S -・Z ,・X .・G の右隣 =・B の右隣 %、A は押さえている間 Shift（矢印で範囲を選ぶ）。
+        // 左の下の段（Enter を押さえている間）: X の真下 ×・C の真下 ÷。Control+Option+Command+Shift+- と = を送り、BetterTouchTool が × ÷ の文字を入れる（第 61 版で登録）
         // 右: 上の段 ? ! & | :、H の左隣 #・H @、J ← K ↓ L ↑ ' →、下の段 N の左隣 "（# の下）・N _・M (（← の下）・, )（↓ の下）・. \・/ /
         NUM_SYM {
             bindings = <
 &kp ASTERISK &kp PLUS   &kp N7   &kp N8   &kp N9                                                    &kp QUESTION   &kp EXCLAMATION  &kp AMPERSAND   &kp PIPE      &kp COLON
 &kp LSHIFT   &kp MINUS  &kp N4   &kp N5   &kp N6   &kp EQUAL                    &kp HASH            &kp AT_SIGN    &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW
 &kp COMMA    &kp DOT    &kp N1   &kp N2   &kp N3   &kp PERCENT                  &kp DOUBLE_QUOTES    &kp UNDERSCORE  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp BACKSLASH  &kp SLASH
-&trans       &trans     &trans   &kp N0   &trans   &trans                       &trans              &trans                                                                &trans
+&trans       &kp LC(LA(LG(LS(MINUS))))     &kp LC(LA(LG(LS(EQUAL))))   &kp N0   &trans   &trans                       &trans              &trans                                                                &trans
             >;
         };
 
