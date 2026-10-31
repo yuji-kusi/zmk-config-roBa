@@ -1,0 +1,61 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>roBa 組み替えの案</title><style>:root{--bg:#1e1e1e;--panel:#2c2c2c;--line:#3d3d3d;--text:#e8e8e8;--sub:#a8a8a8;--blue:#1473e6;--blue2:#3b82f6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"Hiragino Sans",sans-serif;line-height:1.55}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:23px;margin:0 0 8px}
+h2{font-size:19px;margin:32px 0 6px;color:var(--blue2)}
+.now{background:#1d3b66;border:1px solid var(--blue2);border-radius:8px;padding:12px 16px;margin:0 0 16px;font-size:17px;font-weight:600;color:#fff}
+.ask{background:#252525;border:2px solid var(--blue);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:16px}
+.note{color:var(--sub);font-size:15px;margin:6px 0}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--sub);margin:8px 0}
+.wrap{overflow-x:auto;padding-bottom:4px}
+.kb{display:grid;grid-template-columns:repeat(6,1fr) 0.5fr repeat(6,1fr);grid-template-rows:repeat(4,64px);gap:5px;min-width:900px;margin:6px 0}
+.key{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:4px 6px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.key .t{font-size:17px;font-weight:600;color:#fff}
+.key .h{font-size:12px;color:#8fb8ff;margin-top:2px}
+.key.num{border-color:#60a5fa}.key.num .t{font-size:20px}
+.key.c5{background:#1d3b66}
+.key.sym{border-color:#34d399}.key.sym .t{font-size:20px}
+.key.arw{border-color:#fbbf24}.key.arw .t{font-size:20px}
+.key.sh{border-color:#fbbf24}.key.sh .h{color:#fcd34d}
+.key.in{border-color:#a78bfa}
+.key.old{border-color:#555}
+.key.th{border-color:var(--blue2);background:#22324a}
+.key.chg{border:2px solid #f87171}
+.key.held{background:#1473e6;border-color:#1473e6}.key.held .h{color:#dbe8ff}
+.key.dim{background:transparent;border-style:dashed}
+.box{background:#252525;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:10px 0;font-size:15px}
+.macwrap .kb{grid-template-rows:repeat(4,minmax(80px,auto))}.macwrap .key .t{font-size:14px;line-height:1.3}.macwrap .key .h{font-size:12px;line-height:1.3}
+</style></head><body><main>
+<div class="now">設計案（まだ書き換えていません）。右親指の Enter の長押しで「数字＋よく使う記号＋矢印」、左の B の長押しで「余った記号＋F キー」、右親指の delete の長押しで Mac 操作の面。</div>
+<h1>roBa 組み替えの案</h1>
+<div class="legend"><span style="color:#93c5fd">青の枠＝数字</span><span style="color:#86efac">緑の枠＝よく使う記号</span><span style="color:#fcd34d">黄の枠＝矢印・Shift</span><span>塗りつぶし＝押さえるキー</span><span>点線＝空き</span></div>
+
+<div class="ask"><b>確かめたいこと（1 問ずつ二択で聞きます）</b><br>
+1. Mac 操作の面の入口：右親指の delete の長押しにする（推奨）／B の長押しのまま残す<br>
+声の「エンターの横にあるのを Mac の操作面に」「B の長押しは余った記号」を、Enter の隣の delete の長押しを Mac 操作の面にする、と読みました。Z の真下・' の長押しからも今まで通り入れます。</div>
+
+<h2>1. Enter の長押し：数字＋よく使う記号＋矢印（今の「数字と F」の面を置き換え）</h2>
+<p class="note">左手は電卓の並び。F の位置が 5 で、その上下左右に 8・2・4・6。0 は左親指の Space の位置（テンキーの 0 と同じく親指）。右手はよく使う記号 12 個と矢印。12 個は全部入りました（? ! &amp; | / # @ ( ) = * %）。</p>
+<div class="wrap"><div class="kb"><div class="key dim" style="grid-column:1;grid-row:1"><span class="t"></span></div><div class="key num" style="grid-column:2;grid-row:1"><span class="t">+</span></div><div class="key num" style="grid-column:3;grid-row:1"><span class="t">7</span></div><div class="key num" style="grid-column:4;grid-row:1"><span class="t">8</span></div><div class="key num" style="grid-column:5;grid-row:1"><span class="t">9</span></div><div class="key sh" style="grid-column:1;grid-row:2"><span class="t">Shift</span><span class="h">押さえる</span></div><div class="key num" style="grid-column:2;grid-row:2"><span class="t">-</span></div><div class="key num" style="grid-column:3;grid-row:2"><span class="t">4</span></div><div class="key num c5" style="grid-column:4;grid-row:2"><span class="t">5</span><span class="h">F の位置＝真ん中</span></div><div class="key num" style="grid-column:5;grid-row:2"><span class="t">6</span></div><div class="key dim" style="grid-column:6;grid-row:2"><span class="t"></span></div><div class="key num" style="grid-column:1;grid-row:3"><span class="t">,</span></div><div class="key num" style="grid-column:2;grid-row:3"><span class="t">.</span></div><div class="key num" style="grid-column:3;grid-row:3"><span class="t">1</span></div><div class="key num" style="grid-column:4;grid-row:3"><span class="t">2</span></div><div class="key num" style="grid-column:5;grid-row:3"><span class="t">3</span></div><div class="key old" style="grid-column:6;grid-row:3"><span class="t">Home</span></div><div class="key num th" style="grid-column:4;grid-row:4"><span class="t">0</span><span class="h">Space の位置</span></div><div class="key th" style="grid-column:8;grid-row:4"><span class="t">delete</span><span class="h">そのまま</span></div><div class="key held" style="grid-column:9;grid-row:4"><span class="t">Enter</span><span class="h">押さえる</span></div><div class="key sym" style="grid-column:9;grid-row:1"><span class="t">?</span></div><div class="key sym" style="grid-column:10;grid-row:1"><span class="t">!</span></div><div class="key sym" style="grid-column:11;grid-row:1"><span class="t">&amp;</span></div><div class="key sym" style="grid-column:12;grid-row:1"><span class="t">|</span></div><div class="key sym" style="grid-column:13;grid-row:1"><span class="t">/</span></div><div class="key sym" style="grid-column:8;grid-row:2"><span class="t">#</span></div><div class="key sym" style="grid-column:9;grid-row:2"><span class="t">@</span></div><div class="key arw" style="grid-column:10;grid-row:2"><span class="t">←</span></div><div class="key arw" style="grid-column:11;grid-row:2"><span class="t">↓</span></div><div class="key arw" style="grid-column:12;grid-row:2"><span class="t">↑</span></div><div class="key arw" style="grid-column:13;grid-row:2"><span class="t">→</span></div><div class="key old" style="grid-column:8;grid-row:3"><span class="t">End</span></div><div class="key sym" style="grid-column:9;grid-row:3"><span class="t">(</span></div><div class="key sym" style="grid-column:10;grid-row:3"><span class="t">)</span></div><div class="key sym" style="grid-column:11;grid-row:3"><span class="t">=</span></div><div class="key sym" style="grid-column:12;grid-row:3"><span class="t">*</span></div><div class="key sym" style="grid-column:13;grid-row:3"><span class="t">%</span></div></div></div>
+<div class="box"><b>並べ方の考え</b><br>
+・右の上の段 ? ! &amp; | は、今の記号の面の左の上の段と同じ順番のまま右手へ移した。/ はその続き。<br>
+・矢印は今と同じ J K L '（← ↓ ↑ →）。A を押さえて矢印で範囲を選べる（今の A の長押し Shift と同じ使い方）。<br>
+・( ) は N M、= * % は , . /。# @ は H の左隣と H。<br>
+・Home・End は今と同じ場所（B の右隣・N の左隣）に残した。<br>
+・delete（中央寄り）はそのまま使えるので、数字を打ち間違えてもすぐ消せる。<br>
+・Space を押さえて Command にしてから Enter を押さえて数字＝ ⌘1〜⌘9（Alfred の履歴）は今まで通り。</div>
+
+<h2>2. B の長押し：余った記号＋F キー（今の「記号と矢印」の面を置き換え）</h2>
+<p class="note">B を左の人差し指で押さえるので、人差し指の列（R F V T G）は空けた。F キーは左の小指〜中指と左親指、記号は右手。</p>
+<div class="wrap"><div class="kb"><div class="key " style="grid-column:1;grid-row:1"><span class="t">F1</span></div><div class="key " style="grid-column:2;grid-row:1"><span class="t">F2</span></div><div class="key " style="grid-column:3;grid-row:1"><span class="t">F3</span></div><div class="key dim" style="grid-column:4;grid-row:1"><span class="t"></span></div><div class="key dim" style="grid-column:5;grid-row:1"><span class="t"></span></div><div class="key " style="grid-column:1;grid-row:2"><span class="t">F4</span></div><div class="key " style="grid-column:2;grid-row:2"><span class="t">F5</span></div><div class="key " style="grid-column:3;grid-row:2"><span class="t">F6</span></div><div class="key dim" style="grid-column:4;grid-row:2"><span class="t"></span></div><div class="key dim" style="grid-column:5;grid-row:2"><span class="t"></span></div><div class="key dim" style="grid-column:6;grid-row:2"><span class="t"></span></div><div class="key " style="grid-column:1;grid-row:3"><span class="t">F7</span><span class="h">カタカナ</span></div><div class="key " style="grid-column:2;grid-row:3"><span class="t">F8</span></div><div class="key " style="grid-column:3;grid-row:3"><span class="t">F9</span></div><div class="key dim" style="grid-column:4;grid-row:3"><span class="t"></span></div><div class="key held" style="grid-column:5;grid-row:3"><span class="t">B</span><span class="h">押さえる</span></div><div class="key dim" style="grid-column:6;grid-row:3"><span class="t"></span></div><div class="key th" style="grid-column:4;grid-row:4"><span class="t">F10</span><span class="h">Space の位置</span></div><div class="key th" style="grid-column:5;grid-row:4"><span class="t">F11</span><span class="h">Tab の位置</span></div><div class="key th" style="grid-column:6;grid-row:4"><span class="t">F12</span><span class="h">英かなの位置</span></div><div class="key sym" style="grid-column:9;grid-row:1"><span class="t">;</span></div><div class="key sym" style="grid-column:10;grid-row:1"><span class="t">`</span></div><div class="key sym" style="grid-column:11;grid-row:1"><span class="t">&quot;</span></div><div class="key sym" style="grid-column:12;grid-row:1"><span class="t">&#x27;</span></div><div class="key sym" style="grid-column:13;grid-row:1"><span class="t">~</span></div><div class="key sym" style="grid-column:8;grid-row:2"><span class="t">_</span></div><div class="key sym" style="grid-column:9;grid-row:2"><span class="t">:</span></div><div class="key sym" style="grid-column:10;grid-row:2"><span class="t">\</span></div><div class="key sym" style="grid-column:11;grid-row:2"><span class="t">^</span></div><div class="key sym" style="grid-column:12;grid-row:2"><span class="t">$</span></div><div class="key dim" style="grid-column:13;grid-row:2"><span class="t"></span></div><div class="key sym" style="grid-column:8;grid-row:3"><span class="t">&lt;</span></div><div class="key sym" style="grid-column:9;grid-row:3"><span class="t">[</span></div><div class="key sym" style="grid-column:10;grid-row:3"><span class="t">]</span></div><div class="key sym" style="grid-column:11;grid-row:3"><span class="t">{</span></div><div class="key sym" style="grid-column:12;grid-row:3"><span class="t">}</span></div><div class="key sym" style="grid-column:13;grid-row:3"><span class="t">&gt;</span></div></div></div>
+<div class="box"><b>この面に移るもの</b>：; ` &quot; &#x27; ~ _ : \ ^ $ &lt; &gt; [ ] { } と F1〜F12。<br>
+<b>外れるもの</b>：+ は 1 の面の W にあるので重複を外した。今の記号の面の A の長押し Shift・前方削除は 1 の面へ（前方削除は右下の角にもある）。</div>
+
+<h2>3. 親指と入口の変わり方（ふだんの面）</h2>
+<p class="note">赤い枠が変わる所。Mac 操作の面の中身は変えません。</p>
+<div class="macwrap"><div class="wrap"><div class="kb"><div class="key th" style="grid-column:1;grid-row:4"><span class="t">Mac 操作の面</span><span class="h">押している間</span></div><div class="key th" style="grid-column:2;grid-row:4"><span class="t">（押さえる）</span><span class="h">Option</span></div><div class="key th" style="grid-column:3;grid-row:4"><span class="t">（押さえる）</span><span class="h">Control</span></div><div class="key th" style="grid-column:4;grid-row:4"><span class="t">Space</span><span class="h">Command</span></div><div class="key th" style="grid-column:5;grid-row:4"><span class="t">Tab</span><span class="h">Shift</span></div><div class="key th" style="grid-column:6;grid-row:4"><span class="t">英かな</span><span class="h">スクロール</span></div><div class="key th chg" style="grid-column:8;grid-row:4"><span class="t">delete</span><span class="h">Mac 操作の面（新）</span></div><div class="key th chg" style="grid-column:9;grid-row:4"><span class="t">Enter</span><span class="h">数字＋記号＋矢印（新）</span></div><div class="key th" style="grid-column:13;grid-row:4"><span class="t">前方削除</span><span class="h">スクロール</span></div><div class="key chg" style="grid-column:5;grid-row:3"><span class="t">B</span><span class="h">余った記号＋F（新）</span></div><div class="key " style="grid-column:6;grid-row:3"><span class="t">取り消し</span><span class="h">やり直し</span></div><div class="key in" style="grid-column:6;grid-row:2"><span class="t">アプリ切替</span><span class="h">第 60 版で入れ済み</span></div><div class="key " style="grid-column:13;grid-row:2"><span class="t">&#x27;</span><span class="h">Mac 操作の面（そのまま）</span></div></div></div></div>
+
+<h2>4. G の右隣のアプリ切替</h2>
+<div class="box">第 60 版ですでに入れて、右側に書き込み済みです（串田さんの確認待ち）。押した瞬間に Command＋Tab でアプリのアイコンが並び、押したまま左親指の Tab で次へ、ボールで合わせても選べて、離すとそのアプリに切り替わります。軽く押すだけなら直前のアプリへ戻ります。今回の組み替えでは触りません。</div>
+</main></body></html>
