@@ -14,6 +14,7 @@
 // 第 52 版: X の真下 Option・C の真下 Control（第 55 版で入れ替え）・左親指は外から Space（長押し Command）・Tab（長押し Mac 操作の面）（第 54 版で軽押しの Space と Tab を入れ替え。長押しは場所のまま）・S の長押し Command+Shift。B と / の長押しは外した（第 51 版）
 // 第 56 版: J の長押し Control・K の長押し Option（右手の 2 役は左手か親指のキーと一緒のときだけ長押しになる＝rhs）
 // 第 57 版: 左親指の Tab の長押しを Shift、B の右隣を押さえている間 Mac 操作の面（前は Shift）、右親指の Enter と delete を長押しごと元に戻す（中央寄り Enter＝記号と矢印、隣 delete＝数字と F）
+// 第 58 版: B の長押しで Mac 操作の面、取り消し・やり直しを G の右隣から B の右隣へ（G の右隣は空き）
 // 入り方: 1 右親指の delete（Backspace）の長押し / 2 右親指の Enter の長押し / 3 Z の真下を押さえている間、または左親指の Tab・右の ' の長押し（第 50 版で P から ' へ）（音声入力のモード切り替え ⌘/ は右手の B の軽押し）
 
 &mt {
@@ -210,8 +211,8 @@
         default_layer {
             bindings = <
 &sct ESC Q        &kp W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &nlt 5 I   &kp O    &kp P  
-&kp A             &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &urd LS(LG(Z)) LG(Z)               &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &lt 3 SQT      
-&kp Z             &kp X        &kp C        &kp V                   &kp B               &mo 3                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH  
+&kp A             &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &none                              &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &lt 3 SQT      
+&kp Z             &kp X        &kp C        &kp V                   &blt 3 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH  
 &mo 3             &kp LALT        &kp LCTRL          &tmt LGUI SPACE           &cmt LSHIFT TAB          &lt 5 LC(SPACE)       &blt 2 ENTER                  &blt 1 BACKSPACE                                          &lt 5 DELETE
             >;
 
