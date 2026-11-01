@@ -19,6 +19,7 @@
 // 第 61 版: 面の組み替え。1 Enter の長押し＝数字（左手に電卓の並び、F が 5、0 は Space の位置）＋よく使う記号＋矢印 / 2 B の長押し＝余った記号と F1〜F12 / 3 delete の長押し＝Mac 操作の面（Z の真下・' の長押しからも）。Home・End は外した。
 // 第 61 版: 英かなは押すたびに かな（LANG1）と 英数（LANG2）を交互に送る（前は Control+Space＝前の入力ソース。続けて押すと全角英字などへ飛んだ）。どちらを送ったかはキーボードが覚える（面 1 の入・切）。ずれたら 1 回余分に押せば合う
 // 第 63 版: P の長押しで Mac 操作の面（' の長押しから移した）、' の長押しは Shift に戻した（rhs＝左手か親指のキーと一緒のときだけ）。Enter の面の / は BetterTouchTool で文字を入れる（かなのままでも半角の / が出る）
+// 第 64 版: 左親指の Space と Tab の軽押しを入れ替え（外から Tab（長押し Command）・Space（長押し Shift）・英かな）。長押しは場所のまま
 // 入り方: 1 右親指の Enter の長押し / 2 左の B の長押し / 3 右親指の delete の長押し、Z の真下を押さえている間、右の P の長押し / 7 かなを送った後（英かなの次の 1 回を英数にするだけ）
 
 &mt {
@@ -266,7 +267,7 @@
 &sct ESC Q        &sct LG(W) W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &nlt 6 I   &kp O    &blt 4 P  
 &kp A             &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &app_switch                        &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &rhs LSHIFT SQT      
 &kp Z             &sct LG(X) X        &sct LG(C) C        &sct LG(V) V                   &blt 3 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH  
-&mo 4             &kp LALT        &kp LCTRL          &tmt LGUI SPACE           &cmt LSHIFT TAB          &ekk 6 0       &blt 4 BACKSPACE              &blt 2 ENTER                                              &lt 6 DELETE
+&mo 4             &kp LALT        &kp LCTRL          &cmt LGUI TAB             &tmt LSHIFT SPACE          &ekk 6 0       &blt 4 BACKSPACE              &blt 2 ENTER                                              &lt 6 DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
