@@ -287,12 +287,13 @@
         // 左: Q *・W +・S -・Z ,・X .・G の右隣 =・B の右隣 %、A は押さえている間 Shift（矢印で範囲を選ぶ）。
         // 左の下の段（Enter を押さえている間）: X の真下 ×・C の真下 ÷。Control+Option+Command+Shift+- と = を送り、BetterTouchTool が × ÷ の文字を入れる（第 61 版で登録）
         // 右: 上の段 ? ! & | :、H の左隣 #・H @、J ← K ↓ L ↑ ' →、下の段 N の左隣 "（# の下）・N _・M (（← の下）・, )（↓ の下）・. \・/ /
+// \ は第 64 版から Control+Option+Command+Shift+\ を送り、BetterTouchTool が半角の \ を入れる（かなのままだと ¥ になっていたため）
 // / は第 63 版から Control+Option+Command+Shift+/ を送り、BetterTouchTool が半角の / を入れる（かなのままだと / が「・」になっていたため）
         NUM_SYM {
             bindings = <
 &kp ASTERISK &kp PLUS   &kp N7   &kp N8   &kp N9                                                    &kp QUESTION   &kp EXCLAMATION  &kp AMPERSAND   &kp PIPE      &kp COLON
 &kp LSHIFT   &kp MINUS  &kp N4   &kp N5   &kp N6   &kp EQUAL                    &kp HASH            &kp AT_SIGN    &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW
-&kp COMMA    &kp DOT    &kp N1   &kp N2   &kp N3   &kp PERCENT                  &kp DOUBLE_QUOTES    &kp UNDERSCORE  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp BACKSLASH  &kp LC(LA(LG(LS(SLASH))))
+&kp COMMA    &kp DOT    &kp N1   &kp N2   &kp N3   &kp PERCENT                  &kp DOUBLE_QUOTES    &kp UNDERSCORE  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp LC(LA(LG(LS(BACKSLASH))))  &kp LC(LA(LG(LS(SLASH))))
 &trans       &kp LC(LA(LG(LS(MINUS))))     &kp LC(LA(LG(LS(EQUAL))))   &kp N0   &trans   &trans                       &trans              &trans                                                                &trans
             >;
         };
