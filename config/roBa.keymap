@@ -87,15 +87,6 @@
     };
 
     behaviors {
-        // ふだんの面の /（第 65 版）: かなのままだと「・」になるので、Control+Option+Command+Shift+/ を送り BetterTouchTool が半角の / を入れる。
-        // Shift を押さえているときは今までどおり ?
-        slh: slash_halfwidth {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp LC(LA(LG(LS(SLASH))))>, <&kp QUESTION>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
         // 英かな（第 61 版、左親指の中央寄り）: 軽押しは かな と 英数 を交互に、長押しはボールでスクロール（前の &lt 6 と同じ）
         ekk: eikana_kana {
             compatible = "zmk,behavior-hold-tap";
@@ -275,7 +266,7 @@
             bindings = <
 &sct ESC Q        &sct LG(W) W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U  &nlt 6 I   &kp O    &blt 4 P  
 &kp A             &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &app_switch                        &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &rhs LSHIFT SQT      
-&kp Z             &sct LG(X) X        &sct LG(C) C        &sct LG(V) V                   &blt 3 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &slh  
+&kp Z             &sct LG(X) X        &sct LG(C) C        &sct LG(V) V                   &blt 3 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH  
 &mo 4             &kp LALT        &kp LCTRL          &cmt LGUI TAB             &tmt LSHIFT SPACE          &ekk 6 0       &blt 4 BACKSPACE              &blt 2 ENTER                                              &lt 6 DELETE
             >;
 
@@ -297,12 +288,12 @@
         // 左の下の段（Enter を押さえている間）: X の真下 ×・C の真下 ÷。Control+Option+Command+Shift+- と = を送り、BetterTouchTool が × ÷ の文字を入れる（第 61 版で登録）
         // 右: 上の段 ? ! & | :、H の左隣 #・H @、J ← K ↓ L ↑ ' →、下の段 N の左隣 "（# の下）・N _・M (（← の下）・, )（↓ の下）・. \・/ /
 // \ は第 64 版から Control+Option+Command+Shift+\ を送り、BetterTouchTool が半角の \ を入れる（かなのままだと ¥ になっていたため）
-// / は第 63 版から Control+Option+Command+Shift+/ を送り、BetterTouchTool が半角の / を入れる（かなのままだと / が「・」になっていたため）
+// / は第 66 版から Control+Option+Command+Shift+; を送り（第 63 版の +/ は BetterTouchTool に届かなかった。ふだんの / は元のまま＝かなでは「・」）、BetterTouchTool が半角の / を入れる（かなのままだと / が「・」になっていたため）
         NUM_SYM {
             bindings = <
 &kp ASTERISK &kp PLUS   &kp N7   &kp N8   &kp N9                                                    &kp QUESTION   &kp EXCLAMATION  &kp AMPERSAND   &kp PIPE      &kp COLON
 &kp LSHIFT   &kp MINUS  &kp N4   &kp N5   &kp N6   &kp EQUAL                    &kp HASH            &kp AT_SIGN    &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW
-&kp COMMA    &kp DOT    &kp N1   &kp N2   &kp N3   &kp PERCENT                  &kp DOUBLE_QUOTES    &kp UNDERSCORE  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp LC(LA(LG(LS(BACKSLASH))))  &kp LC(LA(LG(LS(SLASH))))
+&kp COMMA    &kp DOT    &kp N1   &kp N2   &kp N3   &kp PERCENT                  &kp DOUBLE_QUOTES    &kp UNDERSCORE  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp LC(LA(LG(LS(BACKSLASH))))  &kp LC(LA(LG(LS(SEMICOLON))))
 &trans       &kp LC(LA(LG(LS(MINUS))))     &kp LC(LA(LG(LS(EQUAL))))   &kp N0   &trans   &trans                       &trans              &trans                                                                &trans
             >;
         };
