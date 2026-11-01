@@ -87,12 +87,13 @@
         };
 
         // 第 67 版: Alfred を開いた後に打つ文字（B の長押しの面の H cw・J bm・K cal・L fna・' ls。半角小文字、Enter は付けない。私用）
+        // かなのままだと cal が「かl」になったので、先に英数（LANG2）を送り、英かなの記憶（面 1）も切る（次の英かなは かな を送る）
         str_bm: str_bm {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <0>;
             tap-ms = <10>;
-            bindings = <&macro_tap &kp B &kp M>;
+            bindings = <&macro_tap &kp LANG2 &tog_off 1>, <&macro_wait_time 30>, <&macro_tap &kp B &kp M>;
         };
 
         str_cal: str_cal {
@@ -100,7 +101,7 @@
             #binding-cells = <0>;
             wait-ms = <0>;
             tap-ms = <10>;
-            bindings = <&macro_tap &kp C &kp A &kp L>;
+            bindings = <&macro_tap &kp LANG2 &tog_off 1>, <&macro_wait_time 30>, <&macro_tap &kp C &kp A &kp L>;
         };
 
         str_fna: str_fna {
@@ -108,7 +109,7 @@
             #binding-cells = <0>;
             wait-ms = <0>;
             tap-ms = <10>;
-            bindings = <&macro_tap &kp F &kp N &kp A>;
+            bindings = <&macro_tap &kp LANG2 &tog_off 1>, <&macro_wait_time 30>, <&macro_tap &kp F &kp N &kp A>;
         };
 
         str_cw: str_cw {
@@ -116,7 +117,7 @@
             #binding-cells = <0>;
             wait-ms = <0>;
             tap-ms = <10>;
-            bindings = <&macro_tap &kp C &kp W>;
+            bindings = <&macro_tap &kp LANG2 &tog_off 1>, <&macro_wait_time 30>, <&macro_tap &kp C &kp W>;
         };
 
         str_ls: str_ls {
@@ -124,11 +125,18 @@
             #binding-cells = <0>;
             wait-ms = <0>;
             tap-ms = <10>;
-            bindings = <&macro_tap &kp L &kp S>;
+            bindings = <&macro_tap &kp LANG2 &tog_off 1>, <&macro_wait_time 30>, <&macro_tap &kp L &kp S>;
         };
     };
 
     behaviors {
+        // 面を必ず切る（押すたびに入れ替えではなく、切るだけ）。Alfred 用の文字の前に英かなの記憶を「英数」にそろえる
+        tog_off: toggle_layer_off {
+            compatible = "zmk,behavior-toggle-layer";
+            #binding-cells = <1>;
+            toggle-mode = "off";
+        };
+
         // 英かな（第 61 版、左親指の中央寄り）: 軽押しは かな と 英数 を交互に、長押しはボールでスクロール（前の &lt 6 と同じ）
         ekk: eikana_kana {
             compatible = "zmk,behavior-hold-tap";
