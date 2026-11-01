@@ -20,6 +20,7 @@
 // 第 61 版: 英かなは押すたびに かな（LANG1）と 英数（LANG2）を交互に送る（前は Control+Space＝前の入力ソース。続けて押すと全角英字などへ飛んだ）。どちらを送ったかはキーボードが覚える（面 1 の入・切）。ずれたら 1 回余分に押せば合う
 // 第 63 版: P の長押しで Mac 操作の面（' の長押しから移した）、' の長押しは Shift に戻した（rhs＝左手か親指のキーと一緒のときだけ）。Enter の面の / は BetterTouchTool で文字を入れる（かなのままでも半角の / が出る）
 // 第 64 版: 左親指の Space と Tab の軽押しを入れ替え（外から Tab（長押し Command）・Space（長押し Shift）・英かな）。長押しは場所のまま
+// 第 69 版: B の長押しの面の W に ToDo 登録（Alfred を開いて「td 」まで打つ）
 // 第 67 版: I の長押しをスクロールから Mac 操作の面に（左手のキーと一緒のときだけ）。B の長押しの面の H J K L ' に Alfred 用の文字、$ は H の左隣へ
 // 入り方: 1 右親指の Enter の長押し / 2 左の B の長押し / 3 右親指の delete の長押し、Z の真下を押さえている間、右の P の長押し / 7 かなを送った後（英かなの次の 1 回を英数にするだけ）
 
@@ -126,6 +127,14 @@
             wait-ms = <0>;
             tap-ms = <10>;
             bindings = <&macro_tap &kp LANG2 &tog_off 1>, <&macro_wait_time 30>, <&macro_tap &kp L &kp S>;
+        };
+        // 第 69 版: ToDo 登録（B の長押しの面の W）。英数にそろえてから Alfred（Command+Space）を開き、開くのを待って「td 」まで打つ（Enter は付けない。私用）
+        str_td: str_td {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <10>;
+            bindings = <&macro_tap &kp LANG2 &tog_off 1>, <&macro_wait_time 30>, <&macro_tap &kp LG(SPACE)>, <&macro_wait_time 300>, <&macro_tap &kp LANG2>, <&macro_wait_time 30>, <&macro_tap &kp T &kp D &kp SPACE>;
         };
     };
 
@@ -349,10 +358,10 @@
         };
 
         // 余った記号と F キーの面（第 61 版。左の B の長押し）。Enter の面にある記号（: _ \ " など）は置かない。
-        // 左: F キーは Enter の面の数字と同じ場所（F が F5、E R T が F7 F8 F9、D G が F4 F6、C V が F1 F2）。B は押さえるので F3 は B の右隣。F10 は Space、F11 は Tab の位置、F12 は G の右隣（F6 の右）。右: 記号は間を空けずに詰める（上の段 ; ` ' ~ ^、H の左隣 $（第 67 版で H から移した）、下の段 { [ ] < > }＝第 68 版で < > と { } を入れ替え）。H J K L ' は第 67 版から文字 cw・bm・cal・fna・ls（Alfred 用）
+        // 左: F キーは Enter の面の数字と同じ場所（F が F5、E R T が F7 F8 F9、D G が F4 F6、C V が F1 F2）。B は押さえるので F3 は B の右隣。F10 は Space、F11 は Tab の位置、F12 は G の右隣（F6 の右）。右: 記号は間を空けずに詰める（上の段 ; ` ' ~ ^、H の左隣 $（第 67 版で H から移した）、下の段 { [ ] < > }＝第 68 版で < > と { } を入れ替え）。H J K L ' は第 67 版から文字 cw・bm・cal・fna・ls（Alfred 用）。W は第 69 版から ToDo 登録（Alfred を開いて td まで打つ）
         SYM_F {
             bindings = <
-&none    &none    &kp F7   &kp F8   &kp F9                                                &kp SEMICOLON  &kp GRAVE         &kp SINGLE_QUOTE   &kp TILDE         &kp CARET
+&none    &str_td  &kp F7   &kp F8   &kp F9                                                &kp SEMICOLON  &kp GRAVE         &kp SINGLE_QUOTE   &kp TILDE         &kp CARET
 &none    &none    &kp F4   &kp F5   &kp F6   &kp F12                 &kp DOLLAR           &str_cw        &str_bm           &str_cal           &str_fna          &str_ls
 &none    &none    &kp F1   &kp F2   &trans   &kp F3                  &kp LEFT_BRACE       &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LESS_THAN   &kp GREATER_THAN &kp RIGHT_BRACE
 &trans   &trans   &trans   &kp F10  &kp F11  &trans                  &trans               &trans                                                                       &trans
