@@ -72,7 +72,7 @@
         };
 
         // アプリ切替（第 60 版、G の右隣）: 押した瞬間に Command を押さえて Tab を 1 回 → アプリのアイコンが並ぶ。
-        // 押している間は Command を押さえたまま（左親指の Tab で次のアプリ、Tab の長押し Shift と一緒に Tab で前へ、ボールでアイコンに合わせても選べる）。
+        // 押している間は Command を押さえたまま（左親指の Tab で次のアプリ、英かなの長押し Shift と一緒に Tab で前へ、ボールでアイコンに合わせても選べる）。
         // 離すと Command も離れて、選んだアプリに切り替わる。軽く押すだけなら直前のアプリへ。
         // 第 31 版の tri-state（&kt で Command を押しっぱなしにする作り）は Command が押されたまま残ったので使わない。押す・離すがキーの押す・離すと必ず対になる作り
         app_switch: app_switch {
@@ -196,11 +196,11 @@
             toggle-mode = "off";
         };
 
-        // 英かな（第 61 版、左親指の中央寄り）: 軽押しは かな と 英数 を交互に、長押しはボールでスクロール（前の &lt 6 と同じ）
+        // 英かな（第 61 版、左親指の中央寄り）: 軽押しは かな と 英数 を交互に、長押しは Shift（第 71 版。前はボールでスクロール）
         ekk: eikana_kana {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            bindings = <&mo>, <&to_kana>;
+            bindings = <&kp>, <&to_kana>;
             flavor = "balanced";
             tapping-term-ms = <200>;
             quick-tap-ms = <0>;
@@ -209,7 +209,7 @@
         eke: eikana_eisu {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            bindings = <&mo>, <&to_eisu>;
+            bindings = <&kp>, <&to_eisu>;
             flavor = "balanced";
             tapping-term-ms = <200>;
             quick-tap-ms = <0>;
@@ -278,7 +278,7 @@
             hold-trigger-on-release;
         };
 
-        // I の長押しで Mac 操作の面（第 67 版。前はボールのスクロール）（第 55 版で Mac 操作の面からスクロールに戻した。N の長押しは第 49 版で外した）。「に」「の」のように N の直後に右手のキーを続けて打ったとき、
+        // I の長押しでボールのスクロール（第 71 版で戻した。第 67〜70 版は Mac 操作の面）（第 55 版で Mac 操作の面からスクロールに戻した。N の長押しは第 49 版で外した）。「に」「の」のように N の直後に右手のキーを続けて打ったとき、
         // N が長押しと判定されて I・O が音量になっていたので、右手のキーが続いたら必ず文字の N にする。
         // 文字を打った直後 0.15 秒以内も必ず N。Mac 操作の面は N を押さえて左手のキーで使う
         nlt: n_layer_tap {
@@ -317,6 +317,17 @@
             quick-tap-ms = <150>;
             require-prior-idle-ms = <150>;
             retro-tap;
+        };
+
+        // 左親指のいちばん外の Tab（第 71 版）: 長押しでボールのスクロール（面 6）。押さえてボールを動かし、何も打たずに離しても Tab は出さない（retro-tap なし）。
+        // 軽押しのすぐ後の押し続けは Tab の連続
+        tsc: tab_scroll {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&mo>, <&kp>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
         };
 
         // 左親指のいちばん端（軽押し Tab・長押し Control）と中央寄り（軽押し 英かな・長押し Option）。
@@ -373,10 +384,10 @@
 
         default_layer {
             bindings = <
-&sct ESC Q        &sct LG(W) W     &kp E     &kp R              &kp T                                                                   &kp Y      &sct DOLLAR U  &nlt 4 I   &kp O    &blt 4 P  
-&kp A             &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &app_switch                        &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &rhs LSHIFT SQT      
+&sct ESC Q        &sct LG(W) W     &kp E     &kp R              &kp T                                                                   &kp Y      &sct DOLLAR U  &nlt 6 I   &kp O    &blt 4 P  
+&sct LG(A) A      &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &app_switch                        &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &rhs LSHIFT SQT      
 &kp Z             &sct LG(X) X        &sct LG(C) C        &sct LG(V) V                   &blt 3 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH  
-&mo 4             &kp LALT        &kp LCTRL          &cmt LGUI TAB             &tmt LSHIFT SPACE          &ekk 6 0       &blt 4 BACKSPACE              &blt 2 ENTER                                              &lt 6 DELETE
+&mo 4             &kp LALT        &kp LCTRL          &tsc 6 TAB                &tmt LGUI SPACE            &ekk LSHIFT 0       &blt 4 BACKSPACE              &blt 2 ENTER                                              &lt 6 DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
@@ -388,7 +399,7 @@
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &eke 6 0    &trans  &trans                          &trans
+&trans  &trans  &trans  &trans  &trans  &eke LSHIFT 0    &trans  &trans                          &trans
             >;
         };
 
