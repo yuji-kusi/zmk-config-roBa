@@ -179,13 +179,6 @@
             bindings = <&macro_tap &kp LANG2 &tog_off 1>, <&macro_wait_time 30>, <&macro_tap &kp LG(SPACE)>, <&macro_wait_time 300>, <&macro_tap &kp LANG2>, <&macro_wait_time 30>, <&macro_tap &kp G &kp C &kp SPACE>;
         };
 
-        str_meet: str_meet {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <0>;
-            tap-ms = <10>;
-            bindings = <&macro_tap &kp LANG2 &tog_off 1>, <&macro_wait_time 30>, <&macro_tap &kp LG(SPACE)>, <&macro_wait_time 300>, <&macro_tap &kp LANG2>, <&macro_wait_time 30>, <&macro_tap &kp M &kp E &kp E &kp T &kp SPACE>;
-        };
     };
 
     behaviors {
@@ -431,14 +424,15 @@
 
         // Mac 操作・メディアの面（Z の真下を押さえている間か、左の B・右の I・' の長押し）。右手は画面の操作と撮影、左手は音楽・アプリを開くキー・Bluetooth。
         // Bluetooth は X の接続先 1 だけ（第 42 版で接続先 2〜4 と接続を消すキーを外した。撮影のときに誤って押して接続先が切り替わったため）
-        // アプリを開くキー（A Notion・S Finder・D Orca（第 43 版で S と D を入れ替え）・F Google Chrome・G Chatwork・G の右隣 LINE）は Control+Option+Command+Shift+1〜6 を送る（Notion 1・Orca 2・Finder 3・LINE 4・Chatwork 5・Chrome 6）。開く設定は Mac 側（BetterTouchTool）で
+        // 第 72 版: A Google カレンダー（Control+Option+Command+C）、Notion は E へ（Meet は外した）。
+        // アプリを開くキー（E Notion・S Finder・D Orca（第 43 版で S と D を入れ替え）・F Google Chrome・G Chatwork・G の右隣 LINE）は Control+Option+Command+Shift+1〜6 を送る（Notion 1・Orca 2・Finder 3・LINE 4・Chatwork 5・Chrome 6）。開く設定は Mac 側（BetterTouchTool）で
         // 右手の中の段は外から 左のタブ・左のデスクトップ・Mission Control・右のデスクトップ・右のタブ（' の位置は空き）
         // 左の下の段はウィンドウ操作（第 45 版）: Z 最小化 Cmd+M、C 左半分・V 最大化・B 右半分は Control+Option+Command+Shift+8・9・0 を BetterTouchTool で（第 46 版で Rectangle から移した。C の Control+Option+← が届かなかったため）
         // 撮影は CleanShot の設定に合わせる（第 52 版で読み直した: N 範囲 Control+Cmd+A、M 全画面 Control+Cmd+F、, 画面の文字 Control+Cmd+T、/ 撮影メニュー Control+Cmd+O）。. の CleanShot の履歴は Control+Option+Command+Shift+7 を BetterTouchTool で cleanshot://open-history に
         MAC_MEDIA {
             bindings = <
-&none   &none         &str_meet     &kp LA(S)     &kp LG(H)                                         &kp C_BRI_DN       &kp C_BRI_UP        &kp C_VOL_DN      &kp C_VOL_UP         &kp C_MUTE
-&kp LC(LA(LG(LS(N1))))  &kp LC(LA(LG(LS(N3))))  &kp LC(LA(LG(LS(N2))))  &kp LC(LA(LG(LS(N6))))  &kp LC(LA(LG(LS(N5))))  &kp LC(LA(LG(LS(N4))))  &kp LC(LS(TAB))    &kp LC(LEFT_ARROW) &kp LC(UP_ARROW)  &kp LC(RIGHT_ARROW)  &kp LC(TAB)  &none
+&none   &none         &kp LC(LA(LG(LS(N1))))  &kp LA(S)     &kp LG(H)                                         &kp C_BRI_DN       &kp C_BRI_UP        &kp C_VOL_DN      &kp C_VOL_UP         &kp C_MUTE
+&kp LC(LA(LG(C)))       &kp LC(LA(LG(LS(N3))))  &kp LC(LA(LG(LS(N2))))  &kp LC(LA(LG(LS(N6))))  &kp LC(LA(LG(LS(N5))))  &kp LC(LA(LG(LS(N4))))  &kp LC(LS(TAB))    &kp LC(LEFT_ARROW) &kp LC(UP_ARROW)  &kp LC(RIGHT_ARROW)  &kp LC(TAB)  &none
 &kp LG(M)  &bt BT_SEL 0  &kp LC(LA(LG(LS(N8))))  &kp LC(LA(LG(LS(N9))))  &kp LC(LA(LG(LS(N0))))  &none          &kp LA(LS(LG(V)))  &kp LC(LG(A))      &kp LC(LG(F))       &kp LC(LG(T))     &kp LC(LA(LG(LS(N7))))  &kp LC(LG(O)) 
 &trans  &trans        &trans        &trans        &trans        &trans         &trans             &trans                                                                   &trans
             >;
