@@ -380,7 +380,7 @@
 &sct ESC Q        &sct LG(W) W     &kp E     &kp R              &kp T                                                                   &kp Y      &sct DOLLAR U  &nlt 6 I   &kp O    &blt 4 P  
 &sct LG(A) A      &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &app_switch                        &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &rhs LSHIFT SQT      
 &kp Z             &sct LG(X) X        &sct LG(C) C        &sct LG(V) V                   &blt 3 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &tap_once SLASH  
-&mo 4             &kp LALT        &kp LCTRL          &tsc 6 TAB                &tmt LGUI SPACE            &ekk LSHIFT 0       &blt 4 BACKSPACE              &blt 2 ENTER                                              &lt 6 DELETE
+&mo 6             &kp LALT        &kp LCTRL          &tsc 6 TAB                &tmt LGUI SPACE            &ekk LSHIFT 0       &blt 4 BACKSPACE              &blt 2 ENTER                                              &lt 6 DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
@@ -422,7 +422,7 @@
             >;
         };
 
-        // Mac 操作・メディアの面（Z の真下を押さえている間か、左の B・右の I・' の長押し）。右手は画面の操作と撮影、左手は音楽・アプリを開くキー・Bluetooth。
+        // Mac 操作・メディアの面（右の P・delete の長押し。Z の真下は第 73 版でスクロールに変えた）。右手は画面の操作と撮影、左手は音楽・アプリを開くキー・Bluetooth。
         // Bluetooth は X の接続先 1 だけ（第 42 版で接続先 2〜4 と接続を消すキーを外した。撮影のときに誤って押して接続先が切り替わったため）
         // 第 72 版: A Google カレンダー（Control+Option+Command+C）、Notion は E へ（Meet は外した）。
         // アプリを開くキー（E Notion・S Finder・D Orca（第 43 版で S と D を入れ替え）・F Google Chrome・G Chatwork・G の右隣 LINE）は Control+Option+Command+Shift+1〜6 を送る（Notion 1・Orca 2・Finder 3・LINE 4・Chatwork 5・Chrome 6）。開く設定は Mac 側（BetterTouchTool）で
@@ -448,15 +448,15 @@
             >;
         };
 
-        // スクロールの面（I・N・/ か右下の角を押さえている間。ボールでスクロール）。
+        // スクロールの面（Z の真下（第 73 版で Mac 操作の面から変更）・Tab・I・右下の角を押さえている間。ボールでスクロール）。
         // 押さえている間は J 左クリック（押さえている間ボールがゆっくり）・L 右クリックが時間切れなしで使える。
-        // マウスキー: 左手の E S D F でカーソルを ↑ ← ↓ →、R で上へ・V で下へスクロール（Mac のナチュラルなスクロールに合わせて SCRL_DOWN・SCRL_UP を逆に割り当て）。U 左クリック、O 右クリック
+        // マウスキー: 左手の E S D F でカーソルを ↑ ← ↓ →、R で上へ・V で下へスクロール（Mac のナチュラルなスクロールに合わせて SCRL_DOWN・SCRL_UP を逆に割り当て）。第 73 版: X で左へ・C で右へ（同じく SCRL_RIGHT・SCRL_LEFT を逆に。向きは実機で未確認）。U 左クリック、O 右クリック
         // 拡大・縮小（タッチパッドのピンチの代わり）: T 拡大 Command+=、G 縮小 Command+-、B 元の大きさ Command+0
         SCROLL {
             bindings = <
 &trans  &trans          &mmv MOVE_UP    &msc SCRL_DOWN   &kp LG(EQUAL)               &trans  &mkp MB1  &trans    &mkp MB2  &trans
 &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &kp LG(MINUS)  &trans      &trans  &trans  &slow_drag  &trans    &mkp MB2  &trans
-&trans  &trans          &trans          &msc SCRL_UP     &kp LG(N0)     &trans      &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &msc SCRL_RIGHT  &msc SCRL_LEFT  &msc SCRL_UP     &kp LG(N0)     &trans      &trans  &trans  &trans    &trans    &trans    &trans
 &trans  &trans          &trans          &trans           &trans  &trans      &trans  &trans                                &trans
             >;
         };
