@@ -386,7 +386,7 @@
             bindings = <
 &sct ESC Q        &sct LG(W) W     &kp E     &kp R              &kp T                                                                   &kp Y      &sct DOLLAR U  &nlt 6 I   &kp O    &blt 4 P  
 &sct LG(A) A      &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &app_switch                        &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &rhs LSHIFT SQT      
-&kp Z             &sct LG(X) X        &sct LG(C) C        &sct LG(V) V                   &blt 3 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &kp SLASH  
+&kp Z             &sct LG(X) X        &sct LG(C) C        &sct LG(V) V                   &blt 3 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &tap_once SLASH  
 &mo 4             &kp LALT        &kp LCTRL          &tsc 6 TAB                &tmt LGUI SPACE            &ekk LSHIFT 0       &blt 4 BACKSPACE              &blt 2 ENTER                                              &lt 6 DELETE
             >;
 
