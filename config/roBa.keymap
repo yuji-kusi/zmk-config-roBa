@@ -432,7 +432,7 @@
         MAC_MEDIA {
             bindings = <
 &none   &none         &kp LC(LA(LG(LS(N1))))  &kp LA(S)     &kp LG(H)                                         &kp C_BRI_DN       &kp C_BRI_UP        &kp C_VOL_DN      &kp C_VOL_UP         &kp C_MUTE
-&kp LC(LA(LG(C)))       &kp LC(LA(LG(LS(F))))   &kp LC(LA(LG(LS(N2))))  &kp LC(LA(LG(LS(N6))))  &kp LC(LA(LG(LS(N5))))  &kp LC(LA(LG(LS(N4))))  &kp LC(LS(TAB))    &kp LC(LEFT_ARROW) &kp LC(UP_ARROW)  &kp LC(RIGHT_ARROW)  &kp LC(TAB)  &none
+&kp LC(LA(LG(LS(C))))   &kp LC(LA(LG(LS(F))))   &kp LC(LA(LG(LS(N2))))  &kp LC(LA(LG(LS(N6))))  &kp LC(LA(LG(LS(N5))))  &kp LC(LA(LG(LS(N4))))  &kp LC(LS(TAB))    &kp LC(LEFT_ARROW) &kp LC(UP_ARROW)  &kp LC(RIGHT_ARROW)  &kp LC(TAB)  &none
 &kp LG(M)  &bt BT_SEL 0  &kp LC(LA(LG(LS(N8))))  &kp LC(LA(LG(LS(N9))))  &kp LC(LA(LG(LS(N0))))  &none          &kp LA(LS(LG(V)))  &kp LC(LG(A))      &kp LC(LG(F))       &kp LC(LG(T))     &kp LC(LA(LG(LS(N7))))  &kp LC(LG(O)) 
 &trans  &trans        &trans        &trans        &trans        &trans         &trans             &trans                                                                   &trans
             >;
