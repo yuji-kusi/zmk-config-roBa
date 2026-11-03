@@ -8,11 +8,14 @@ py="$(command -v python3)"
 [[ -x /opt/homebrew/bin/python3 ]] && py=/opt/homebrew/bin/python3
 [[ -n "$py" ]] || py=/usr/bin/python3
 
-if ! page="$("$py" "$here/make_keymap_page.py" 2>>"$log")"; then
-  echo "$(date '+%F %T') 図を作れなかった（上の行が理由）" >>"$log"
+err="$(mktemp)"
+if ! page="$("$py" "$here/make_keymap_page.py" 2>"$err")"; then
+  { echo "$(date '+%F %T') 図を作れなかった:"; cat "$err"; } >>"$log"
+  rm -f "$err"
   osascript -e 'display notification "理由は ~/Library/Logs/roba-keymap-page.log" with title "キーマップの図を作れませんでした"'
   exit 1
 fi
+rm -f "$err"
 url="$("$py" -c 'import sys,pathlib,unicodedata;print(pathlib.Path(unicodedata.normalize("NFC",sys.argv[1])).as_uri())' "$page")"
 
 found="$(osascript - "$url" <<'OSA' 2>/dev/null
