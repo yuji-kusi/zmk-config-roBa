@@ -8,8 +8,8 @@
 import html
 import json
 import re
+import subprocess
 import sys
-from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -26,12 +26,16 @@ SHOW = [
     ("SCROLL", "スクロール（押さえてボール）"),
     ("MOUSE", "マウス（ボールを動かした後 1.5 秒）"),
 ]
-LAYER_INDEX = {"default_layer": 0, "EIKANA": 1, "NUM_SYM": 2, "SYM_F": 3,
-               "MAC_MEDIA": 4, "MOUSE": 5, "SCROLL": 6, "SLOW_DRAG": 7}
-LAYER_SHORT = {1: "英かな", 2: "数字記号", 3: "記号F", 4: "Mac操作", 5: "マウス", 6: "スクロール", 7: "ゆっくり"}
+HIDE = {"EIKANA", "SLOW_DRAG"}
+# 長押しの表示に使う面の短い名前（keymap の面の名前 → 短い名前）。ここに無い面は keymap の名前のまま出す
+SHORT = {"EIKANA": "英かな", "NUM_SYM": "数字記号", "SYM_F": "記号F", "MAC_MEDIA": "Mac操作",
+         "MOUSE": "マウス", "SCROLL": "スクロール", "SLOW_DRAG": "ゆっくり"}
+LAYER_ORDER = []  # 面の番号 → 面の名前（keymap に書かれた順。main で埋める）
 
 KEYNAME = {
-    "SPACE": "Space", "TAB": "Tab", "ENTER": "Enter", "RET": "Enter", "BACKSPACE": "delete",
+    "SPACE": "Space", "SPC": "Space", "BSPC": "delete", "DEL": "前方削除", "LEFT_SHIFT": "Shift",
+    "RALT": "Option", "RCTRL": "Control", "RGUI": "Command", "LEFT_ALT": "Option", "LEFT_CONTROL": "Control",
+    "LEFT_GUI": "Command", "LCMD": "Command", "TAB": "Tab", "ENTER": "Enter", "RET": "Enter", "BACKSPACE": "delete",
     "DELETE": "前方削除", "ESC": "Esc", "ESCAPE": "Esc", "MINUS": "-", "EQUAL": "=", "PLUS": "+",
     "SQT": "'", "SINGLE_QUOTE": "'", "DOUBLE_QUOTES": '"', "COMMA": ",", "DOT": ".", "PERIOD": ".",
     "SLASH": "/", "BACKSLASH": "\\", "SEMICOLON": ";", "COLON": ":", "GRAVE": "`", "TILDE": "~",
@@ -60,7 +64,7 @@ MEANING = {
     "⌃⇧Tab": "左のタブ", "⌃Tab": "右のタブ", "⌃←": "左のデスクトップ", "⌃→": "右のデスクトップ",
     "⌃↑": "Mission Control", "⌘M": "最小化", "⌘Space": "Alfred",
     "⌘Z": "取り消し", "⇧⌘Z": "やり直し", "⌘/": "声のモード", "⌘.": "音声入力",
-    "⌘=": "拡大", "⌘-": "縮小", "⌘0": "元の大きさ", "⌃⌘": "⌃⌘", "⇧⌘S": "⇧⌘S",
+    "⌘=": "拡大", "⌘-": "縮小", "⌘0": "元の大きさ",
 }
 
 
@@ -88,16 +92,6 @@ def key_label(code: str) -> str:
     return MEANING.get(text, text)
 
 
-def plain(code: str) -> str:
-    """意味に置き換えない、キーそのものの書き方（⌃⌥⇧⌘C など）"""
-    saved = dict(MEANING)
-    MEANING.clear()
-    try:
-        return key_label(code)
-    finally:
-        MEANING.update(saved)
-
-
 def hold_label(code: str) -> str:
     if code in ("LSHIFT", "RSHIFT"):
         return "Shift"
@@ -111,7 +105,11 @@ def hold_label(code: str) -> str:
 
 
 def layer_name(n: str) -> str:
-    return LAYER_SHORT.get(int(n), f"面 {n}")
+    """面の番号（数字でなければ #define の名前のまま）を短い名前にする"""
+    if n.isdigit() and int(n) < len(LAYER_ORDER):
+        name = LAYER_ORDER[int(n)]
+        return SHORT.get(name, name)
+    return f"面 {n}"
 
 
 def split_bindings(text: str):
@@ -154,9 +152,9 @@ def describe(binding: str):
     if name == "app_switch":
         return "アプリ切替", "", "key"
     if name.startswith("str_"):
-        return name[4:], "Alfred", "alfred"
+        return name[4:], "", "alfred"
     if name == "slow_drag":
-        return "左クリック", "ゆっくり", "mouse"
+        return "左クリック", "", "mouse"
     if name == "mkp" and args:
         return {"MB1": "左クリック", "MB2": "右クリック", "MB3": "中クリック"}.get(args[0], args[0]), "", "mouse"
     if name == "mmv" and args:
@@ -165,20 +163,29 @@ def describe(binding: str):
     if name == "msc" and args:
         # Mac のナチュラルなスクロールに合わせて逆に割り当てているので、実際に動く向きで出す
         return {"SCRL_DOWN": "上へ送る", "SCRL_UP": "下へ送る", "SCRL_RIGHT": "左へ送る",
-                "SCRL_LEFT": "右へ送る"}.get(args[0], args[0]), "スクロール", "mouse"
+                "SCRL_LEFT": "右へ送る"}.get(args[0], args[0]), "", "mouse"
     if name == "bt" and args:
         if args[0] == "BT_SEL" and len(args) > 1:
-            return f"BT {int(args[1]) + 1}", "接続先", "key"
-        return " ".join(args), "Bluetooth", "key"
+            return (f"BT {int(args[1]) + 1}" if args[1].isdigit() else f"BT {args[1]}"), "", "key"
+        return " ".join(args), "", "key"
     return binding.lstrip("&"), "", "key"
 
 
 def read_layers(src: str):
+    """keymap { ... } の中の面を、書かれた順に {面の名前: [キー…]} で返す。
+    display-name などが bindings より先にあっても読む。<…>, <…> と分けて書いても 1 本につなぐ"""
+    src = re.sub(r"/\*.*?\*/", "", src, flags=re.S)
     src = re.sub(r"//[^\n]*", "", src)
-    km = src[src.index("keymap {"):]
+    m = re.search(r"\bkeymap\s*\{", src)
+    if not m:
+        raise SystemExit("keymap { が見つからない")
+    km = src[m.end():]
     layers = {}
-    for m in re.finditer(r"(\w+)\s*\{\s*bindings\s*=\s*<(.*?)>;", km, re.S):
-        layers[m.group(1)] = split_bindings(m.group(2))
+    for lm in re.finditer(r"(\w+)\s*\{([^{}]*)\}", km):
+        bm = re.search(r"\bbindings\s*=\s*((?:<[^>]*>\s*,?\s*)+);", lm.group(2))
+        if bm:
+            body = " ".join(re.findall(r"<([^>]*)>", bm.group(1)))
+            layers[lm.group(1)] = split_bindings(body)
     return layers
 
 
@@ -188,7 +195,7 @@ def entry_keys(base, layer_no):
     for i, b in enumerate(base):
         p = b.split()
         n = p[0][1:]
-        if n in ("mo", "nlt", "blt", "tsc", "tlt", "lt") and len(p) > 1 and p[1] == str(layer_no):
+        if n in ("mo", "nlt", "blt", "tsc", "tlt", "lt", "sl", "to") and len(p) > 1 and p[1] == str(layer_no):
             out.add(i)
     return out
 
@@ -205,17 +212,18 @@ def render_board(bindings, base, layout, held):
         b = bindings[i] if i < len(bindings) else "&none"
         tap, hold, kind = describe(b)
         ghost = ""
-        if kind == "trans":
-            bt, bh, _ = describe(base[i]) if base is not bindings else ("", "", "")
-            ghost = bt
+        if kind == "trans" and base is not bindings:
+            ghost = describe(base[i] if i < len(base) else "&none")[0]
         cls = f"k {kind}"
         if i in held:
-            cls += " held"
-            if not tap or kind == "trans":
-                tap, ghost = ghost or "押さえる", ""
-            hold = "押さえる"
+            if kind in ("trans", "none"):  # 押さえているだけのキー
+                cls += " held"
+                tap, ghost, hold = ghost or "押さえる", "", "押さえる"
+            else:  # 別の入口からこの面に入ったときは、このキーが働く
+                cls += " held2"
+                hold = "ここでも入る"
         style = f"left:{k['x'] * unit:.1f}px;top:{k['y'] * unit:.1f}px;width:{unit - gap}px;height:{unit - gap}px;"
-        if "r" in k:
+        if "r" in k and "rx" in k and "ry" in k:
             ox = (k["rx"] - k["x"]) * unit
             oy = (k["ry"] - k["y"]) * unit
             style += f"transform-origin:{ox:.1f}px {oy:.1f}px;transform:rotate({k['r']}deg);"
@@ -235,15 +243,33 @@ def main():
     src = KEYMAP.read_text(encoding="utf-8")
     layout = json.loads(LAYOUT.read_text(encoding="utf-8"))["layouts"]["default_layout"]["layout"]
     layers = read_layers(src)
-    base = layers["default_layer"]
-    mtime = datetime.fromtimestamp(KEYMAP.stat().st_mtime).strftime("%Y-%m-%d %H:%M")
+    if not layers:
+        raise SystemExit("keymap に面が見つからない")
+    LAYER_ORDER[:] = list(layers)
+    base_name = LAYER_ORDER[0]  # いちばん上に書いた面がふだんの面
+    base = layers[base_name]
+    try:
+        mtime = subprocess.run(["git", "-C", str(ROOT), "log", "-1", "--format=%cd", "--date=format:%Y-%m-%d %H:%M",
+                                "--", "config/roBa.keymap"], capture_output=True, text=True).stdout.strip()
+    except OSError:
+        mtime = ""
+    dirty = subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain", "--", "config/roBa.keymap"],
+                           capture_output=True, text=True).stdout.strip()
+    when = f"{mtime} のコミット" if mtime else "日時不明"
+    if dirty:
+        when += "＋まだコミットしていない書き換え"
+    warns = []
+    titles = dict(SHOW)
+    order = [k for k, _ in SHOW if k in layers] + [k for k in layers if k not in titles and k not in HIDE]
     sections = []
-    for key, title in SHOW:
-        if key not in layers:
-            continue
-        held = set() if key == "default_layer" else entry_keys(base, LAYER_INDEX.get(key, -1))
+    for key in order:
+        if len(layers[key]) != len(layout):
+            warns.append(f"{key} の面はキーが {len(layers[key])} 個（配置は {len(layout)} 個）。図がずれている")
+        held = set() if key == base_name else entry_keys(base, LAYER_ORDER.index(key))
         board = render_board(layers[key], base, layout, held)
+        title = titles.get(key, key)
         sections.append(f'<section><h2>{html.escape(title)}</h2>{board}</section>')
+    warn_html = "".join(f'<p class="warn">{html.escape(w)}</p>' for w in warns)
     page = f"""<!doctype html><html lang="ja"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>roBa 今のキーマップ</title>
 <style>
@@ -260,22 +286,26 @@ h2{{font-size:17px;margin:26px 0 8px;color:var(--blue2)}}
 .board{{position:relative;margin:0 auto}}
 .k{{position:absolute;background:var(--panel);border:1px solid var(--line);border-radius:8px;display:flex;flex-direction:column;
   justify-content:center;align-items:center;text-align:center;padding:2px 3px;overflow:hidden}}
-.k .t{{font-size:15px;font-weight:600;color:#fff;line-height:1.15;word-break:break-all}}
+.k .t{{font-size:15px;font-weight:600;color:#fff;line-height:1.15;overflow-wrap:anywhere}}
 .k .t.s{{font-size:11px}}
 .k .h{{font-size:10px;color:#8fb8ff;margin-top:2px;line-height:1.1}}
 .k .g{{font-size:11px;color:#5c5c5c}}
 .k.trans{{background:transparent;border-style:dashed;border-color:#333}}
 .k.none{{background:transparent;border-style:dotted;border-color:#444}}
-.k.layer{{border-color:#a78bfa}}.k.layer .h{{color:#c4b5fd}}
-.k.alfred{{border-color:#34d399}}.k.alfred .h{{color:#6ee7b7}}
-.k.mouse{{border-color:#fbbf24}}.k.mouse .h{{color:#fcd34d}}
+.k.layer{{border:2px solid var(--blue2)}}
+.k.alfred{{background:#22324a;border-color:#2f4a70}}
+.k.mouse{{border:2px dashed #93c5fd}}
 .k.held{{background:var(--blue);border-color:var(--blue);border-style:solid}}.k.held .h{{color:#dbe8ff}}.k.held .t{{color:#fff}}
+.k.held2{{border:2px solid var(--blue);box-shadow:inset 0 0 0 2px #1473e655}}.k.held2 .h{{color:#93c5fd}}
+.warn{{background:#3a2424;border:1px solid #a14b4b;border-radius:6px;padding:8px 12px;font-size:14px;margin:8px 0}}
 </style></head><body><main>
 <h1>roBa 今のキーマップ</h1>
-<p class="meta">config/roBa.keymap（{mtime} 更新）から作った図。上の段が軽く押したとき、小さい字が長押し。キーに指を乗せると keymap の書き方が出る。</p>
-<div class="legend"><span><i style="border-color:#a78bfa"></i>長押しで面に入る</span><span><i style="border-color:#34d399"></i>Alfred の言葉</span>
-<span><i style="border-color:#fbbf24"></i>マウス・スクロール</span><span><i style="background:#1473e6;border-color:#1473e6"></i>その面に入るために押さえるキー</span>
+<p class="meta">config/roBa.keymap（{when}）から、呼び出したときに作った図。大きい字が軽く押したとき、小さい字が長押し。キーに指を乗せると keymap の書き方が出る。スクロールの向きは Mac のナチュラルなスクロールを前提にした表示（左右は実機で未確認）。</p>
+<div class="legend"><span><i style="border-color:#3b82f6"></i>長押しで面に入る</span><span><i style="background:#22324a;border-color:#2f4a70"></i>Alfred の言葉（Alfred を開いて打つ）</span>
+<span><i style="border-color:#93c5fd;border-style:dashed"></i>マウス・スクロール</span><span><i style="background:#1473e6;border-color:#1473e6"></i>その面に入るために押さえるキー</span>
+<span><i style="border-color:#1473e6"></i>そのキーでも入れる（別の入口から入ったときは書いてある働き）</span>
 <span><i style="border-color:#444;border-style:dashed"></i>ふだんの面のまま（薄い字）</span></div>
+{warn_html}
 {''.join(sections)}
 </main></body></html>
 """
