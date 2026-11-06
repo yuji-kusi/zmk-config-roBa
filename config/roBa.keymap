@@ -361,18 +361,6 @@
 
         // 長押しで面に入るキー（第 61 版）: 右親指の Enter で数字＋よく使う記号＋矢印、左の B で余った記号と F キー、右親指の delete（Backspace）で Mac 操作の面。
         // 長押しして何も打たずに離しても delete・Enter・B は出さない（文字を消さない・誤って送信しない）。文字を打った直後 0.15 秒以内は必ず軽押し
-        // F（第 74 版）: 軽押し f・長押しで Alfred の面（面 8）。F の長押しで Alfred（⌘Space）を開く役はやめた（Alfred の面のキーが自分で Alfred を開く）。
-        // 速打ちで誤って入らないよう、文字を打った直後 0.15 秒以内は必ず f、長押しは 0.3 秒（前の sct と同じ）
-        flt: f_layer_tap {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            bindings = <&mo>, <&tap_once>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <300>;
-            quick-tap-ms = <175>;
-            require-prior-idle-ms = <150>;
-        };
-
         blt: right_layer_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -384,13 +372,26 @@
         };
     };
 
+    // 第 74 版: D と F をほぼ同時（0.05 秒以内）に押して離すと、次に押す 1 つだけ Alfred の面（&sl 8）。
+    // 文字を打った直後 0.15 秒以内は同時押しとみなさない（ローマ字の速打ち対策）。ふだんの面と英かなの面でだけ効く
+    combos {
+        compatible = "zmk,combos";
+        combo_alfred {
+            timeout-ms = <50>;
+            key-positions = <12 13>;
+            bindings = <&sl 8>;
+            require-prior-idle-ms = <150>;
+            layers = <0 1>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             bindings = <
 &sct ESC Q        &sct LG(W) W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U          &nlt 6 I   &kp O    &blt 4 P  
-&sct LG(A) A      &ghm LG(LSHIFT) S         &lhs LC(LALT) D &flt 8 F                          &ghm LC(LGUI) G                   &app_switch                        &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &rhs LSHIFT SQT      
+&sct LG(A) A      &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &app_switch                        &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &rhs LSHIFT SQT      
 &kp Z             &sct LG(X) X        &sct LG(C) C        &sct LG(V) V                   &blt 3 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &tap_once SLASH  
 &mo 6             &kp LALT        &kp LCTRL          &tsc 6 TAB                &tmt LGUI SPACE            &ekk LSHIFT 0       &blt 4 BACKSPACE              &blt 2 ENTER                                              &lt 6 DELETE
             >;
@@ -441,12 +442,12 @@
         // アプリを開くキー（E Notion・S Finder・D Orca（第 43 版で S と D を入れ替え）・F Google Chrome・G Chatwork・G の右隣 LINE）は Control+Option+Command+Shift+1〜6 を送る（Notion 1・Orca 2・Finder 3・LINE 4・Chatwork 5・Chrome 6）。開く設定は Mac 側（BetterTouchTool）で
         // 右手の中の段は外から 左のタブ・左のデスクトップ・Mission Control・右のデスクトップ・右のタブ（' の位置は空き）
         // 左の下の段はウィンドウ操作（第 45 版）: Z 最小化 Cmd+M、C 左半分・V 最大化・B 右半分は Control+Option+Command+Shift+8・9・0 を BetterTouchTool で（第 46 版で Rectangle から移した。C の Control+Option+← が届かなかったため）
-        // 撮影は CleanShot の設定に合わせる（第 52 版で読み直した: N 範囲 Control+Cmd+A、M 全画面 Control+Cmd+F、, 画面の文字 Control+Cmd+T、/ 撮影メニュー Control+Cmd+O）。. の CleanShot の履歴は Control+Option+Command+Shift+7 を BetterTouchTool で cleanshot://open-history に
+        // 撮影の履歴は第 74 版から Control+Command+H（CleanShot のホットキー。G の長押し＋H で開くのを串田さんが確認。Hyper+7 の BetterTouchTool 経由は開かなかった）。撮影は CleanShot の設定に合わせる（第 52 版で読み直した: N 範囲 Control+Cmd+A、M 全画面 Control+Cmd+F、, 画面の文字 Control+Cmd+T、/ 撮影メニュー Control+Cmd+O）。. の CleanShot の履歴は Control+Option+Command+Shift+7 を BetterTouchTool で cleanshot://open-history に
         MAC_MEDIA {
             bindings = <
 &none   &none         &kp LC(LA(LG(LS(N1))))  &kp LA(S)     &kp LG(H)                                         &kp C_BRI_DN       &kp C_BRI_UP        &kp C_VOL_DN      &kp C_VOL_UP         &kp C_MUTE
 &kp LC(LA(LG(LS(C))))   &kp LC(LA(LG(LS(F))))   &kp LC(LA(LG(LS(N2))))  &kp LC(LA(LG(LS(N6))))  &kp LC(LA(LG(LS(N5))))  &kp LC(LA(LG(LS(N4))))  &kp LC(LS(TAB))    &kp LC(LEFT_ARROW) &kp LC(UP_ARROW)  &kp LC(RIGHT_ARROW)  &kp LC(TAB)  &none
-&kp LA(LS(LG(V)))  &kp LC(LG(A))      &kp LC(LG(F))       &kp LC(LG(T))     &kp LC(LA(LG(LS(N7))))  &kp LC(LG(O))          &kp LG(M)  &bt BT_SEL 0  &kp LC(LA(LG(LS(N8))))  &kp LC(LA(LG(LS(N9))))  &kp LC(LA(LG(LS(N0))))  &none 
+&kp LA(LS(LG(V)))  &kp LC(LG(A))      &kp LC(LG(F))       &kp LC(LG(T))     &kp LC(LG(H))           &kp LC(LG(O))          &kp LG(M)  &bt BT_SEL 0  &kp LC(LA(LG(LS(N8))))  &kp LC(LA(LG(LS(N9))))  &kp LC(LA(LG(LS(N0))))  &none 
 &trans  &trans        &trans        &trans        &trans        &trans         &trans             &trans                                                                   &trans
             >;
         };
@@ -484,9 +485,9 @@
             >;
         };
 
-        // Alfred の面（第 74 版。F の長押し、面 8）。B の長押しの面にあった Alfred 用の文字マクロを同じ場所のまま移した。
+        // Alfred の面（第 74 版。D と F の同時押し（上の combos）、面 8）。B の長押しの面にあった Alfred 用の文字マクロを同じ場所のまま移した。
         // 左: Q sp・W spn・A dq・S dqn・Z gc、右: H の左隣 fna・H cw・J bm・K cal・L ls・' td。ほかのキーは下の面のまま。
-        // いちばん上に置くが、F を押さえている間だけなのでボールのスクロールの判定には響かない
+        // いちばん上に置くが、同時押しの後の 1 キーの間だけなのでボールのスクロールの判定には響かない
         ALFRED {
             bindings = <
 &str_sp  &str_spn &trans   &trans   &trans                                &trans   &trans   &trans   &trans   &trans

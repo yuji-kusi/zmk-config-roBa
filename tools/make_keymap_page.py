@@ -22,7 +22,7 @@ SHOW = [
     ("default_layer", "ふだんの面"),
     ("NUM_SYM", "数字・よく使う記号・矢印（Enter の長押し）"),
     ("SYM_F", "余った記号・F キー（B の長押し）"),
-    ("ALFRED", "Alfred（F の長押し）"),
+    ("ALFRED", "Alfred（D と F の同時押し → 次の 1 キー）"),
     ("MAC_MEDIA", "Mac 操作・メディア（P・delete の長押し）"),
     ("SCROLL", "スクロール（押さえてボール）"),
     ("MOUSE", "マウス（ボールを動かした後 1.5 秒）"),
@@ -58,7 +58,7 @@ MOD_ORDER = "⌃⌥⇧⌘"
 MEANING = {
     "⌃⌥⇧⌘1": "Notion", "⌃⌥⇧⌘2": "Orca", "⌃⌥⇧⌘F": "Finder", "⌃⌥⇧⌘4": "LINE",
     "⌃⌥⇧⌘5": "Chatwork", "⌃⌥⇧⌘6": "Chrome", "⌃⌥⇧⌘C": "Google カレンダー",
-    "⌃⌥⇧⌘7": "撮影の履歴", "⌃⌥⇧⌘8": "窓を左半分", "⌃⌥⇧⌘9": "窓を最大化", "⌃⌥⇧⌘0": "窓を右半分",
+    "⌃⌘H": "撮影の履歴", "⌃⌥⇧⌘8": "窓を左半分", "⌃⌥⇧⌘9": "窓を最大化", "⌃⌥⇧⌘0": "窓を右半分",
     "⌃⌥⇧⌘-": "×", "⌃⌥⇧⌘=": "÷", "⌃⌥⇧⌘\\": "\\（半角）", "⌃⌥⇧⌘;": "/（半角）",
     "⌃⌘A": "範囲を撮影", "⌃⌘F": "全画面を撮影", "⌃⌘T": "画面の文字を写す", "⌃⌘O": "撮影メニュー",
     "⌥S": "スニペット", "⌘H": "クリップボード履歴", "⌥⇧⌘V": "書式なしで貼る",
@@ -132,7 +132,7 @@ def describe(binding: str):
     parts = binding.split()
     name, args = parts[0][1:], parts[1:]
     hold_tap_kp = {"sct", "ghm", "lhs", "rhs", "tmt", "cmt", "vbs", "urd", "ekk", "eke", "mt"}
-    hold_tap_layer = {"nlt", "blt", "tsc", "tlt", "lt", "flt"}
+    hold_tap_layer = {"nlt", "blt", "tsc", "tlt", "lt"}
     if name == "trans":
         return "", "", "trans"
     if name == "none":
@@ -196,7 +196,7 @@ def entry_keys(base, layer_no):
     for i, b in enumerate(base):
         p = b.split()
         n = p[0][1:]
-        if n in ("mo", "nlt", "blt", "tsc", "tlt", "lt", "flt", "sl", "to") and len(p) > 1 and p[1] == str(layer_no):
+        if n in ("mo", "nlt", "blt", "tsc", "tlt", "lt", "sl", "to") and len(p) > 1 and p[1] == str(layer_no):
             out.add(i)
     return out
 
