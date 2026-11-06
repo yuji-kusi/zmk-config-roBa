@@ -472,11 +472,12 @@
         // 右手の中の段は外から 左のタブ・左のデスクトップ・Mission Control・右のデスクトップ・右のタブ（' の位置は空き）
         // 左の下の段はウィンドウ操作（第 45 版）: Z 最小化 Cmd+M、C 左半分・V 最大化・B 右半分は Control+Option+Command+Shift+8・9・0 を BetterTouchTool で（第 46 版で Rectangle から移した。C の Control+Option+← が届かなかったため）
         // 撮影の履歴は第 74 版から Control+Command+H（CleanShot のホットキー。G の長押し＋H で開くのを串田さんが確認。Hyper+7 の BetterTouchTool 経由は開かなかった）。撮影は CleanShot の設定に合わせる（第 52 版で読み直した: N 範囲 Control+Cmd+A、M 全画面 Control+Cmd+F、, 画面の文字 Control+Cmd+T、/ 撮影メニュー Control+Cmd+O）。. の CleanShot の履歴は Control+Option+Command+Shift+7 を BetterTouchTool で cleanshot://open-history に
+        // 第 77 版: 左の下の段を Z 撮影メニュー・X 画面の文字・C 範囲・V 全画面・B 撮影の履歴（そのまま）・G の右隣 書式なしで貼る に（串田さんの画像の矢印。範囲→全画面の場所、全画面→画面の文字の場所、画面の文字→範囲の場所、書式なしで貼ると撮影メニューを入れ替え）
         MAC_MEDIA {
             bindings = <
 &none   &none         &kp LC(LA(LG(LS(N1))))  &kp LA(S)     &kp LG(H)                                         &kp C_BRI_DN       &kp C_BRI_UP        &kp C_VOL_DN      &kp C_VOL_UP         &kp C_MUTE
 &kp LC(LA(LG(LS(C))))   &kp LC(LA(LG(LS(F))))   &kp LC(LA(LG(LS(N2))))  &kp LC(LA(LG(LS(N6))))  &kp LC(LA(LG(LS(N5))))  &kp LC(LA(LG(LS(N4))))  &kp LC(LS(TAB))    &kp LC(LEFT_ARROW) &kp LC(UP_ARROW)  &kp LC(RIGHT_ARROW)  &kp LC(TAB)  &none
-&kp LA(LS(LG(V)))  &kp LC(LG(A))      &kp LC(LG(F))       &kp LC(LG(T))     &kp LC(LG(H))           &kp LC(LG(O))          &none      &kp LC(LA(LG(LS(N8))))  &kp LC(LA(LG(LS(N9))))  &kp LC(LA(LG(LS(N0))))  &kp LG(M)  &none 
+&kp LC(LG(O))      &kp LC(LG(T))      &kp LC(LG(A))       &kp LC(LG(F))     &kp LC(LG(H))           &kp LA(LS(LG(V)))      &none      &kp LC(LA(LG(LS(N8))))  &kp LC(LA(LG(LS(N9))))  &kp LC(LA(LG(LS(N0))))  &kp LG(M)  &none 
 &trans  &trans        &trans        &trans        &trans        &trans         &trans             &trans                                                                   &trans
             >;
         };
