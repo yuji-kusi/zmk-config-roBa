@@ -361,6 +361,18 @@
 
         // 長押しで面に入るキー（第 61 版）: 右親指の Enter で数字＋よく使う記号＋矢印、左の B で余った記号と F キー、右親指の delete（Backspace）で Mac 操作の面。
         // 長押しして何も打たずに離しても delete・Enter・B は出さない（文字を消さない・誤って送信しない）。文字を打った直後 0.15 秒以内は必ず軽押し
+        // F（第 74 版）: 軽押し f・長押しで Alfred の面（面 8）。F の長押しで Alfred（⌘Space）を開く役はやめた（Alfred の面のキーが自分で Alfred を開く）。
+        // 速打ちで誤って入らないよう、文字を打った直後 0.15 秒以内は必ず f、長押しは 0.3 秒（前の sct と同じ）
+        flt: f_layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&mo>, <&tap_once>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <300>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+        };
+
         blt: right_layer_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -377,8 +389,8 @@
 
         default_layer {
             bindings = <
-&sct ESC Q        &sct LG(W) W     &kp E     &kp R              &kp T                                                                   &kp Y      &sct DOLLAR U  &nlt 6 I   &kp O    &blt 4 P  
-&sct LG(A) A      &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &app_switch                        &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &rhs LSHIFT SQT      
+&sct ESC Q        &sct LG(W) W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U          &nlt 6 I   &kp O    &blt 4 P  
+&sct LG(A) A      &ghm LG(LSHIFT) S         &lhs LC(LALT) D &flt 8 F                          &ghm LC(LGUI) G                   &app_switch                        &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &rhs LSHIFT SQT      
 &kp Z             &sct LG(X) X        &sct LG(C) C        &sct LG(V) V                   &blt 3 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &tap_once SLASH  
 &mo 6             &kp LALT        &kp LCTRL          &tsc 6 TAB                &tmt LGUI SPACE            &ekk LSHIFT 0       &blt 4 BACKSPACE              &blt 2 ENTER                                              &lt 6 DELETE
             >;
@@ -399,30 +411,31 @@
         // 数字＋よく使う記号＋矢印の面（第 61 版。右親指の Enter の長押し）。左手は電卓の並び（F が 5、0 は左親指の Space の位置。送るのは上の段の普通の数字＝⌘1 などが確実に効く）。
         // 左: Q *・W +・S -・Z ,・X .・G の右隣 =・B の右隣 %、A は押さえている間 Shift（矢印で範囲を選ぶ）。
         // 左の下の段（Enter を押さえている間）: X の真下 ×・C の真下 ÷。Control+Option+Command+Shift+- と = を送り、BetterTouchTool が × ÷ の文字を入れる（第 61 版で登録）
-        // 右: 上の段 ? ! & | :、H の左隣 #・H @、J ← K ↓ L ↑ ' →、下の段 N の左隣 "（# の下）・N _・M (（← の下）・, )（↓ の下）・. \・/ /
+        // 右: 上の段 & | ? ! :（第 74 版で ? ! & | から並べ替え）、H の左隣 #・H @、J ← K ↓ L ↑ ' →、下の段 N の左隣 "（# の下）・N _・M (（← の下）・, )（↓ の下）・. \・/ /
 // \ は第 64 版から Control+Option+Command+Shift+\ を送り、BetterTouchTool が半角の \ を入れる（かなのままだと ¥ になっていたため）
 // / は第 66 版から Control+Option+Command+Shift+; を送り（第 63 版の +/ は BetterTouchTool に届かなかった。ふだんの / は元のまま＝かなでは「・」）、BetterTouchTool が半角の / を入れる（かなのままだと / が「・」になっていたため）
         NUM_SYM {
             bindings = <
-&kp ASTERISK &kp PLUS   &kp N7   &kp N8   &kp N9                                                    &kp QUESTION   &kp EXCLAMATION  &kp AMPERSAND   &kp PIPE      &kp COLON
+&kp ASTERISK &kp PLUS   &kp N7   &kp N8   &kp N9                                                    &kp AMPERSAND  &kp PIPE         &kp QUESTION    &kp EXCLAMATION  &kp COLON
 &kp LSHIFT   &kp MINUS  &kp N4   &kp N5   &kp N6   &kp EQUAL                    &kp HASH            &kp AT_SIGN    &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW
 &kp COMMA    &kp DOT    &kp N1   &kp N2   &kp N3   &kp PERCENT                  &kp DOUBLE_QUOTES    &kp UNDERSCORE  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp LC(LA(LG(LS(BACKSLASH))))  &kp LC(LA(LG(LS(SEMICOLON))))
 &trans       &kp LC(LA(LG(LS(MINUS))))     &kp LC(LA(LG(LS(EQUAL))))   &kp N0   &trans   &trans                       &trans              &trans                                                                &trans
             >;
         };
 
-        // 余った記号と F キーの面（第 61 版。左の B の長押し）。Enter の面にある記号（: _ \ " など）は置かない。
+        // 余った記号と F キーの面（第 61 版。左の B の長押し）。第 74 版: Alfred 用の文字マクロは F の長押しの Alfred の面へ移し、$ を H の左隣に戻した（U の長押しの $ は外した）。Enter の面にある記号（: _ \ " など）は置かない。
         // 左: F キーは Enter の面の数字と同じ場所（F が F5、E R T が F7 F8 F9、D G が F4 F6、C V が F1 F2）。B は押さえるので F3 は B の右隣。F10 は Space、F11 は Tab の位置、F12 は G の右隣（F6 の右）。右: 記号は間を空けずに詰める（上の段 ; ` ' ~ ^、H の左隣 $（第 67 版で H から移した）、下の段 { [ ] < > }＝第 68 版で < > と { } を入れ替え）。H J K L ' は第 67 版から文字 cw・bm・cal・fna・ls（Alfred 用）。第 69 版で H の左隣 fna・H cw・J bm・K cal・L ls・' td（ToDo 登録）に並べ替え、$ はふだんの面の U の長押しへ
         SYM_F {
             bindings = <
-&str_sp  &str_spn &kp F7   &kp F8   &kp F9                                                &kp SEMICOLON  &kp GRAVE         &kp SINGLE_QUOTE   &kp TILDE         &kp CARET
-&str_dq  &str_dqn &kp F4   &kp F5   &kp F6   &kp F12                 &str_fna             &str_cw        &str_bm           &str_cal           &str_ls           &str_td
-&str_gc  &none    &kp F1   &kp F2   &trans   &kp F3                  &kp LEFT_BRACE       &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LESS_THAN   &kp GREATER_THAN &kp RIGHT_BRACE
+&none    &none    &kp F7   &kp F8   &kp F9                                                &kp SEMICOLON  &kp GRAVE         &kp SINGLE_QUOTE   &kp TILDE         &kp CARET
+&none    &none    &kp F4   &kp F5   &kp F6   &kp F12                 &kp DOLLAR           &none          &none             &none              &none             &none
+&none    &none    &kp F1   &kp F2   &trans   &kp F3                  &kp LEFT_BRACE       &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LESS_THAN   &kp GREATER_THAN &kp RIGHT_BRACE
 &trans   &trans   &trans   &kp F10  &kp F11  &trans                  &trans               &trans                                                                       &trans
             >;
         };
 
         // Mac 操作・メディアの面（右の P・delete の長押し。Z の真下は第 73 版でスクロールに変えた）。右手は画面の操作と撮影、左手は音楽・アプリを開くキー・Bluetooth。
+        // 第 74 版: 下の段の左 6 つ（最小化・BT 1・窓の左半分・最大化・右半分・空き）と右 6 つ（書式なしで貼る・撮影 4 つ・撮影メニュー）を並び順のまま入れ替えた（下の説明の左右はそれ以前のもの）
         // Bluetooth は X の接続先 1 だけ（第 42 版で接続先 2〜4 と接続を消すキーを外した。撮影のときに誤って押して接続先が切り替わったため）
         // 第 72 版: A Google カレンダー（Control+Option+Command+C）、Notion は E へ（Meet は外した）。
         // アプリを開くキー（E Notion・S Finder・D Orca（第 43 版で S と D を入れ替え）・F Google Chrome・G Chatwork・G の右隣 LINE）は Control+Option+Command+Shift+1〜6 を送る（Notion 1・Orca 2・Finder 3・LINE 4・Chatwork 5・Chrome 6）。開く設定は Mac 側（BetterTouchTool）で
@@ -433,7 +446,7 @@
             bindings = <
 &none   &none         &kp LC(LA(LG(LS(N1))))  &kp LA(S)     &kp LG(H)                                         &kp C_BRI_DN       &kp C_BRI_UP        &kp C_VOL_DN      &kp C_VOL_UP         &kp C_MUTE
 &kp LC(LA(LG(LS(C))))   &kp LC(LA(LG(LS(F))))   &kp LC(LA(LG(LS(N2))))  &kp LC(LA(LG(LS(N6))))  &kp LC(LA(LG(LS(N5))))  &kp LC(LA(LG(LS(N4))))  &kp LC(LS(TAB))    &kp LC(LEFT_ARROW) &kp LC(UP_ARROW)  &kp LC(RIGHT_ARROW)  &kp LC(TAB)  &none
-&kp LG(M)  &bt BT_SEL 0  &kp LC(LA(LG(LS(N8))))  &kp LC(LA(LG(LS(N9))))  &kp LC(LA(LG(LS(N0))))  &none          &kp LA(LS(LG(V)))  &kp LC(LG(A))      &kp LC(LG(F))       &kp LC(LG(T))     &kp LC(LA(LG(LS(N7))))  &kp LC(LG(O)) 
+&kp LA(LS(LG(V)))  &kp LC(LG(A))      &kp LC(LG(F))       &kp LC(LG(T))     &kp LC(LA(LG(LS(N7))))  &kp LC(LG(O))          &kp LG(M)  &bt BT_SEL 0  &kp LC(LA(LG(LS(N8))))  &kp LC(LA(LG(LS(N9))))  &kp LC(LA(LG(LS(N0))))  &none 
 &trans  &trans        &trans        &trans        &trans        &trans         &trans             &trans                                                                   &trans
             >;
         };
@@ -471,6 +484,16 @@
             >;
         };
 
-
+        // Alfred の面（第 74 版。F の長押し、面 8）。B の長押しの面にあった Alfred 用の文字マクロを同じ場所のまま移した。
+        // 左: Q sp・W spn・A dq・S dqn・Z gc、右: H の左隣 fna・H cw・J bm・K cal・L ls・' td。ほかのキーは下の面のまま。
+        // いちばん上に置くが、F を押さえている間だけなのでボールのスクロールの判定には響かない
+        ALFRED {
+            bindings = <
+&str_sp  &str_spn &trans   &trans   &trans                                &trans   &trans   &trans   &trans   &trans
+&str_dq  &str_dqn &trans   &trans   &trans   &trans          &str_fna     &str_cw  &str_bm  &str_cal &str_ls  &str_td
+&str_gc  &trans   &trans   &trans   &trans   &trans          &trans       &trans   &trans   &trans   &trans   &trans
+&trans   &trans   &trans   &trans   &trans   &trans          &trans       &trans                              &trans
+            >;
+        };
     };
 };

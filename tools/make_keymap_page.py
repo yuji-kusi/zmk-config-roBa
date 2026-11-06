@@ -21,7 +21,8 @@ OUT = ROOT / "docs" / "今のキーマップ.html"
 SHOW = [
     ("default_layer", "ふだんの面"),
     ("NUM_SYM", "数字・よく使う記号・矢印（Enter の長押し）"),
-    ("SYM_F", "余った記号・F キー・Alfred（B の長押し）"),
+    ("SYM_F", "余った記号・F キー（B の長押し）"),
+    ("ALFRED", "Alfred（F の長押し）"),
     ("MAC_MEDIA", "Mac 操作・メディア（P・delete の長押し）"),
     ("SCROLL", "スクロール（押さえてボール）"),
     ("MOUSE", "マウス（ボールを動かした後 1.5 秒）"),
@@ -29,7 +30,7 @@ SHOW = [
 HIDE = {"EIKANA", "SLOW_DRAG"}
 # 長押しの表示に使う面の短い名前（keymap の面の名前 → 短い名前）。ここに無い面は keymap の名前のまま出す
 SHORT = {"EIKANA": "英かな", "NUM_SYM": "数字記号", "SYM_F": "記号F", "MAC_MEDIA": "Mac操作",
-         "MOUSE": "マウス", "SCROLL": "スクロール", "SLOW_DRAG": "ゆっくり"}
+         "MOUSE": "マウス", "SCROLL": "スクロール", "SLOW_DRAG": "ゆっくり", "ALFRED": "Alfred"}
 LAYER_ORDER = []  # 面の番号 → 面の名前（keymap に書かれた順。main で埋める）
 
 KEYNAME = {
@@ -131,7 +132,7 @@ def describe(binding: str):
     parts = binding.split()
     name, args = parts[0][1:], parts[1:]
     hold_tap_kp = {"sct", "ghm", "lhs", "rhs", "tmt", "cmt", "vbs", "urd", "ekk", "eke", "mt"}
-    hold_tap_layer = {"nlt", "blt", "tsc", "tlt", "lt"}
+    hold_tap_layer = {"nlt", "blt", "tsc", "tlt", "lt", "flt"}
     if name == "trans":
         return "", "", "trans"
     if name == "none":
@@ -195,7 +196,7 @@ def entry_keys(base, layer_no):
     for i, b in enumerate(base):
         p = b.split()
         n = p[0][1:]
-        if n in ("mo", "nlt", "blt", "tsc", "tlt", "lt", "sl", "to") and len(p) > 1 and p[1] == str(layer_no):
+        if n in ("mo", "nlt", "blt", "tsc", "tlt", "lt", "flt", "sl", "to") and len(p) > 1 and p[1] == str(layer_no):
             out.add(i)
     return out
 
