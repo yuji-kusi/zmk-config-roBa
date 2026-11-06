@@ -143,6 +143,8 @@ def describe(binding: str):
         return key_label(args[0]), "", "key"
     if name in hold_tap_layer and len(args) >= 2:
         return key_label(args[1]), layer_name(args[0]), "layer"
+    if name in ("ekk", "eke") and len(args) >= 2:
+        return "英かな", layer_name(args[0]), "layer"
     if name in hold_tap_kp and len(args) >= 2:
         tap = "英かな" if name in ("ekk", "eke") else key_label(args[1])
         return tap, hold_label(args[0]), "hold"
@@ -198,7 +200,7 @@ def entry_keys(base, layer_no):
     for i, b in enumerate(base):
         p = b.split()
         n = p[0][1:]
-        if n in ("mo", "nlt", "blt", "tsc", "tlt", "lt", "sl", "to") and len(p) > 1 and p[1] == str(layer_no):
+        if n in ("mo", "nlt", "blt", "tsc", "tlt", "lt", "sl", "to", "ekk") and len(p) > 1 and p[1] == str(layer_no):
             out.add(i)
     return out
 
