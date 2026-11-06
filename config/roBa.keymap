@@ -464,7 +464,7 @@
 
         // 第 75 版: 入口は左親指の Tab の長押しだけ（P・delete の長押しは外した。delete の長押しはアプリ切替、Tab の長押しのスクロールは外した）
         // Mac 操作・メディアの面（右の P・delete の長押し。Z の真下は第 73 版でスクロールに変えた）。右手は画面の操作と撮影、左手は音楽・アプリを開くキー・Bluetooth。
-        // 第 76 版: BT 1（接続先 1 に戻す BT_SEL 0）を外し、右の下の段を左へ詰めた（N の左隣 最小化・N 窓を左半分・M 最大化・, 右半分）。Bluetooth の接続先を変えるキーは 1 つも無い
+        // 第 76 版: BT 1（接続先 1 に戻す BT_SEL 0）を外し、右の下の段を左へ詰めた（N 窓を左半分・M 最大化・, 右半分。最小化は . へ、N の左隣は空き）。Bluetooth の接続先を変えるキーは 1 つも無い
         // 第 74 版: 下の段の左 6 つ（最小化・BT 1・窓の左半分・最大化・右半分・空き）と右 6 つ（書式なしで貼る・撮影 4 つ・撮影メニュー）を並び順のまま入れ替えた（下の説明の左右はそれ以前のもの）
         // Bluetooth は X の接続先 1 だけ（第 42 版で接続先 2〜4 と接続を消すキーを外した。撮影のときに誤って押して接続先が切り替わったため）
         // 第 72 版: A Google カレンダー（Control+Option+Command+C）、Notion は E へ（Meet は外した）。
@@ -476,7 +476,7 @@
             bindings = <
 &none   &none         &kp LC(LA(LG(LS(N1))))  &kp LA(S)     &kp LG(H)                                         &kp C_BRI_DN       &kp C_BRI_UP        &kp C_VOL_DN      &kp C_VOL_UP         &kp C_MUTE
 &kp LC(LA(LG(LS(C))))   &kp LC(LA(LG(LS(F))))   &kp LC(LA(LG(LS(N2))))  &kp LC(LA(LG(LS(N6))))  &kp LC(LA(LG(LS(N5))))  &kp LC(LA(LG(LS(N4))))  &kp LC(LS(TAB))    &kp LC(LEFT_ARROW) &kp LC(UP_ARROW)  &kp LC(RIGHT_ARROW)  &kp LC(TAB)  &none
-&kp LA(LS(LG(V)))  &kp LC(LG(A))      &kp LC(LG(F))       &kp LC(LG(T))     &kp LC(LG(H))           &kp LC(LG(O))          &kp LG(M)  &kp LC(LA(LG(LS(N8))))  &kp LC(LA(LG(LS(N9))))  &kp LC(LA(LG(LS(N0))))  &none  &none 
+&kp LA(LS(LG(V)))  &kp LC(LG(A))      &kp LC(LG(F))       &kp LC(LG(T))     &kp LC(LG(H))           &kp LC(LG(O))          &none      &kp LC(LA(LG(LS(N8))))  &kp LC(LA(LG(LS(N9))))  &kp LC(LA(LG(LS(N0))))  &kp LG(M)  &none 
 &trans  &trans        &trans        &trans        &trans        &trans         &trans             &trans                                                                   &trans
             >;
         };
