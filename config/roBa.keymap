@@ -75,6 +75,20 @@
         // 押している間は Command を押さえたまま（左親指の Tab で次のアプリ、英かなの長押し Shift と一緒に Tab で前へ、ボールでアイコンに合わせても選べる）。
         // 離すと Command も離れて、選んだアプリに切り替わる。軽く押すだけなら直前のアプリへ。
         // 第 31 版の tri-state（&kt で Command を押しっぱなしにする作り）は Command が押されたまま残ったので使わない。押す・離すがキーの押す・離すと必ず対になる作り
+        // 長押しで使えるよう数を 1 つ受け取る形にしたもの（数は使わない。第 75 版、delete の長押し）
+        app_switch_p: app_switch_p {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            wait-ms = <0>;
+            tap-ms = <30>;
+            bindings
+                = <&macro_press &kp LGUI>
+                , <&macro_tap &kp TAB>
+                , <&macro_pause_for_release>
+                , <&macro_release &kp LGUI>
+                ;
+        };
+
         app_switch: app_switch {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -361,6 +375,18 @@
 
         // 長押しで面に入るキー（第 61 版）: 右親指の Enter で数字＋よく使う記号＋矢印、左の B で余った記号と F キー、右親指の delete（Backspace）で Mac 操作の面。
         // 長押しして何も打たずに離しても delete・Enter・B は出さない（文字を消さない・誤って送信しない）。文字を打った直後 0.15 秒以内は必ず軽押し
+        // delete（第 75 版）: 軽押し delete・長押しでアプリ切替（押した瞬間 Command を押さえて Tab 1 回、離すと Command を離す）。
+        // delete を押さえたまま左親指の Tab で次のアプリへ。前は G の右隣にあった &app_switch と同じ動き。後ろの数は使わない（0 を書く）
+        dsw: delete_app_switch {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&app_switch_p>, <&kp>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            require-prior-idle-ms = <150>;
+        };
+
         blt: right_layer_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -390,10 +416,10 @@
 
         default_layer {
             bindings = <
-&sct ESC Q        &sct LG(W) W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U          &nlt 6 I   &kp O    &blt 4 P  
-&sct LG(A) A      &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &app_switch                        &kp MINUS                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &rhs LSHIFT SQT      
+&sct ESC Q        &sct LG(W) W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U          &nlt 6 I   &kp O    &kp P     
+&sct LG(A) A      &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &none                              &sct EXCLAMATION QUESTION     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &rhs LSHIFT MINUS      
 &kp Z             &sct LG(X) X        &sct LG(C) C        &sct LG(V) V                   &blt 3 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &tap_once SLASH  
-&mo 6             &kp LALT        &kp LCTRL          &tsc 6 TAB                &tmt LGUI SPACE            &ekk LSHIFT 0       &blt 4 BACKSPACE              &blt 2 ENTER                                              &lt 6 DELETE
+&mo 6             &kp LALT        &kp LCTRL          &tsc 4 TAB                &tmt LGUI SPACE            &ekk LSHIFT 0       &dsw 0 BACKSPACE              &blt 2 ENTER                                              &lt 6 DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
@@ -409,6 +435,7 @@
             >;
         };
 
+        // 第 75 版: 左手を Q *・W %・A -・S +・Z ÷・X ×・B の右隣 =、Z の真下 ,・X の真下 .・C の真下 0 に（G の右隣・Tab の位置は空き、A の Shift は外した。下の説明はそれ以前のもの）
         // 数字＋よく使う記号＋矢印の面（第 61 版。右親指の Enter の長押し）。左手は電卓の並び（F が 5、0 は左親指の Space の位置。送るのは上の段の普通の数字＝⌘1 などが確実に効く）。
         // 左: Q *・W +・S -・Z ,・X .・G の右隣 =・B の右隣 %、A は押さえている間 Shift（矢印で範囲を選ぶ）。
         // 左の下の段（Enter を押さえている間）: X の真下 ×・C の真下 ÷。Control+Option+Command+Shift+- と = を送り、BetterTouchTool が × ÷ の文字を入れる（第 61 版で登録）
@@ -417,10 +444,10 @@
 // / は第 66 版から Control+Option+Command+Shift+; を送り（第 63 版の +/ は BetterTouchTool に届かなかった。ふだんの / は元のまま＝かなでは「・」）、BetterTouchTool が半角の / を入れる（かなのままだと / が「・」になっていたため）
         NUM_SYM {
             bindings = <
-&kp ASTERISK &kp PLUS   &kp N7   &kp N8   &kp N9                                                    &kp AMPERSAND  &kp PIPE         &kp QUESTION    &kp EXCLAMATION  &kp COLON
-&kp LSHIFT   &kp MINUS  &kp N4   &kp N5   &kp N6   &kp EQUAL                    &kp HASH            &kp AT_SIGN    &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW
-&kp COMMA    &kp DOT    &kp N1   &kp N2   &kp N3   &kp PERCENT                  &kp DOUBLE_QUOTES    &kp UNDERSCORE  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp LC(LA(LG(LS(BACKSLASH))))  &kp LC(LA(LG(LS(SEMICOLON))))
-&trans       &kp LC(LA(LG(LS(MINUS))))     &kp LC(LA(LG(LS(EQUAL))))   &kp N0   &trans   &trans                       &trans              &trans                                                                &trans
+&kp ASTERISK &kp PERCENT &kp N7   &kp N8   &kp N9                                                    &kp AMPERSAND  &kp PIPE         &kp QUESTION    &kp EXCLAMATION  &kp COLON
+&kp MINUS    &kp PLUS   &kp N4   &kp N5   &kp N6   &none                        &kp HASH            &kp AT_SIGN    &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW
+&kp LC(LA(LG(LS(EQUAL))))  &kp LC(LA(LG(LS(MINUS))))  &kp N1   &kp N2   &kp N3   &kp EQUAL                  &kp DOUBLE_QUOTES    &kp UNDERSCORE  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp LC(LA(LG(LS(BACKSLASH))))  &kp LC(LA(LG(LS(SEMICOLON))))
+&kp COMMA    &kp DOT    &kp N0   &none    &trans   &trans                       &trans              &trans                                                                &trans
             >;
         };
 
@@ -428,13 +455,14 @@
         // 左: F キーは Enter の面の数字と同じ場所（F が F5、E R T が F7 F8 F9、D G が F4 F6、C V が F1 F2）。B は押さえるので F3 は B の右隣。F10 は Space、F11 は Tab の位置、F12 は G の右隣（F6 の右）。右: 記号は間を空けずに詰める（上の段 ; ` ' ~ ^、H の左隣 $（第 67 版で H から移した）、下の段 { [ ] < > }＝第 68 版で < > と { } を入れ替え）。H J K L ' は第 67 版から文字 cw・bm・cal・fna・ls（Alfred 用）。第 69 版で H の左隣 fna・H cw・J bm・K cal・L ls・' td（ToDo 登録）に並べ替え、$ はふだんの面の U の長押しへ
         SYM_F {
             bindings = <
-&none    &none    &kp F7   &kp F8   &kp F9                                                &kp SEMICOLON  &kp GRAVE         &kp SINGLE_QUOTE   &kp TILDE         &kp CARET
-&none    &none    &kp F4   &kp F5   &kp F6   &kp F12                 &kp DOLLAR           &none          &none             &none              &none             &none
+&none    &none    &kp F7   &kp F8   &kp F9                                                &none          &none             &none              &none             &none    
+&none    &none    &kp F4   &kp F5   &kp F6   &kp F12                 &kp DOLLAR           &kp SEMICOLON  &kp GRAVE         &kp SINGLE_QUOTE   &kp TILDE         &kp CARET
 &none    &none    &kp F1   &kp F2   &trans   &kp F3                  &kp LEFT_BRACE       &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LESS_THAN   &kp GREATER_THAN &kp RIGHT_BRACE
 &trans   &trans   &trans   &kp F10  &kp F11  &trans                  &trans               &trans                                                                       &trans
             >;
         };
 
+        // 第 75 版: 入口は左親指の Tab の長押しだけ（P・delete の長押しは外した。delete の長押しはアプリ切替、Tab の長押しのスクロールは外した）
         // Mac 操作・メディアの面（右の P・delete の長押し。Z の真下は第 73 版でスクロールに変えた）。右手は画面の操作と撮影、左手は音楽・アプリを開くキー・Bluetooth。
         // 第 74 版: 下の段の左 6 つ（最小化・BT 1・窓の左半分・最大化・右半分・空き）と右 6 つ（書式なしで貼る・撮影 4 つ・撮影メニュー）を並び順のまま入れ替えた（下の説明の左右はそれ以前のもの）
         // Bluetooth は X の接続先 1 だけ（第 42 版で接続先 2〜4 と接続を消すキーを外した。撮影のときに誤って押して接続先が切り替わったため）

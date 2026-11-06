@@ -23,7 +23,7 @@ SHOW = [
     ("NUM_SYM", "数字・よく使う記号・矢印（Enter の長押し）"),
     ("SYM_F", "余った記号・F キー（B の長押し）"),
     ("ALFRED", "Alfred（D と F の同時押し → 次の 1 キー）"),
-    ("MAC_MEDIA", "Mac 操作・メディア（P・delete の長押し）"),
+    ("MAC_MEDIA", "Mac 操作・メディア（Tab の長押し）"),
     ("SCROLL", "スクロール（押さえてボール）"),
     ("MOUSE", "マウス（ボールを動かした後 1.5 秒）"),
 ]
@@ -150,6 +150,8 @@ def describe(binding: str):
         return f"押さえて{layer_name(args[0])}", "", "layer"
     if name == "tog" and args:
         return f"{layer_name(args[0])} 入切", "", "layer"
+    if name == "dsw" and len(args) >= 2:
+        return key_label(args[1]), "アプリ切替", "hold"
     if name == "app_switch":
         return "アプリ切替", "", "key"
     if name.startswith("str_"):
