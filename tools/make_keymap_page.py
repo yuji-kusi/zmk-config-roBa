@@ -57,7 +57,8 @@ MOD_ORDER = "⌃⌥⇧⌘"
 # Mac 側（BetterTouchTool・CleanShot・Alfred など）で意味を付けているキー。キーの書き方 → 表示
 MEANING = {
     "⌃⌥⇧⌘1": "Notion", "⌃⌥⇧⌘2": "Orca", "⌃⌥⇧⌘F": "Finder", "⌃⌥⇧⌘4": "LINE",
-    "⌃⌥⇧⌘5": "Chatwork", "⌃⌥⇧⌘6": "Chrome", "⌃⌥⇧⌘C": "Google カレンダー",
+    "⌃⌥⇧⌘5": "Chatwork", "⌃⌥⇧⌘6": "Chrome", "⌃⌥⇧⌘C": "Google カレンダー", "⌃⌥⇧⌘T": "Google ToDo",
+    "⌥⇧←": "前の単語まで選ぶ", "⌃K": "行の終わりまで消す",
     "⌃⌘H": "撮影の履歴", "⌃⌥⇧⌘8": "窓を左半分", "⌃⌥⇧⌘9": "窓を最大化", "⌃⌥⇧⌘0": "窓を右半分",
     "⌃⌥⇧⌘-": "×", "⌃⌥⇧⌘=": "÷", "⌃⌥⇧⌘\\": "\\（半角）", "⌃⌥⇧⌘;": "/（半角）",
     "⌃⌘A": "範囲を撮影", "⌃⌘F": "全画面を撮影", "⌃⌘T": "画面の文字を写す", "⌃⌘O": "撮影メニュー",
@@ -148,6 +149,8 @@ def describe(binding: str):
     if name in hold_tap_kp and len(args) >= 2:
         tap = "英かな" if name in ("ekk", "eke") else key_label(args[1])
         return tap, hold_label(args[0]), "hold"
+    if name == "ghn" and args:
+        return "", hold_label(args[0]), "hold"
     if name == "mo" and args:
         return f"押さえて{layer_name(args[0])}", "", "layer"
     if name == "tog" and args:
