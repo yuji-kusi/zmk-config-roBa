@@ -235,9 +235,8 @@
             require-prior-idle-ms = <150>;
         };
 
-        // 軽押しは何も出さない（&none）、長押しだけ働く 2 役キー（使い方 &ghn 長押しのキー 0）
-        // 第 78 版: ふだんの面の G の右隣（Shift+Option+←）と H の左隣（Control+K）で使う。押さえている間そのキーを押したまま（Mac のキーリピートで続けて効く）
-        // 軽押しは何も出さないので、打鍵の直後でも必ず長押しとして待つ（require-prior-idle・quick-tap は外した）
+        // 軽押しは何も出さない（&none）、長押しだけ働く 2 役キー（使い方 &ghn 長押しのキー 0）。第 79 版から使っている所は無い
+        // 第 78 版で G の右隣（Shift+Option+←）・H の左隣（Control+K）に使ったが、第 79 版で軽押しで効く &kp にした（串田さんの依頼）
         ghn: g_hold_only {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -417,7 +416,7 @@
         default_layer {
             bindings = <
 &sct ESC Q        &sct LG(W) W     &kp E     &kp R              &kp T                                                                   &kp Y      &kp U          &nlt 6 I   &kp O    &kp P     
-&sct LG(A) A      &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &ghn LS(LA(LEFT_ARROW)) 0          &ghn LC(K) 0                  &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &rhs LSHIFT MINUS      
+&sct LG(A) A      &ghm LG(LSHIFT) S         &lhs LC(LALT) D &sct LG(SPACE) F                  &ghm LC(LGUI) G                   &kp LS(LA(LEFT_ARROW))             &kp LC(K)                     &kp H  &rhs LCTRL J  &rhs LALT K  &kp L  &rhs LSHIFT MINUS      
 &kp Z             &sct LG(X) X        &sct LG(C) C        &sct LG(V) V                   &blt 3 B               &urd LS(LG(Z)) LG(Z)                      &vbs LG(PERIOD) LG(SLASH)           &kp N      &kp M  &kp COMMA  &kp DOT  &tap_once SLASH  
 &mo 6             &kp LALT        &kp LCTRL          &tmt LSHIFT SPACE         &tmt LGUI TAB              &ekk 4 0            &dsw 0 BACKSPACE              &blt 2 ENTER                                              &lt 6 DELETE
             >;
